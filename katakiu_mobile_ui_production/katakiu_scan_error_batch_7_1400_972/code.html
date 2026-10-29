@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KataKiu Scan Error Batch 7 (1400 × 972)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #F5F7F8;
+    color: #071724;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+  }
+
+  /* 1400 x 972 Fixed Presentation Board Canvas */
+  .presentation-board {
+    width: 1400px;
+    height: 972px;
+    min-width: 1400px;
+    min-height: 972px;
+    max-width: 1400px;
+    max-height: 972px;
+    background-color: #F5F7F8;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Artboard styling: exactly 390 x 844 px at fixed absolute coordinates */
+  .artboard {
+    width: 390px;
+    height: 844px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 64px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(7, 23, 36, 0.05);
+    border-radius: 0px;
+  }
+
+  /* Exact positions: Screen 1 x=67, Screen 2 x=505, Screen 3 x=943 */
+  .artboard-1 { left: 67px; }
+  .artboard-2 { left: 505px; }
+  .artboard-3 { left: 943px; }
+
+  /* 24px Android-first status bar */
+  .status-bar {
+    height: 24px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    color: #071724;
+    z-index: 10;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 56px Consistent App Bar */
+  .app-bar {
+    height: 56px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    z-index: 10;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #071724;
+  }
+
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #071724;
+    line-height: 1.2;
+  }
+
+  /* Screen Content Scrollable / Structured Container */
+  .content-container {
+    flex: 1;
+    padding: 24px 24px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  /* Safe Area Bottom Gesture Indicator */
+  .gesture-bar-container {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+  }
+
+  .gesture-pill {
+    width: 72px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #E6EAED;
+  }
+
+  /* Chips and Tags */
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+
+  .chip-coral {
+    background-color: #FDF0F0;
+    color: #EF6A6A;
+  }
+
+  .chip-amber {
+    background-color: #FFF7EB;
+    color: #D98816;
+  }
+
+  /* Typography Rules */
+  .section-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+
+  .supporting-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  /* Cards and Surfaces */
+  .card-surface {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .card-notice {
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .notice-coral {
+    background-color: #FDF0F0;
+    border: 1px solid rgba(239, 106, 106, 0.2);
+  }
+
+  .notice-amber {
+    background-color: #FFF7EB;
+    border: 1px solid rgba(255, 181, 71, 0.35);
+  }
+
+  .notice-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .notice-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #071724;
+    line-height: 1.3;
+  }
+
+  .notice-body {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 1.45;
+  }
+
+  .notice-meta {
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  /* Input styling with Coral Error state */
+  .input-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #071724;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .input-box {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+  }
+
+  .input-box.error-state {
+    border: 1.5px solid #EF6A6A;
+  }
+
+  .input-val-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #071724;
+    letter-spacing: 1px;
+  }
+
+  .inline-error {
+    font-size: 11px;
+    font-weight: 400;
+    color: #EF6A6A;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .field-helper {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* Detail Rows */
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #E6EAED;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .detail-row:first-child {
+    padding-top: 0;
+  }
+
+  .detail-label {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+
+  .detail-value {
+    font-size: 11px;
+    font-weight: 500;
+    color: #071724;
+  }
+
+  /* Buttons & Action Areas */
+  .actions-wrapper {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    width: 100%;
+    height: 44px;
+    background-color: #0DB3A0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-primary:active {
+    opacity: 0.9;
+  }
+
+  .btn-text-link {
+    background: none;
+    border: none;
+    color: #0DB3A0;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 4px 8px;
+  }
+
+  /* SVG Icons Inline */
+  .icon-svg {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="presentation-board">
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 1: INVALID PRODUCT CODE (x = 67px, y = 64px, 390 × 844 px)         -->
+  <!-- ========================================================================= -->
+  <div class="artboard artboard-1">
+    <!-- Status Bar (24px) -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.23c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.62-.62C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/><circle cx="12" cy="12" r="4"/></svg>
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/></svg>
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar (56px) -->
+    <div class="app-bar">
+      <button class="back-btn" aria-label="Go back">
+        <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <span class="app-bar-title">Scan purchase</span>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+      <!-- Status Chip -->
+      <div class="status-chip chip-coral">
+        <svg class="icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        CODE NOT ACCEPTED
+      </div>
+
+      <h1 class="section-heading">We could not verify this code</h1>
+      <p class="supporting-text">Check the code and try again.</p>
+
+      <!-- Input Form Card with Coral Error Highlight -->
+      <div class="card-surface" style="padding: 16px;">
+        <label class="input-label">Product code</label>
+        <div class="input-box error-state">
+          <span class="input-val-text">AB7K-92M4</span>
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div class="inline-error">
+          <svg class="icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          This code is invalid or not recognised.
+        </div>
+        <p class="field-helper">Make sure all letters and numbers are entered correctly. Unique codes are printed beneath participating caps or labels.</p>
+      </div>
+
+      <!-- Assistance & Guidelines Surface -->
+      <div class="card-notice notice-coral">
+        <div class="notice-header">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="notice-title">Verification guidance</span>
+        </div>
+        <p class="notice-body">Eligible codes contain 8 characters (letters and numbers). Standard retail barcodes cannot be used to claim rewards.</p>
+      </div>
+
+      <!-- Action Area -->
+      <div class="actions-wrapper">
+        <button class="btn-primary">Try again</button>
+        <button class="btn-text-link">Scan with camera</button>
+      </div>
+    </div>
+
+    <!-- Safe Area Bottom Gesture Bar (24px) -->
+    <div class="gesture-bar-container">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 2: OFFLINE SCAN (x = 505px, y = 64px, 390 × 844 px)                -->
+  <!-- ========================================================================= -->
+  <div class="artboard artboard-2">
+    <!-- Status Bar (24px) -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="#66737D"><line x1="1" y1="1" x2="23" y2="23" stroke="#66737D" stroke-width="2"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="#66737D" stroke-width="2"/></svg>
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar (56px) -->
+    <div class="app-bar">
+      <button class="back-btn" aria-label="Go back">
+        <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <span class="app-bar-title">Scan purchase</span>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+      <!-- Status Chip -->
+      <div class="status-chip chip-amber">
+        <svg class="icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D98816" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        OFFLINE
+      </div>
+
+      <h1 class="section-heading">Connection unavailable</h1>
+      <p class="supporting-text">We could not check the product code because you are offline.</p>
+
+      <!-- Offline Explanation Surface -->
+      <div class="card-notice notice-amber">
+        <div class="notice-header">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D98816" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          <span class="notice-title">Your code has not been submitted</span>
+        </div>
+        <p class="notice-body">Reconnect to mobile data or Wi-Fi, then try again.</p>
+        <p class="notice-meta" style="color: #D98816;">No points were added.</p>
+      </div>
+
+      <!-- Network Requirement Clarity Surface -->
+      <div class="card-surface" style="padding: 16px;">
+        <div class="detail-row">
+          <span class="detail-label">Network status</span>
+          <span class="detail-value" style="color: #66737D;">Disconnected</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Security protocol</span>
+          <span class="detail-value">Live merchant lookup</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Code storage</span>
+          <span class="detail-value">Not saved offline</span>
+        </div>
+      </div>
+
+      <p class="field-helper" style="padding: 0 4px;">KataKiu codes require a live encrypted connection to check validity and prevent duplicate claims.</p>
+
+      <!-- Action Area -->
+      <div class="actions-wrapper">
+        <button class="btn-primary">Retry connection</button>
+        <button class="btn-text-link">Enter code manually</button>
+      </div>
+    </div>
+
+    <!-- Safe Area Bottom Gesture Bar (24px) -->
+    <div class="gesture-bar-container">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- SCREEN 3: PURCHASE CLAIM TIMED OUT (x = 943px, y = 64px, 390 × 844 px)    -->
+  <!-- ========================================================================= -->
+  <div class="artboard artboard-3">
+    <!-- Status Bar (24px) -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.23c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.62-.62C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/><circle cx="12" cy="12" r="4"/></svg>
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/></svg>
+        <svg class="icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar (56px) -->
+    <div class="app-bar">
+      <button class="back-btn" aria-label="Go back">
+        <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <span class="app-bar-title">Scan purchase</span>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+      <!-- Status Chip -->
+      <div class="status-chip chip-coral">
+        <svg class="icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        CLAIM EXPIRED
+      </div>
+
+      <h1 class="section-heading">This purchase claim expired</h1>
+      <p class="supporting-text">The merchant confirmation window ended before the purchase was confirmed.</p>
+
+      <!-- Explanation Card -->
+      <div class="card-notice notice-coral">
+        <div class="notice-header">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span class="notice-title">No points were added</span>
+        </div>
+        <p class="notice-body">Start a new claim if you still have the eligible product and receipt.</p>
+        <p class="notice-meta" style="color: #EF6A6A;">Claim status: Expired</p>
+      </div>
+
+      <!-- Audit / Session Details Card -->
+      <div class="card-surface" style="padding: 16px;">
+        <div class="detail-row">
+          <span class="detail-label">Product code</span>
+          <span class="detail-value" style="font-family: monospace; font-size: 12px; letter-spacing: 0.5px;">AB7K-92M4</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Outlet location</span>
+          <span class="detail-value">Market Square, Westlands</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Confirmation window</span>
+          <span class="detail-value">2 minutes (timed out)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Temporary QR</span>
+          <span class="detail-value" style="color: #66737D;">Deactivated</span>
+        </div>
+      </div>
+
+      <p class="field-helper" style="padding: 0 4px;">For security at the counter, temporary merchant confirmation QR codes expire automatically after 2 minutes.</p>
+
+      <!-- Action Area -->
+      <div class="actions-wrapper">
+        <button class="btn-primary">Start again</button>
+        <button class="btn-text-link">Back to home</button>
+      </div>
+    </div>
+
+    <!-- Safe Area Bottom Gesture Bar (24px) -->
+    <div class="gesture-bar-container">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

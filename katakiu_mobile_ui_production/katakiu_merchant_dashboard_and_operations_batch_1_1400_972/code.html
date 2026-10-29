@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400, height=972, initial-scale=1.0">
+<title>KataKiu Merchant Dashboard and Operations Batch 1 — 1400 × 972</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: #F5F7F8;
+    color: #071724;
+    width: 1400px;
+    height: 972px;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Typography strict specs */
+  .text-body { font-size: 12px; font-weight: 400; line-height: 16px; }
+  .text-meta { font-size: 11px; font-weight: 400; line-height: 14px; }
+  .text-app-title { font-size: 14px; font-weight: 500; line-height: 18px; }
+  .text-section-heading { font-size: 16px; font-weight: 600; line-height: 20px; }
+  .text-primary-action { font-size: 13px; font-weight: 600; line-height: 16px; }
+  .text-metric-val { font-size: 20px; font-weight: 700; line-height: 24px; }
+  .text-nav-label { font-size: 12px; font-weight: 500; line-height: 14px; }
+  .text-status-label { font-size: 11px; font-weight: 500; line-height: 14px; }
+
+  /* Strict Dimensions */
+  .artboard {
+    width: 390px;
+    height: 844px;
+    position: absolute;
+    top: 64px;
+    background: #FFFFFF;
+    border-radius: 28px;
+    box-shadow: 0 4px 24px rgba(7, 23, 36, 0.06), 0 1px 3px rgba(7, 23, 36, 0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E6EAED;
+  }
+
+  /* Specific coordinates */
+  #artboard-1 { left: 67px; }
+  #artboard-2 { left: 505px; }
+  #artboard-3 { left: 943px; }
+
+  /* App bar and navigation components */
+  .app-bar {
+    height: 56px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+
+  .status-bar {
+    height: 24px;
+    padding: 6px 24px 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #071724;
+    background: #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  .bottom-nav {
+    height: 56px;
+    background: #FFFFFF;
+    border-top: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  .home-indicator {
+    height: 20px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .home-bar {
+    width: 134px;
+    height: 4px;
+    background: #071724;
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+
+  /* Brand Tokens */
+  .bg-midnight { background-color: #071724; }
+  .text-midnight { color: #071724; }
+  .bg-teal { background-color: #0DB3A0; }
+  .text-teal { color: #0DB3A0; }
+  .border-teal { border-color: #0DB3A0; }
+  .bg-amber { background-color: #FFB547; }
+  .text-amber { color: #FFB547; }
+  .bg-coral { background-color: #EF6A6A; }
+  .text-coral { color: #EF6A6A; }
+  .bg-aqua-tint { background-color: #F0FAF9; }
+  .bg-coral-tint { background-color: #FDF0F0; }
+  .bg-amber-tint { background-color: #FFF7EB; }
+  .border-divider { border-color: #E6EAED; }
+  .text-secondary { color: #66737D; }
+
+  /* Custom scrollbar hide for clean artboard presentation */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+</head>
+<body>
+
+  <!-- SCREEN 1: MERCHANT DASHBOARD (x: 67px, y: 64px) -->
+  <div id="artboard-1" class="artboard">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg width="13" height="10" viewBox="0 0 13 10" fill="currentColor">
+          <path d="M6.5 0C3.98 0 1.76 1.05 0 2.76L6.5 10L13 2.76C11.24 1.05 9.02 0 6.5 0Z"/>
+        </svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+          <path d="M11 0H1C0.45 0 0 0.45 0 1V9C0 9.55 0.45 10 1 10H11C11.55 10 12 9.55 12 9V1C12 0.45 11.55 0 11 0ZM10 8H2V2H10V8Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="flex items-center gap-2">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCej5GVIVLbwYN0OWvPy6UHn9WBNfefeeo_hi7WTCz907ySp_Ricc0rrQgRrHVfzdTn8RMVKQWauiDtNrGY0uqGypxafNehtai6gA1h-lPtTZBkOpf-cPt7a6tHIrWjp8q52kSlAbXqYx9aGAUDVW5o9sMC-RDyCotYgsm-_J7dlhvtQ7MjvAmB5zDiTewpxWpA9DDxBSI-yjV09hrhXTVwjCl2ciMDRfPd0J6K5yDeIthiYeuLk8zbz6I9pH4ZWzLcw" alt="KataKiu" class="w-6 h-6 rounded" />
+        <span class="text-app-title text-midnight">Merchant portal</span>
+      </div>
+      <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-midnight border border-divider">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="flex-1 overflow-y-auto no-scrollbar px-6 py-4 flex flex-col gap-4">
+      <!-- Greeting & Outlet Info -->
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="text-meta text-secondary font-medium uppercase tracking-wider">Market Square Westlands</span>
+          <span class="text-meta text-secondary">Today, 14 Sept</span>
+        </div>
+        <h1 class="text-section-heading text-midnight mt-1">Good morning, James</h1>
+      </div>
+
+      <!-- Compact Operational Summary Grid -->
+      <div class="grid grid-cols-2 gap-2">
+        <!-- Confirmed sales -->
+        <div class="p-3 bg-[#F8FAFB] border border-divider rounded-lg">
+          <span class="text-meta text-secondary">Confirmed sales</span>
+          <div class="text-metric-val text-midnight mt-0.5">84</div>
+          <div class="text-meta text-teal flex items-center gap-1 mt-0.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#0DB3A0]"></span>
+            <span>+12 this hour</span>
+          </div>
+        </div>
+        <!-- Points issued -->
+        <div class="p-3 bg-[#F8FAFB] border border-divider rounded-lg">
+          <span class="text-meta text-secondary">Points issued</span>
+          <div class="text-metric-val text-midnight mt-0.5">12,460</div>
+          <div class="text-meta text-secondary mt-0.5">Verified ledger</div>
+        </div>
+        <!-- Pending confirmations -->
+        <div class="p-3 bg-amber-tint border border-[#FFE0A3] rounded-lg">
+          <span class="text-meta text-[#925C05] font-medium">Pending confirmations</span>
+          <div class="text-metric-val text-midnight mt-0.5">3</div>
+          <div class="text-meta text-[#925C05] flex items-center gap-1 mt-0.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#FFB547]"></span>
+            <span>Requires review</span>
+          </div>
+        </div>
+        <!-- Returns -->
+        <div class="p-3 bg-[#F8FAFB] border border-divider rounded-lg">
+          <span class="text-meta text-secondary">Returns</span>
+          <div class="text-metric-val text-midnight mt-0.5">1</div>
+          <div class="text-meta text-coral mt-0.5">Reversal logged</div>
+        </div>
+      </div>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-col gap-2">
+        <button class="w-full h-12 bg-teal text-white rounded-lg text-primary-action flex items-center justify-center gap-2 active:opacity-95 transition-opacity">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+            <line x1="7" y1="12" x2="17" y2="12"></line>
+          </svg>
+          <span>Confirm customer</span>
+        </button>
+        <button class="w-full h-10 bg-white border border-divider text-midnight rounded-lg text-primary-action flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors">
+          <span>View pending</span>
+          <span class="px-1.5 py-0.5 rounded-full bg-amber-tint border border-[#FFE0A3] text-meta text-[#925C05] font-semibold">3</span>
+        </button>
+      </div>
+
+      <!-- Section: Recent Activity -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <h2 class="text-section-heading text-midnight">Recent activity</h2>
+          <span class="text-meta text-teal font-medium cursor-pointer">View all</span>
+        </div>
+
+        <!-- Activity Rows -->
+        <div class="flex flex-col border border-divider rounded-lg divide-y divide-divider bg-white">
+          <!-- Item 1 -->
+          <div class="p-3 flex items-center justify-between">
+            <div class="flex items-start gap-2.5">
+              <div class="w-7 h-7 rounded bg-aqua-tint text-teal flex items-center justify-center mt-0.5 flex-shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <div class="text-body font-medium text-midnight">Purchase confirmed</div>
+                <div class="text-meta text-secondary">Market Square • Today, 14:20</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-block px-1.5 py-0.5 rounded bg-aqua-tint text-teal text-status-label font-semibold">+240 pts</span>
+              <div class="text-meta text-teal mt-0.5">Confirmed</div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="p-3 flex items-center justify-between">
+            <div class="flex items-start gap-2.5">
+              <div class="w-7 h-7 rounded bg-aqua-tint text-teal flex items-center justify-center mt-0.5 flex-shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <div class="text-body font-medium text-midnight">Purchase confirmed</div>
+                <div class="text-meta text-secondary">Westlands outlet • Today, 13:48</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-block px-1.5 py-0.5 rounded bg-aqua-tint text-teal text-status-label font-semibold">+120 pts</span>
+              <div class="text-meta text-teal mt-0.5">Confirmed</div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="p-3 flex items-center justify-between">
+            <div class="flex items-start gap-2.5">
+              <div class="w-7 h-7 rounded bg-coral-tint text-coral flex items-center justify-center mt-0.5 flex-shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                  <path d="M3 21v-5h5"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="text-body font-medium text-midnight">Return requested</div>
+                <div class="text-meta text-secondary">Market Square • Yesterday</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-block px-1.5 py-0.5 rounded bg-coral-tint text-coral text-status-label font-semibold">Review</span>
+              <div class="text-meta text-coral mt-0.5">Return</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Home Active) -->
+    <div class="bottom-nav">
+      <!-- Home (Active) -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-teal cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        <span class="text-nav-label font-semibold mt-0.5">Home</span>
+      </div>
+      <!-- Confirm -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span class="text-nav-label mt-0.5">Confirm</span>
+        <!-- Pending Indicator Badge representing 3 real pending actions -->
+        <span class="absolute top-1 right-6 w-2 h-2 rounded-full bg-amber"></span>
+      </div>
+      <!-- Account -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span class="text-nav-label mt-0.5">Account</span>
+      </div>
+    </div>
+
+    <!-- Gesture Home Indicator -->
+    <div class="home-indicator">
+      <div class="home-bar"></div>
+    </div>
+  </div>
+
+
+  <!-- SCREEN 2: PENDING CONFIRMATIONS (x: 505px, y: 64px) -->
+  <div id="artboard-2" class="artboard">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg width="13" height="10" viewBox="0 0 13 10" fill="currentColor">
+          <path d="M6.5 0C3.98 0 1.76 1.05 0 2.76L6.5 10L13 2.76C11.24 1.05 9.02 0 6.5 0Z"/>
+        </svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+          <path d="M11 0H1C0.45 0 0 0.45 0 1V9C0 9.55 0.45 10 1 10H11C11.55 10 12 9.55 12 9V1C12 0.45 11.55 0 11 0ZM10 8H2V2H10V8Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar with Back Arrow -->
+    <div class="app-bar">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 -ml-1 rounded flex items-center justify-center text-midnight cursor-pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </div>
+        <span class="text-app-title text-midnight">Pending confirmations</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-full bg-amber-tint border border-[#FFE0A3] text-status-label text-[#925C05] font-semibold">3 queue</span>
+    </div>
+
+    <!-- Content Area -->
+    <div class="flex-1 overflow-y-auto no-scrollbar px-6 py-4 flex flex-col gap-3">
+      <!-- Helper Context Banner -->
+      <div class="p-3 bg-[#F8FAFB] border border-divider rounded-lg">
+        <div class="flex items-center justify-between">
+          <span class="text-body font-semibold text-midnight">3 awaiting review</span>
+          <span class="text-meta text-amber font-semibold bg-amber-tint px-2 py-0.5 rounded border border-[#FFE0A3]">Action required</span>
+        </div>
+        <p class="text-meta text-secondary mt-1">Review customer claims waiting for outlet confirmation. Points are not issued until confirmation.</p>
+      </div>
+
+      <!-- Compact Pending Claim List -->
+      <div class="flex flex-col gap-3">
+
+        <!-- Card 1: Amina Mwangi -->
+        <div class="p-3.5 bg-white border border-divider rounded-lg flex flex-col gap-2 hover:border-teal transition-colors">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-body font-semibold text-midnight">Amina Mwangi</div>
+              <div class="text-meta text-secondary">Claim ID: KK-CLM-90814</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-amber-tint border border-[#FFE0A3] text-amber text-status-label font-medium flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FFB547]"></span>
+              Awaiting review
+            </span>
+          </div>
+          
+          <div class="bg-[#F8FAFB] p-2 rounded border border-[#EDF1F3] flex flex-col gap-1 text-meta">
+            <div class="flex items-center justify-between text-midnight">
+              <span class="text-secondary">Product:</span>
+              <span class="font-medium">Participating product • 1 × 500 ml</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-secondary">Reward:</span>
+              <span class="font-medium text-midnight"><span class="text-teal">Cust +240 pts</span> • <span class="text-secondary">Outlet +20 pts</span></span>
+            </div>
+            <div class="flex items-center justify-between text-secondary">
+              <span>Scanned:</span>
+              <span>Today, 14:20</span>
+            </div>
+          </div>
+
+          <button class="w-full h-9 bg-white border border-teal text-teal rounded-md text-primary-action flex items-center justify-center gap-1.5 hover:bg-aqua-tint transition-colors">
+            <span>Review claim</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Card 2: Brian Otieno -->
+        <div class="p-3.5 bg-white border border-divider rounded-lg flex flex-col gap-2 hover:border-teal transition-colors">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-body font-semibold text-midnight">Brian Otieno</div>
+              <div class="text-meta text-secondary">Claim ID: KK-CLM-90809</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-amber-tint border border-[#FFE0A3] text-amber text-status-label font-medium flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FFB547]"></span>
+              Awaiting review
+            </span>
+          </div>
+          
+          <div class="bg-[#F8FAFB] p-2 rounded border border-[#EDF1F3] flex flex-col gap-1 text-meta">
+            <div class="flex items-center justify-between text-midnight">
+              <span class="text-secondary">Product:</span>
+              <span class="font-medium">Participating product • 1 × 330 ml</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-secondary">Reward:</span>
+              <span class="font-medium text-midnight"><span class="text-teal">Cust +120 pts</span> • <span class="text-secondary">Outlet +10 pts</span></span>
+            </div>
+            <div class="flex items-center justify-between text-secondary">
+              <span>Scanned:</span>
+              <span>Today, 13:48</span>
+            </div>
+          </div>
+
+          <button class="w-full h-9 bg-white border border-teal text-teal rounded-md text-primary-action flex items-center justify-center gap-1.5 hover:bg-aqua-tint transition-colors">
+            <span>Review claim</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Card 3: Mercy Wanjiku -->
+        <div class="p-3.5 bg-white border border-divider rounded-lg flex flex-col gap-2 hover:border-teal transition-colors">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-body font-semibold text-midnight">Mercy Wanjiku</div>
+              <div class="text-meta text-secondary">Claim ID: KK-CLM-90803</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-amber-tint border border-[#FFE0A3] text-amber text-status-label font-medium flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#FFB547]"></span>
+              Awaiting review
+            </span>
+          </div>
+          
+          <div class="bg-[#F8FAFB] p-2 rounded border border-[#EDF1F3] flex flex-col gap-1 text-meta">
+            <div class="flex items-center justify-between text-midnight">
+              <span class="text-secondary">Product:</span>
+              <span class="font-medium">Participating product • 1 × 500 ml</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-secondary">Reward:</span>
+              <span class="font-medium text-midnight"><span class="text-teal">Cust +180 pts</span> • <span class="text-secondary">Outlet +15 pts</span></span>
+            </div>
+            <div class="flex items-center justify-between text-secondary">
+              <span>Scanned:</span>
+              <span>Today, 12:32</span>
+            </div>
+          </div>
+
+          <button class="w-full h-9 bg-white border border-teal text-teal rounded-md text-primary-action flex items-center justify-center gap-1.5 hover:bg-aqua-tint transition-colors">
+            <span>Review claim</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Confirm Active) -->
+    <div class="bottom-nav">
+      <!-- Home -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="text-nav-label mt-0.5">Home</span>
+      </div>
+      <!-- Confirm (Active) -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-teal cursor-pointer relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <span class="text-nav-label font-semibold mt-0.5">Confirm</span>
+        <span class="absolute top-1 right-6 w-2 h-2 rounded-full bg-amber"></span>
+      </div>
+      <!-- Account -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span class="text-nav-label mt-0.5">Account</span>
+      </div>
+    </div>
+
+    <!-- Gesture Home Indicator -->
+    <div class="home-indicator">
+      <div class="home-bar"></div>
+    </div>
+  </div>
+
+
+  <!-- SCREEN 3: MERCHANT POINTS AND ACTIVITY (x: 943px, y: 64px) -->
+  <div id="artboard-3" class="artboard">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg width="13" height="10" viewBox="0 0 13 10" fill="currentColor">
+          <path d="M6.5 0C3.98 0 1.76 1.05 0 2.76L6.5 10L13 2.76C11.24 1.05 9.02 0 6.5 0Z"/>
+        </svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+          <path d="M11 0H1C0.45 0 0 0.45 0 1V9C0 9.55 0.45 10 1 10H11C11.55 10 12 9.55 12 9V1C12 0.45 11.55 0 11 0ZM10 8H2V2H10V8Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar with Back Arrow -->
+    <div class="app-bar">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 -ml-1 rounded flex items-center justify-center text-midnight cursor-pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </div>
+        <span class="text-app-title text-midnight">Merchant points</span>
+      </div>
+      <span class="text-meta text-secondary font-medium">Ledger active</span>
+    </div>
+
+    <!-- Content Area -->
+    <div class="flex-1 overflow-y-auto no-scrollbar px-6 py-4 flex flex-col gap-4">
+      <!-- Title & Context -->
+      <div>
+        <h1 class="text-section-heading text-midnight">Your outlet rewards</h1>
+        <p class="text-meta text-secondary mt-0.5">Points are issued only after verified customer purchases.</p>
+      </div>
+
+      <!-- Compact Balance Summary Card -->
+      <div class="p-3.5 bg-[#F8FAFB] border border-divider rounded-lg flex flex-col gap-3">
+        <!-- Main Available Row -->
+        <div class="flex items-baseline justify-between border-b border-divider pb-2.5">
+          <div>
+            <span class="text-meta text-secondary">Available points</span>
+            <div class="text-metric-val text-midnight mt-0.5">4,280 <span class="text-body font-medium text-secondary">pts</span></div>
+          </div>
+          <span class="px-2 py-0.5 rounded bg-aqua-tint text-teal text-status-label font-semibold">Settled</span>
+        </div>
+
+        <!-- Pending & Earned Today Sub-metrics -->
+        <div class="grid grid-cols-2 gap-2 text-meta">
+          <div class="bg-white p-2 rounded border border-divider">
+            <span class="text-secondary block">Pending points</span>
+            <span class="text-body font-semibold text-amber mt-0.5 block">320 pts</span>
+            <span class="text-[10px] text-secondary">3 claims in queue</span>
+          </div>
+          <div class="bg-white p-2 rounded border border-divider">
+            <span class="text-secondary block">Earned today</span>
+            <span class="text-body font-semibold text-teal mt-0.5 block">+1,180 pts</span>
+            <span class="text-[10px] text-secondary">Market Square</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Recent Points Activity -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <h2 class="text-section-heading text-midnight">Recent points activity</h2>
+          <span class="text-meta text-secondary">Last 48 hrs</span>
+        </div>
+
+        <!-- Activity Ledger Rows -->
+        <div class="flex flex-col border border-divider rounded-lg divide-y divide-divider bg-white">
+          <!-- Item 1: Confirmed -->
+          <div class="p-3 flex items-center justify-between">
+            <div>
+              <div class="text-body font-medium text-midnight">Customer purchase confirmed</div>
+              <div class="text-meta text-secondary">Market Square Westlands • Today, 14:20</div>
+            </div>
+            <div class="text-right flex-shrink-0 ml-2">
+              <span class="text-body font-bold text-teal">+240 pts</span>
+              <div class="text-meta text-teal">Earned</div>
+            </div>
+          </div>
+
+          <!-- Item 2: Confirmed -->
+          <div class="p-3 flex items-center justify-between">
+            <div>
+              <div class="text-body font-medium text-midnight">Customer purchase confirmed</div>
+              <div class="text-meta text-secondary">Westlands outlet • Today, 13:48</div>
+            </div>
+            <div class="text-right flex-shrink-0 ml-2">
+              <span class="text-body font-bold text-teal">+120 pts</span>
+              <div class="text-meta text-teal">Earned</div>
+            </div>
+          </div>
+
+          <!-- Item 3: Return Reversal (Coral) -->
+          <div class="p-3 flex items-center justify-between bg-[#FFFDFD]">
+            <div>
+              <div class="text-body font-medium text-coral flex items-center gap-1">
+                <span>Return reversal</span>
+              </div>
+              <div class="text-meta text-secondary">Market Square Westlands • Yesterday</div>
+            </div>
+            <div class="text-right flex-shrink-0 ml-2">
+              <span class="text-body font-bold text-coral">-180 pts</span>
+              <div class="text-meta text-coral">Reversed</div>
+            </div>
+          </div>
+
+          <!-- Item 4: Campaign bonus -->
+          <div class="p-3 flex items-center justify-between">
+            <div>
+              <div class="text-body font-medium text-midnight">Campaign bonus</div>
+              <div class="text-meta text-secondary">Partner campaign • 12 September</div>
+            </div>
+            <div class="text-right flex-shrink-0 ml-2">
+              <span class="text-body font-bold text-teal">+500 pts</span>
+              <div class="text-meta text-teal">Bonus</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Full History Action -->
+        <button class="w-full h-10 bg-white border border-divider text-midnight rounded-lg text-primary-action flex items-center justify-center gap-1 mt-1 hover:bg-slate-50 transition-colors">
+          <span>View full history</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Account Active / Preserved Merchant Shell) -->
+    <div class="bottom-nav">
+      <!-- Home -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="text-nav-label mt-0.5">Home</span>
+      </div>
+      <!-- Confirm -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-secondary hover:text-midnight cursor-pointer relative">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span class="text-nav-label mt-0.5">Confirm</span>
+        <span class="absolute top-1 right-6 w-2 h-2 rounded-full bg-amber"></span>
+      </div>
+      <!-- Account (Active for Merchant Points & Outlet Account context) -->
+      <div class="flex flex-col items-center justify-center flex-1 h-full text-teal cursor-pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 3a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 14.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08a7.2 7.2 0 0 1-6 3.22z"/>
+        </svg>
+        <span class="text-nav-label font-semibold mt-0.5">Account</span>
+      </div>
+    </div>
+
+    <!-- Gesture Home Indicator -->
+    <div class="home-indicator">
+      <div class="home-bar"></div>
+    </div>
+  </div>
+
+</body>
+</html>

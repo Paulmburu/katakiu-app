@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KataKiu Admin Portal — Campaign Management (1440 × 1024)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #F7F9FA;
+    color: #071724;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 1440px;
+    height: 1024px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* Admin Sidebar: 232px fixed width */
+  .sidebar {
+    width: 232px;
+    height: 1024px;
+    background-color: #071724;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    user-select: none;
+  }
+  .sidebar-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .brand-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .brand-title {
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-title .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+  }
+  .brand-title .sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: #7AE1D6;
+    line-height: 1.2;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  .nav-group-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #66737D;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 0 12px;
+    margin-bottom: 6px;
+  }
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #A0B0BC;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    height: 40px;
+  }
+  .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #FFFFFF;
+  }
+  .nav-item.active {
+    background-color: #0DB3A0;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .nav-item.active svg {
+    stroke: #FFFFFF;
+  }
+  .nav-item svg {
+    width: 18px;
+    height: 18px;
+    stroke: #A0B0BC;
+    fill: none;
+    stroke-width: 1.8;
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #0DB3A0;
+    flex-shrink: 0;
+  }
+  .status-text {
+    font-size: 11px;
+    color: #7AE1D6;
+    font-weight: 400;
+  }
+
+  /* Main Area */
+  .main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 1024px;
+    overflow: hidden;
+  }
+
+  /* Top App Bar: 64px */
+  .top-bar {
+    height: 64px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    flex-shrink: 0;
+  }
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .top-bar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #071724;
+  }
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .env-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #E6F7F5;
+    color: #0DB3A0;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(13, 179, 160, 0.2);
+  }
+  .env-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #0DB3A0;
+  }
+  .help-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid #E6EAED;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #66737D;
+    cursor: pointer;
+  }
+  .avatar-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #071724;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E6EAED;
+  }
+
+  /* Page Content: 32px padding */
+  .page-content {
+    flex: 1;
+    padding: 24px 32px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow: hidden;
+  }
+
+  /* Page Header */
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #0DB3A0;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px;
+  }
+  .heading-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .page-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+  }
+  .scope-label {
+    font-size: 11px;
+    color: #66737D;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .sub-description {
+    font-size: 12px;
+    color: #66737D;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 16px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    user-select: none;
+  }
+  .btn-primary {
+    background-color: #0DB3A0;
+    color: #FFFFFF;
+    border-color: #0DB3A0;
+  }
+  .btn-primary:hover {
+    background-color: #099484;
+  }
+  .btn-outline {
+    background-color: #FFFFFF;
+    color: #071724;
+    border-color: #E6EAED;
+  }
+  .btn-outline:hover {
+    background-color: #F7F9FA;
+    border-color: #D3D9DE;
+  }
+  .btn-coral-outline {
+    background-color: #FFFFFF;
+    color: #EF6A6A;
+    border-color: #EF6A6A;
+  }
+  .btn-coral-outline:hover {
+    background-color: #FFF5F5;
+  }
+  .btn-compact {
+    height: 32px;
+    min-height: 32px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Summary Row: 3 compact values */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .summary-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .summary-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-teal {
+    background-color: #E6F7F5;
+    color: #0DB3A0;
+  }
+  .icon-amber {
+    background-color: #FFF7EB;
+    color: #FFB547;
+  }
+  .summary-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .summary-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: #071724;
+    line-height: 1.1;
+  }
+  .summary-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #66737D;
+    margin-top: 2px;
+  }
+
+  /* Filter and Search Bar */
+  .control-bar {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .search-box {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    stroke: #66737D;
+    fill: none;
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px 0 36px;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #071724;
+    background-color: #F7F9FA;
+    outline: none;
+  }
+  .search-input:focus {
+    border-color: #0DB3A0;
+    background-color: #FFFFFF;
+  }
+  .filter-select {
+    height: 36px;
+    padding: 0 28px 0 12px;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #071724;
+    background-color: #FFFFFF;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2366737D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    min-width: 130px;
+  }
+
+  /* Two Column Main Content Layout: ~2/3 and ~1/3 */
+  .layout-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 2fr 1.05fr;
+    gap: 20px;
+    min-height: 0;
+  }
+
+  /* Table / List Card (Left Column) */
+  .table-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #E6EAED;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+  }
+  .card-count {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+
+  .table-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .data-table th {
+    background-color: #FAFBFB;
+    font-size: 11px;
+    font-weight: 600;
+    color: #66737D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #E6EAED;
+  }
+  .data-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #E6EAED;
+    font-size: 12px;
+    color: #071724;
+    vertical-align: middle;
+  }
+  .data-table tr.selected {
+    background-color: #F0FAF9;
+  }
+  .data-table tr:hover:not(.selected) {
+    background-color: #FAFBFB;
+  }
+  .campaign-name-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .campaign-name-title {
+    font-weight: 600;
+    color: #071724;
+    font-size: 12px;
+  }
+  .campaign-id {
+    font-size: 11px;
+    color: #66737D;
+  }
+
+  /* Status Chips: 6px radius */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .chip-teal {
+    background-color: #E6F7F5;
+    color: #0B8E7F;
+  }
+  .chip-teal .chip-dot {
+    background-color: #0DB3A0;
+  }
+  .chip-amber {
+    background-color: #FFF7EB;
+    color: #B3740A;
+  }
+  .chip-amber .chip-dot {
+    background-color: #FFB547;
+  }
+  .chip-neutral {
+    background-color: #F0F2F5;
+    color: #66737D;
+  }
+  .chip-neutral .chip-dot {
+    background-color: #8C99A4;
+  }
+
+  .table-footer {
+    padding: 10px 16px;
+    border-top: 1px solid #E6EAED;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FAFBFB;
+  }
+  .pagination-text {
+    font-size: 11px;
+    color: #66737D;
+  }
+  .pagination-actions {
+    display: flex;
+    gap: 6px;
+  }
+  .page-btn {
+    padding: 4px 10px;
+    border: 1px solid #E6EAED;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    font-size: 11px;
+    color: #071724;
+    cursor: pointer;
+  }
+  .page-btn:disabled {
+    color: #A0B0BC;
+    cursor: default;
+    background-color: #FAFBFB;
+  }
+
+  /* Right Details Card */
+  .details-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px;
+    gap: 16px;
+  }
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E6EAED;
+  }
+  .details-title-area {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .details-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+  }
+  .details-subtext {
+    font-size: 11px;
+    color: #66737D;
+    line-height: 1.35;
+  }
+
+  .detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #071724;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: #FAFBFB;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .detail-label {
+    color: #66737D;
+    font-weight: 400;
+  }
+  .detail-val {
+    color: #071724;
+    font-weight: 500;
+    text-align: right;
+  }
+  .val-highlight {
+    color: #0DB3A0;
+    font-weight: 600;
+  }
+
+  /* Budget Progress Bar */
+  .budget-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #FAFBFB;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background-color: #E6EAED;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    width: 82%;
+    height: 100%;
+    background-color: #FFB547;
+    border-radius: 4px;
+  }
+  .budget-metrics {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+  }
+  .budget-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #B3740A;
+    background-color: #FFF7EB;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* Action Buttons in Controls */
+  .controls-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+  }
+  .controls-helper {
+    font-size: 11px;
+    color: #66737D;
+    line-height: 1.35;
+  }
+
+  /* Icon Utilities */
+  .stroke-icon {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+    fill: none;
+    stroke: currentColor;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Left Sidebar (232px) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Ow7V652DQI9ACZwydL2zaTmJJP6IVUxAT7AM-8NSoUB5CbGP4eHf6nh-Gb7g-n29aE0vp_Xz4nkSYSnQuPLhqnGg06g1ZJ7Sd1JYXe7lWCNMf_RsTY7DmH2XC_9ShiQ7xRy6rVppkkdJ8iBz-A1kIlf3217WlZ80WY8ziuZFHERqd-OB4x4yh4x0q5rpKq-WGo21Y9q8L6T8ynb2EpvB5CG9IrBycTT9Gt4StzSpu_CwOwMAVVkT_oQR4AU9DvvY0w" alt="KataKiu" class="brand-logo" />
+      <div class="brand-title">
+        <span class="name">KataKiu</span>
+        <span class="sub">Admin portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div>
+        <div class="nav-group-title">Primary</div>
+        <div class="nav-list">
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Overview</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Code operations</span>
+          </a>
+          <a href="#" class="nav-item active">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Campaigns</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+            <span>Merchants</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Claims and risk</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            <span>Finance</span>
+          </a>
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Reports</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="nav-group-title">System</div>
+        <div class="nav-list">
+          <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Settings</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-dot"></div>
+      <span class="status-text">Kenya production environment</span>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <main class="main-container">
+    <!-- Top App Bar (64px) -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="top-bar-title">Campaigns</h1>
+      </div>
+      <div class="top-bar-right">
+        <div class="env-badge">
+          <span class="env-dot"></span>
+          <span>Production</span>
+        </div>
+        <button class="help-btn" aria-label="Help & Documentation">
+          <svg class="stroke-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+        <div class="avatar-badge" title="Administrator AW">AW</div>
+      </div>
+    </header>
+
+    <!-- Page Content Area -->
+    <div class="page-content">
+      <!-- Header Area -->
+      <section class="header-section">
+        <div>
+          <div class="eyebrow">LOYALTY PROGRAMME</div>
+          <div class="heading-row">
+            <h2 class="page-heading">Campaign management</h2>
+            <span class="scope-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              KataKiu Kenya
+            </span>
+          </div>
+          <p class="sub-description">Set verified-purchase rewards, product eligibility, outlet coverage and campaign controls.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline">
+            <svg class="stroke-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            View approval queue
+          </button>
+          <button class="btn btn-primary">
+            <svg class="stroke-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create campaign
+          </button>
+        </div>
+      </section>
+
+      <!-- Campaign Summary (3 compact values) -->
+      <section class="summary-row">
+        <div class="summary-card">
+          <div class="summary-icon-wrap icon-teal">
+            <svg class="stroke-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="summary-body">
+            <div class="summary-val">4</div>
+            <div class="summary-label">Active campaigns</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon-wrap icon-amber">
+            <svg class="stroke-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="summary-body">
+            <div class="summary-val">2</div>
+            <div class="summary-label">Scheduled campaigns</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon-wrap icon-amber">
+            <svg class="stroke-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="summary-body">
+            <div class="summary-val">1</div>
+            <div class="summary-label">Awaiting approval</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter and Search Bar -->
+      <section class="control-bar">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" placeholder="Search campaign" value="Launch partner">
+        </div>
+        <select class="filter-select">
+          <option>All statuses</option>
+          <option>Active</option>
+          <option>Scheduled</option>
+          <option>Approval needed</option>
+          <option>Ended</option>
+        </select>
+        <select class="filter-select">
+          <option>All products</option>
+          <option>Participating product • 500 ml</option>
+          <option>Participating product • 330 ml</option>
+        </select>
+        <select class="filter-select">
+          <option>All outlets</option>
+          <option>Nairobi Region</option>
+          <option>Westlands Outlets</option>
+        </select>
+        <select class="filter-select">
+          <option>Current period</option>
+          <option>Last 30 days</option>
+          <option>Quarter 3</option>
+        </select>
+      </section>
+
+      <!-- Two-Column Layout (~2/3 and ~1/3) -->
+      <div class="layout-grid">
+        <!-- Left Column: Campaigns Table -->
+        <div class="table-card">
+          <div class="card-header">
+            <h3 class="card-title">Campaigns</h3>
+            <span class="card-count">7 total registered campaigns</span>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Campaign</th>
+                  <th>Status</th>
+                  <th>Eligible products</th>
+                  <th>Outlet coverage</th>
+                  <th>Validity</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Selected / Active -->
+                <tr class="selected">
+                  <td>
+                    <div class="campaign-name-cell">
+                      <span class="campaign-name-title">Launch partner rewards</span>
+                      <span class="campaign-id">CMP-2026-001</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="chip chip-teal">
+                      <span class="chip-dot"></span>
+                      Active
+                    </span>
+                  </td>
+                  <td>3 products</td>
+                  <td>42 outlets</td>
+                  <td>01 Sep – 30 Sep 2026</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-outline btn-compact" style="background-color: #0DB3A0; color: #FFFFFF; border-color: #0DB3A0;">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 2: Scheduled -->
+                <tr>
+                  <td>
+                    <div class="campaign-name-cell">
+                      <span class="campaign-name-title">Weekend verified purchase</span>
+                      <span class="campaign-id">CMP-2026-002</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="chip chip-amber">
+                      <span class="chip-dot"></span>
+                      Scheduled
+                    </span>
+                  </td>
+                  <td>2 products</td>
+                  <td>18 outlets</td>
+                  <td>20 Sep – 22 Sep 2026</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-outline btn-compact">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 3: Approval needed -->
+                <tr>
+                  <td>
+                    <div class="campaign-name-cell">
+                      <span class="campaign-name-title">October retail launch</span>
+                      <span class="campaign-id">CMP-2026-003</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="chip chip-amber">
+                      <span class="chip-dot"></span>
+                      Approval needed
+                    </span>
+                  </td>
+                  <td>4 products</td>
+                  <td>60 outlets</td>
+                  <td>01 Oct – 31 Oct 2026</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-outline btn-compact">Review</button>
+                  </td>
+                </tr>
+
+                <!-- Row 4: Ended -->
+                <tr>
+                  <td>
+                    <div class="campaign-name-cell">
+                      <span class="campaign-name-title">August outlet bonus</span>
+                      <span class="campaign-id">CMP-2026-000</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="chip chip-neutral">
+                      <span class="chip-dot"></span>
+                      Ended
+                    </span>
+                  </td>
+                  <td>4 products</td>
+                  <td>36 outlets</td>
+                  <td>01 Aug – 31 Aug 2026</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-outline btn-compact">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span class="pagination-text">Showing 1–4 of 7 campaigns</span>
+            <div class="pagination-actions">
+              <button class="page-btn" disabled>Previous</button>
+              <button class="page-btn">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Details Panel -->
+        <div class="details-card">
+          <!-- Header -->
+          <div class="details-header">
+            <div class="details-title-area">
+              <h3 class="details-title">Launch partner rewards</h3>
+              <p class="details-subtext">Points are awarded only after a verified customer purchase and merchant confirmation.</p>
+            </div>
+            <span class="chip chip-teal" style="margin-top: 2px;">
+              <span class="chip-dot"></span>
+              Active
+            </span>
+          </div>
+
+          <!-- Section: Reward rules -->
+          <div class="detail-section">
+            <div class="section-title">Reward rules</div>
+            <div class="detail-grid">
+              <div class="detail-row">
+                <span class="detail-label">Customer reward</span>
+                <span class="detail-val val-highlight">Up to +240 pts</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Merchant reward</span>
+                <span class="detail-val val-highlight">Up to +20 pts</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Eligible products</span>
+                <span class="detail-val">3 products</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Reward frequency</span>
+                <span class="detail-val">One reward per unique product code</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Stacking</span>
+                <span class="detail-val">Not stackable</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Coverage and validity -->
+          <div class="detail-section">
+            <div class="section-title">Coverage and validity</div>
+            <div class="detail-grid">
+              <div class="detail-row">
+                <span class="detail-label">Participating outlets</span>
+                <span class="detail-val">42 outlets</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Validity</span>
+                <span class="detail-val">01 Sep – 30 Sep 2026</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Age eligibility</span>
+                <span class="detail-val">18+ account confirmation required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Budget control -->
+          <div class="detail-section">
+            <div class="section-title">Budget control</div>
+            <div class="budget-container">
+              <div class="budget-metrics">
+                <span class="detail-label">Campaign budget</span>
+                <span class="detail-val" style="font-weight: 700;">KES 350,000</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="budget-metrics">
+                <div>
+                  <span class="detail-label">Used: </span>
+                  <span class="detail-val" style="font-weight: 600;">KES 287,500</span>
+                </div>
+                <div>
+                  <span class="detail-label">Remaining: </span>
+                  <span class="detail-val">KES 62,500</span>
+                </div>
+              </div>
+              <div style="margin-top: 2px;">
+                <span class="budget-tag">82% of budget used</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Campaign controls -->
+          <div class="detail-section" style="margin-top: auto;">
+            <div class="section-title">Campaign controls</div>
+            <div class="controls-actions">
+              <button class="btn btn-outline" style="flex: 1;">
+                <svg class="stroke-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit campaign
+              </button>
+              <button class="btn btn-coral-outline" style="flex: 1;">
+                <svg class="stroke-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                Pause campaign
+              </button>
+            </div>
+            <p class="controls-helper">Pausing prevents new claims. It does not change rewards already confirmed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

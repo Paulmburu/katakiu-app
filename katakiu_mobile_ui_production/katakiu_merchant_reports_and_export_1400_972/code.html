@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KataKiu Merchant Reports and Export — 1400 × 972</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #F5F7F8;
+    font-family: 'Inter', sans-serif;
+    color: #071724;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+
+  .presentation-board {
+    width: 1400px;
+    height: 972px;
+    position: relative;
+    background-color: #F5F7F8;
+    overflow: hidden;
+  }
+
+  /* Artboard styling */
+  .artboard {
+    position: absolute;
+    top: 64px;
+    width: 390px;
+    height: 844px;
+    background-color: #FFFFFF;
+    border-radius: 36px;
+    box-shadow: 0 12px 36px rgba(7, 23, 36, 0.06), 0 1px 3px rgba(7, 23, 36, 0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E6EAED;
+  }
+
+  .artboard-1 { left: 67px; }
+  .artboard-2 { left: 505px; }
+  .artboard-3 { left: 943px; }
+
+  /* Status Bar */
+  .status-bar {
+    height: 24px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #071724;
+    background-color: #FFFFFF;
+    z-index: 10;
+  }
+
+  .status-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* App Bar */
+  .app-bar {
+    height: 56px;
+    padding: 0 20px 0 16px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .app-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #071724;
+  }
+
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #071724;
+  }
+
+  .outlet-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: #0DB3A0;
+    background-color: #E8F7F5;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  /* Content Scroll Area */
+  .screen-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: none;
+  }
+  .screen-content::-webkit-scrollbar { display: none; }
+
+  /* Typography */
+  .section-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+    line-height: 20px;
+  }
+
+  .body-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #071724;
+    line-height: 16px;
+  }
+
+  .secondary-text {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 15px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #071724;
+    line-height: 22px;
+  }
+
+  /* Cards and Containers */
+  .surface-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .surface-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Filter Header */
+  .filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8FAFB;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .date-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #071724;
+  }
+
+  .date-display svg {
+    color: #66737D;
+  }
+
+  .outline-chip-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0DB3A0;
+    background-color: #FFFFFF;
+    border: 1px solid #0DB3A0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Status Chips */
+  .chip {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+  }
+
+  .chip-teal {
+    background-color: #E8F7F5;
+    color: #0DB3A0;
+  }
+
+  .chip-amber {
+    background-color: #FFF7EB;
+    color: #D98818;
+  }
+
+  .chip-coral {
+    background-color: #FDF0F0;
+    color: #EF6A6A;
+  }
+
+  .chip-neutral {
+    background-color: #F0F3F5;
+    color: #66737D;
+  }
+
+  /* Metrics List Rows */
+  .metric-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0F3F5;
+  }
+  .metric-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .metric-item:first-child {
+    padding-top: 0;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #071724;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .metric-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: #071724;
+  }
+
+  .metric-val.teal { color: #0DB3A0; }
+  .metric-val.amber { color: #D98818; }
+  .metric-val.coral { color: #EF6A6A; }
+
+  /* Comparison Badge */
+  .trend-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .trend-teal {
+    background-color: #E8F7F5;
+    color: #0DB3A0;
+  }
+  .trend-neutral {
+    background-color: #F0F3F5;
+    color: #66737D;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    height: 48px;
+    width: 100%;
+    background-color: #0DB3A0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn-outline {
+    height: 48px;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #071724;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  /* Transactions Stacked Rows */
+  .tx-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tx-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tx-id {
+    font-size: 12px;
+    font-weight: 600;
+    color: #071724;
+  }
+
+  .tx-time {
+    font-size: 11px;
+    color: #66737D;
+  }
+
+  .tx-points-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F8FAFB;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #F0F3F5;
+  }
+
+  .tx-pt-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tx-pt-title {
+    font-size: 11px;
+    color: #66737D;
+  }
+
+  .tx-pt-num {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tx-pt-num.teal { color: #0DB3A0; }
+  .tx-pt-num.amber { color: #D98818; }
+  .tx-pt-num.coral { color: #EF6A6A; }
+
+  /* Summary Pill Group */
+  .summary-pill-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .summary-pill {
+    flex: 1;
+    background-color: #F8FAFB;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 8px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .summary-pill-num {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .summary-pill-lbl {
+    font-size: 11px;
+    color: #66737D;
+  }
+
+  /* Form / Selector Elements */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #66737D;
+  }
+
+  .select-box {
+    height: 44px;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 500;
+    color: #071724;
+  }
+
+  /* Format Radio / Pill Options */
+  .format-options {
+    display: flex;
+    gap: 8px;
+  }
+
+  .format-pill {
+    flex: 1;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #FFFFFF;
+    color: #071724;
+    cursor: pointer;
+  }
+
+  .format-pill.active {
+    border-color: #0DB3A0;
+    background-color: #E8F7F5;
+    color: #0DB3A0;
+    font-weight: 600;
+  }
+
+  /* Helper Notice Card */
+  .notice-card {
+    background-color: #F8FAFB;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .notice-card svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #66737D;
+  }
+
+  /* Safe Area indicator */
+  .safe-area-bottom {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+  }
+  .home-bar {
+    width: 134px;
+    height: 4px;
+    background-color: #071724;
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="presentation-board">
+
+  <!-- ==================== SCREEN 01 — REPORTS OVERVIEW ==================== -->
+  <div class="artboard artboard-1">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 9.5H13C13.5523 9.5 14 9.05228 14 8.5V1.5C14 0.947715 13.5523 0.5 13 0.5H1C0.447715 0.5 0 0.947715 0 1.5V8.5C0 9.05228 0.447715 9.5 1 9.5Z" fill="#071724"/><path d="M12 2H2V8H12V2Z" fill="white"/></svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M6 2C8.2 2 10.1 2.9 11.4 4.3L6 10L0.6 4.3C1.9 2.9 3.8 2 6 2Z" fill="#071724"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="app-bar-title">Reports</span>
+      </div>
+      <span class="outlet-tag">Market Square Westlands</span>
+    </div>
+
+    <!-- Content -->
+    <div class="screen-content">
+      <!-- Date Filter Bar -->
+      <div class="filter-bar">
+        <div class="date-display">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>01 Sep – 14 Sep 2026</span>
+        </div>
+        <button class="outline-chip-btn">
+          <span>Change dates</span>
+        </button>
+      </div>
+
+      <!-- Performance Summary -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span class="section-heading">Performance summary</span>
+        <div class="surface-card">
+          <div class="metric-item">
+            <span class="metric-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Confirmed purchases
+            </span>
+            <span class="metric-val">84</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D98818" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Pending confirmations
+            </span>
+            <span class="metric-val amber">3</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Customer points issued
+            </span>
+            <span class="metric-val">12,460 pts</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Merchant points earned
+            </span>
+            <span class="metric-val teal">1,180 pts</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Returns and reversals
+            </span>
+            <span class="metric-val coral">1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compared with previous period -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span class="section-heading">Compared with previous period</span>
+        <div class="surface-card">
+          <div class="metric-item">
+            <span class="metric-label">Confirmed purchases</span>
+            <span class="trend-badge trend-teal">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +12%
+            </span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Customer points issued</span>
+            <span class="trend-badge trend-teal">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +8%
+            </span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Returns</span>
+            <span class="trend-badge trend-neutral">No change</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions-group">
+        <button class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span>View sales report</span>
+        </button>
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Export report</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Safe Area Bottom -->
+    <div class="safe-area-bottom"><div class="home-bar"></div></div>
+  </div>
+
+
+  <!-- ==================== SCREEN 02 — SALES AND POINTS REPORT ==================== -->
+  <div class="artboard artboard-2">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 9.5H13C13.5523 9.5 14 9.05228 14 8.5V1.5C14 0.947715 13.5523 0.5 13 0.5H1C0.447715 0.5 0 0.947715 0 1.5V8.5C0 9.05228 0.447715 9.5 1 9.5Z" fill="#071724"/><path d="M12 2H2V8H12V2Z" fill="white"/></svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M6 2C8.2 2 10.1 2.9 11.4 4.3L6 10L0.6 4.3C1.9 2.9 3.8 2 6 2Z" fill="#071724"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="app-bar-title">Sales and points</span>
+      </div>
+      <span class="chip chip-neutral" style="font-size: 11px;">Westlands</span>
+    </div>
+
+    <!-- Content -->
+    <div class="screen-content">
+      <!-- Filter Bar & Filter Select -->
+      <div style="display: flex; gap: 8px;">
+        <div class="filter-bar" style="flex: 1; padding: 8px 10px;">
+          <div class="date-display" style="font-size: 11px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>01 Sep – 14 Sep</span>
+          </div>
+        </div>
+        <div class="select-box" style="width: 130px; height: 38px; font-size: 11px; padding: 0 8px;">
+          <span>All statuses</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <!-- Summary Row -->
+      <div class="summary-pill-group">
+        <div class="summary-pill">
+          <span class="summary-pill-num" style="color: #0DB3A0;">84</span>
+          <span class="summary-pill-lbl">confirmed</span>
+        </div>
+        <div class="summary-pill">
+          <span class="summary-pill-num" style="color: #D98818;">3</span>
+          <span class="summary-pill-lbl">pending</span>
+        </div>
+        <div class="summary-pill">
+          <span class="summary-pill-num" style="color: #EF6A6A;">1</span>
+          <span class="summary-pill-lbl">reversed</span>
+        </div>
+      </div>
+
+      <!-- Recent Transactions Heading -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+        <span class="section-heading">Recent transactions</span>
+        <span class="secondary-text">4 records</span>
+      </div>
+
+      <!-- Transaction Stacked List -->
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Tx 1: MS-90814 -->
+        <div class="tx-card">
+          <div class="tx-header">
+            <div>
+              <span class="tx-id">MS-90814</span>
+              <span class="secondary-text" style="margin-left: 6px;">Today, 14:20</span>
+            </div>
+            <span class="chip chip-teal">Confirmed</span>
+          </div>
+          <div class="tx-points-box">
+            <div class="tx-pt-col">
+              <span class="tx-pt-title">Customer</span>
+              <span class="tx-pt-num teal">+240 pts</span>
+            </div>
+            <div class="tx-pt-col" style="text-align: right;">
+              <span class="tx-pt-title">Merchant fee</span>
+              <span class="tx-pt-num teal">+20 pts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tx 2: MS-90809 -->
+        <div class="tx-card">
+          <div class="tx-header">
+            <div>
+              <span class="tx-id">MS-90809</span>
+              <span class="secondary-text" style="margin-left: 6px;">Today, 13:48</span>
+            </div>
+            <span class="chip chip-teal">Confirmed</span>
+          </div>
+          <div class="tx-points-box">
+            <div class="tx-pt-col">
+              <span class="tx-pt-title">Customer</span>
+              <span class="tx-pt-num teal">+120 pts</span>
+            </div>
+            <div class="tx-pt-col" style="text-align: right;">
+              <span class="tx-pt-title">Merchant fee</span>
+              <span class="tx-pt-num teal">+10 pts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tx 3: MS-90803 -->
+        <div class="tx-card">
+          <div class="tx-header">
+            <div>
+              <span class="tx-id">MS-90803</span>
+              <span class="secondary-text" style="margin-left: 6px;">Today, 12:32</span>
+            </div>
+            <span class="chip chip-amber">Pending</span>
+          </div>
+          <div class="tx-points-box">
+            <div class="tx-pt-col">
+              <span class="tx-pt-title">Customer (pending)</span>
+              <span class="tx-pt-num amber">+180 pts</span>
+            </div>
+            <div class="tx-pt-col" style="text-align: right;">
+              <span class="tx-pt-title">Merchant fee</span>
+              <span class="tx-pt-num amber">+15 pts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tx 4: MS-90788 -->
+        <div class="tx-card">
+          <div class="tx-header">
+            <div>
+              <span class="tx-id">MS-90788</span>
+              <span class="secondary-text" style="margin-left: 6px;">Yesterday</span>
+            </div>
+            <span class="chip chip-coral">Reversed</span>
+          </div>
+          <div class="tx-points-box">
+            <div class="tx-pt-col">
+              <span class="tx-pt-title">Customer reversal</span>
+              <span class="tx-pt-num coral">-120 pts</span>
+            </div>
+            <div class="tx-pt-col" style="text-align: right;">
+              <span class="tx-pt-title">Merchant fee</span>
+              <span class="tx-pt-num coral">-10 pts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <button class="btn-outline" style="margin-top: 4px;">
+        <span>View all transactions</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Safe Area Bottom -->
+    <div class="safe-area-bottom"><div class="home-bar"></div></div>
+  </div>
+
+
+  <!-- ==================== SCREEN 03 — RETURNS, CAMPAIGNS AND EXPORT ==================== -->
+  <div class="artboard artboard-3">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 9.5H13C13.5523 9.5 14 9.05228 14 8.5V1.5C14 0.947715 13.5523 0.5 13 0.5H1C0.447715 0.5 0 0.947715 0 1.5V8.5C0 9.05228 0.447715 9.5 1 9.5Z" fill="#071724"/><path d="M12 2H2V8H12V2Z" fill="white"/></svg>
+        <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M6 2C8.2 2 10.1 2.9 11.4 4.3L6 10L0.6 4.3C1.9 2.9 3.8 2 6 2Z" fill="#071724"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="app-bar-title">More reports</span>
+      </div>
+      <span class="outlet-tag">Export Center</span>
+    </div>
+
+    <!-- Content -->
+    <div class="screen-content">
+      <!-- Returns and reversals section -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span class="section-heading">Returns and reversals</span>
+        <div class="surface-card">
+          <div class="metric-item">
+            <span class="metric-label">Accepted returns</span>
+            <span class="metric-val coral">1</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Customer points reversed</span>
+            <span class="metric-val coral">120 pts</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Merchant points reversed</span>
+            <span class="metric-val coral">10 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaign performance section -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span class="section-heading">Campaign performance</span>
+        <div class="surface-card">
+          <div class="surface-row">
+            <span style="font-size: 13px; font-weight: 600; color: #071724;">Launch partner rewards</span>
+            <span class="chip chip-teal">Active</span>
+          </div>
+          <div class="metric-item" style="padding-top: 4px;">
+            <span class="metric-label">Verified claims</span>
+            <span class="metric-val">62</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Customer points issued</span>
+            <span class="metric-val teal">8,940 pts</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Merchant points fee</span>
+            <span class="metric-val teal">620 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export report section -->
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span class="section-heading">Export report</span>
+        
+        <div class="surface-card" style="gap: 12px;">
+          <!-- Report Type Selector -->
+          <div class="form-group">
+            <span class="form-label">Report type</span>
+            <div class="select-box">
+              <span>Sales, points and reversals</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <!-- Date Range -->
+          <div class="form-group">
+            <span class="form-label">Date range</span>
+            <div class="select-box">
+              <span>01 Sep – 14 Sep 2026</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+          </div>
+
+          <!-- Format Options -->
+          <div class="form-group">
+            <span class="form-label">File format</span>
+            <div class="format-options">
+              <div class="format-pill active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>CSV</span>
+              </div>
+              <div class="format-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>PDF</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary Action -->
+          <button class="btn-primary" style="margin-top: 4px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Generate export</span>
+          </button>
+
+          <!-- Small helper notice -->
+          <div class="notice-card">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span class="secondary-text" style="font-size: 11px; line-height: 14px;">
+              The export contains outlet activity, reward entries, pending claims and approved reversals.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safe Area Bottom -->
+    <div class="safe-area-bottom"><div class="home-bar"></div></div>
+  </div>
+
+</div>
+
+</body>
+</html>

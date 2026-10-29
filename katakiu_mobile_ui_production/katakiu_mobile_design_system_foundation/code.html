@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KataKiu Mobile Design System Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+  :root {
+    --midnight: #071724;
+    --amber: #FFB547;
+    --teal: #0DB3A0;
+    --aqua: #7AE1D6;
+    --coral: #EF6A6A;
+    --white: #FFFFFF;
+    --divider: #E6EAED;
+    --secondary-text: #66737D;
+    --soft-neutral: #F5F7F8;
+    
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-inter);
+    background-color: #EEF2F5;
+    color: var(--midnight);
+    font-size: 12px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px 16px 80px 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .system-board {
+    width: 100%;
+    max-width: 960px;
+    background-color: var(--white);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(7, 23, 36, 0.05);
+  }
+
+  /* Header */
+  .board-header {
+    border-bottom: 1px solid var(--divider);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .brand-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-logo-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    object-fit: contain;
+    border: 1px solid var(--divider);
+  }
+
+  .brand-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--midnight);
+    letter-spacing: -0.01em;
+  }
+
+  .brand-tagline {
+    font-size: 12px;
+    color: var(--secondary-text);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .spec-badge {
+    background: var(--soft-neutral);
+    border: 1px solid var(--divider);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--midnight);
+    font-weight: 500;
+  }
+
+  /* Section structure */
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--midnight);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--secondary-text);
+  }
+
+  .section-block {
+    margin-bottom: 24px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  /* Cards */
+  .token-card {
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--white);
+  }
+
+  .color-swatch-box {
+    height: 44px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(7, 23, 36, 0.08);
+    display: flex;
+    align-items: flex-end;
+    padding: 6px;
+  }
+
+  .token-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .token-meta {
+    font-size: 11px;
+    color: var(--secondary-text);
+    margin-top: 2px;
+  }
+
+  .token-desc {
+    font-size: 11px;
+    color: var(--midnight);
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+
+  /* Typography table */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .spec-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--secondary-text);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--divider);
+    background: var(--soft-neutral);
+  }
+
+  .spec-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: middle;
+  }
+
+  /* Spacing Scale Demo */
+  .space-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+  }
+  .space-bar {
+    background: var(--teal);
+    height: 14px;
+    border-radius: 2px;
+  }
+
+  /* Status Chips */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .chip-confirmed {
+    background-color: rgba(13, 179, 160, 0.14);
+    color: #075E54;
+  }
+
+  .chip-pending {
+    background-color: rgba(255, 181, 71, 0.22);
+    color: #613C00;
+  }
+
+  .chip-review {
+    background-color: rgba(255, 181, 71, 0.22);
+    color: #613C00;
+  }
+
+  .chip-reversed {
+    background-color: rgba(239, 106, 106, 0.16);
+    color: #8C1D1D;
+  }
+
+  .chip-offline {
+    background-color: var(--divider);
+    color: var(--midnight);
+  }
+
+  .chip-icon {
+    font-size: 13px !important;
+  }
+
+  /* UI Components */
+  .phone-frame-ref {
+    width: 390px;
+    background: var(--white);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto 16px auto;
+  }
+
+  /* App Bar */
+  .app-bar-spec {
+    height: 56px;
+    background: var(--white);
+    border-bottom: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .app-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--midnight);
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    color: var(--midnight);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+  }
+  .icon-btn:hover {
+    background: var(--soft-neutral);
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav-spec {
+    background: var(--white);
+    border-top: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 0;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--secondary-text);
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 64px;
+  }
+
+  .nav-item.active {
+    color: var(--teal);
+  }
+
+  .nav-icon {
+    font-size: 22px !important;
+  }
+
+  /* Buttons */
+  .btn-demo-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: background 0.15s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--teal);
+    color: var(--white);
+  }
+
+  .btn-primary:active {
+    background-color: #0B9888;
+  }
+
+  .btn-primary:disabled {
+    background-color: #C0D3D0;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: var(--white);
+    color: var(--midnight);
+    border: 1px solid var(--divider);
+  }
+
+  .btn-secondary:active {
+    background-color: var(--soft-neutral);
+  }
+
+  .btn-tertiary {
+    background: transparent;
+    color: var(--teal);
+    padding: 0 8px;
+    height: 36px;
+  }
+
+  .btn-destructive {
+    background-color: var(--coral);
+    color: var(--white);
+  }
+
+  /* Inputs */
+  .field-group {
+    margin-bottom: 12px;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--midnight);
+    margin-bottom: 4px;
+  }
+
+  .field-input {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    padding: 0 12px;
+    font-family: var(--font-inter);
+    font-size: 12px;
+    color: var(--midnight);
+    background: var(--white);
+    outline: none;
+  }
+
+  .field-input:focus {
+    border-color: var(--teal);
+  }
+
+  .field-input.error {
+    border-color: var(--coral);
+  }
+
+  .field-helper {
+    font-size: 11px;
+    color: var(--secondary-text);
+    margin-top: 4px;
+  }
+
+  .field-helper.error {
+    color: var(--coral);
+  }
+
+  /* OTP */
+  .otp-container {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .otp-box {
+    width: 44px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--midnight);
+    background: var(--white);
+    outline: none;
+  }
+
+  .otp-box.focus {
+    border-color: var(--teal);
+  }
+
+  .otp-box.error {
+    border-color: var(--coral);
+    color: var(--coral);
+  }
+
+  /* QR Spec Container */
+  .qr-spec-card {
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 16px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .qr-frame {
+    width: 160px;
+    height: 160px;
+    background: #FFFFFF;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  /* Realistic SVG QR matrix placeholder */
+  .qr-svg {
+    width: 100%;
+    height: 100%;
+    shape-rendering: crispEdges;
+  }
+
+  /* List row */
+  .list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    background: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .row-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .row-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--soft-neutral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--midnight);
+  }
+
+  .row-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .row-sub {
+    font-size: 11px;
+    color: var(--secondary-text);
+  }
+
+  .row-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--midnight);
+    text-align: right;
+  }
+
+  /* Dialog & Sheet preview */
+  .dialog-box {
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 16px;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(7, 23, 36, 0.08);
+  }
+
+  .bottom-sheet-box {
+    border: 1px solid var(--divider);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 12px 16px 16px 16px;
+    background: var(--white);
+    box-shadow: 0 -2px 10px rgba(7, 23, 36, 0.05);
+  }
+
+  .sheet-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--divider);
+    border-radius: 2px;
+    margin: 0 auto 12px auto;
+  }
+
+  /* State badges / banners */
+  .state-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    margin-bottom: 8px;
+    background: var(--white);
+  }
+
+  /* Do-not-use comparison card */
+  .rule-card {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid var(--divider);
+  }
+
+  .rule-card.do {
+    background: #F0FAF9;
+    border-color: #B5E5E0;
+  }
+
+  .rule-card.dont {
+    background: #FDF3F3;
+    border-color: #F8B4B4;
+  }
+
+  .rule-title {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .do-title { color: #086B60; }
+  .dont-title { color: #A62424; }
+
+  .rule-list {
+    list-style: none;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .rule-list li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 3px;
+  }
+
+  .rule-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="system-board">
+
+  <!-- 1. BRAND IDENTITY -->
+  <header class="board-header">
+    <div class="brand-block">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv0a6Hfs56Bx9NMoUtxDvcDLeKr16s3mrsYySbe-AHwVEpWbx-yIkD2cxhUh1rpc3GUWa12CELet0GeVgv6kahhM6OOX6J22EW2Z5K8jwcrvIpvDaCNUHSUTQ7Nb87r-A0qeOt0we3ea923HQOtdaOEzRUFGIDOotj3kiPI6ZCBeWhOk56x3IDsMf2dzh3Dvv3CMhMG8kS_gmmgVIVjEQz6fqqwjSdiEHf7uzc7xII6tF92rZLkOKukAjktt1eWh-zGg" alt="KataKiu Logo" class="brand-logo-img">
+      <div>
+        <h1 class="brand-title">KataKiu</h1>
+        <p class="brand-tagline">“Scan. Earn. Enjoy responsibly.”</p>
+        <p style="font-size: 11px; color: var(--secondary-text); margin-top: 4px;">Kenya Verified Purchase Loyalty & Rewards &bull; Official Mobile Design System</p>
+      </div>
+    </div>
+    <div class="spec-badge">
+      Reference: 390 &times; 844 px (Android Mobile)
+    </div>
+  </header>
+
+  <!-- 2. COLOR TOKENS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>2. Official Colour Tokens</span>
+      <span class="section-subtitle">Strict 9-token palette &bull; No gradients, no glassmorphism</span>
+    </div>
+
+    <div class="grid-3">
+      <!-- Midnight -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #071724; color: #FFF;">
+          <span style="font-size: 11px; font-weight: 500;">Dark Contrast</span>
+        </div>
+        <div class="token-name">Midnight</div>
+        <div class="token-meta">#071724 &bull; Core Dark</div>
+        <div class="token-desc">Primary text, strong contrast, headings, dark summary surfaces, security & trust badges.</div>
+      </div>
+
+      <!-- Teal -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #0DB3A0; color: #FFF;">
+          <span style="font-size: 11px; font-weight: 500;">Brand Action</span>
+        </div>
+        <div class="token-name">Teal</div>
+        <div class="token-meta">#0DB3A0 &bull; Core Primary</div>
+        <div class="token-desc">Primary buttons, confirmed states, active navigation icons, success states, primary links.</div>
+      </div>
+
+      <!-- Amber -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #FFB547; color: #071724;">
+          <span style="font-size: 11px; font-weight: 500;">Scan / Attention</span>
+        </div>
+        <div class="token-name">Amber</div>
+        <div class="token-meta">#FFB547 &bull; Highlight Accent</div>
+        <div class="token-desc">Scan actions, attention states, pending/review indicators, focus rings, corner accents.</div>
+      </div>
+
+      <!-- Aqua -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #7AE1D6; color: #071724;">
+          <span style="font-size: 11px; font-weight: 500;">Light Support</span>
+        </div>
+        <div class="token-name">Aqua</div>
+        <div class="token-meta">#7AE1D6 &bull; Secondary Tint</div>
+        <div class="token-desc">Light supporting surfaces, pending-state cards, informational highlights, secondary positive states.</div>
+      </div>
+
+      <!-- Coral -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #EF6A6A; color: #FFF;">
+          <span style="font-size: 11px; font-weight: 500;">Error / Warning</span>
+        </div>
+        <div class="token-name">Coral</div>
+        <div class="token-meta">#EF6A6A &bull; Alert & Reversal</div>
+        <div class="token-desc">Errors, reversals, expired rewards, destructive actions, age-restriction (18+) warnings.</div>
+      </div>
+
+      <!-- White -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #FFFFFF; color: #071724; border: 1px solid var(--divider);">
+          <span style="font-size: 11px; font-weight: 500;">Base Surface</span>
+        </div>
+        <div class="token-name">White</div>
+        <div class="token-meta">#FFFFFF &bull; Core Surface</div>
+        <div class="token-desc">Main screen background, cards, app bars, bottom navigation bar, form fields.</div>
+      </div>
+
+      <!-- Divider -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #E6EAED; color: #071724;">
+          <span style="font-size: 11px; font-weight: 500;">Structure</span>
+        </div>
+        <div class="token-name">Divider</div>
+        <div class="token-meta">#E6EAED &bull; 1px Borders</div>
+        <div class="token-desc">Thin 1px borders, list separators, app-bar borders, bottom nav dividers, structural cuts.</div>
+      </div>
+
+      <!-- Secondary Text -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #66737D; color: #FFF;">
+          <span style="font-size: 11px; font-weight: 500;">Subtext</span>
+        </div>
+        <div class="token-name">Secondary Text</div>
+        <div class="token-meta">#66737D &bull; Metadata</div>
+        <div class="token-desc">Helper text, metadata, timestamps, transaction IDs, supporting labels, inactive nav.</div>
+      </div>
+
+      <!-- Soft Neutral -->
+      <div class="token-card">
+        <div class="color-swatch-box" style="background-color: #F5F7F8; color: #071724; border: 1px solid var(--divider);">
+          <span style="font-size: 11px; font-weight: 500;">Soft Surface</span>
+        </div>
+        <div class="token-name">Soft Neutral Surface</div>
+        <div class="token-meta">#F5F7F8 &bull; Low Container</div>
+        <div class="token-desc">Icon container backgrounds, secondary chips, subtle summary sections, code containers.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LOGO USAGE -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>3. Logo & Brand Mark Rules</span>
+      <span class="section-subtitle">Clear space & integrity rules</span>
+    </div>
+    <div class="grid-2">
+      <div class="token-card">
+        <div style="display:flex; align-items:center; gap:16px;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl5iqX6eM5KOOfp3d2Qojqmk-cxIg6Duj1W4dhoVhOZ9zQNHUCeAc2MkRQZQ9gVpKRHBcezodcs6JdVZu2KiXV-zq8fkNSzaFRDgd5CgBh40OVhFNtI3dWFAlzFzN-L-sorzCuRxTBSbD2ycZ0rmvMz7hxsdhIcehRS0ykWZz2YYUclfOAz2dcnyRP2YPkWgGpFFU58AR7XkS2o6Uh5HEC3XndV5KzNbu77wC5UHKqh4Xxn-sFS8Ps94z9V-FNE6FCLw" alt="Official KataKiu Mark" style="width: 72px; height: 72px; border-radius:12px;">
+          <div>
+            <div style="font-weight:600; font-size:13px;">Official Midnight Badge Mark</div>
+            <p style="font-size:11px; color:var(--secondary-text); margin-top:2px;">Rounded Midnight background with crisp white capital 'K' and distinct Amber scan corner brackets.</p>
+            <span class="chip chip-confirmed" style="margin-top:6px;"><span class="material-symbols-outlined chip-icon">check</span>Primary Mark</span>
+          </div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:6px;">Usage Rules:</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li>Logo badge is the strongest rounded shape in the entire application</li>
+          <li>Keep the mark simple, sharp and instantly recognisable</li>
+          <li><strong>Do not</strong> place the logo inside scannable QR matrices</li>
+          <li><strong>Do not</strong> distort, rotate, stretch or add shadows/gradients</li>
+          <li><strong>Do not</strong> use the logo as a repeated wallpaper or decorative pattern</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TYPOGRAPHY SCALE -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>4. Fixed Typography Scale</span>
+      <span class="section-subtitle">Single typeface: Inter &bull; Fixed px sizes only (no ranges)</span>
+    </div>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Token / Role</th>
+          <th>Size</th>
+          <th>Weight</th>
+          <th>Color</th>
+          <th>Sample Rendering</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Main numerical value</strong></td>
+          <td>22 px</td>
+          <td>700 Bold</td>
+          <td>#071724</td>
+          <td><span style="font-size:22px; font-weight:700; color:var(--midnight);">1,840 PTS</span></td>
+        </tr>
+        <tr>
+          <td><strong>Section heading</strong></td>
+          <td>16 px</td>
+          <td>600 Semibold</td>
+          <td>#071724</td>
+          <td><span style="font-size:16px; font-weight:600; color:var(--midnight);">Eligible Purchases</span></td>
+        </tr>
+        <tr>
+          <td><strong>App-bar title</strong></td>
+          <td>14 px</td>
+          <td>500 Medium</td>
+          <td>#071724</td>
+          <td><span style="font-size:14px; font-weight:500; color:var(--midnight);">Scan Verification</span></td>
+        </tr>
+        <tr>
+          <td><strong>Primary action label</strong></td>
+          <td>13 px</td>
+          <td>600 Semibold</td>
+          <td>#0DB3A0 / #FFF</td>
+          <td><span style="font-size:13px; font-weight:600; color:var(--teal);">Confirm Purchase</span></td>
+        </tr>
+        <tr>
+          <td><strong>Body text</strong></td>
+          <td>12 px</td>
+          <td>400 Regular</td>
+          <td>#071724</td>
+          <td><span style="font-size:12px; font-weight:400; color:var(--midnight);">Show this code to an authorised KataKiu merchant in Westlands.</span></td>
+        </tr>
+        <tr>
+          <td><strong>Bottom-navigation label</strong></td>
+          <td>12 px</td>
+          <td>500 Medium</td>
+          <td>#0DB3A0 / #66737D</td>
+          <td><span style="font-size:12px; font-weight:500; color:var(--teal);">Home</span> &bull; <span style="font-size:12px; font-weight:500; color:var(--secondary-text);">Account</span></td>
+        </tr>
+        <tr>
+          <td><strong>Status & chip text</strong></td>
+          <td>11 px</td>
+          <td>500 Medium</td>
+          <td>Token-specific</td>
+          <td><span class="chip chip-confirmed" style="font-size:11px;">Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><strong>Metadata & helper text</strong></td>
+          <td>11 px</td>
+          <td>400 Regular</td>
+          <td>#66737D</td>
+          <td><span style="font-size:11px; font-weight:400; color:var(--secondary-text);">Yesterday at 14:32 &bull; Naivas Market</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 & 6 & 7. SPACING, LAYOUT & RADIUS RULES -->
+  <section class="section-block">
+    <div class="grid-3">
+      
+      <!-- Spacing -->
+      <div class="token-card">
+        <div class="token-name" style="margin-bottom:8px;">5. Spacing Scale</div>
+        <div class="space-item">
+          <span style="width:36px; font-size:11px; color:var(--secondary-text);">4 px</span>
+          <div class="space-bar" style="width: 16px;"></div>
+          <span style="font-size:11px;">Icon gaps, micro padding</span>
+        </div>
+        <div class="space-item">
+          <span style="width:36px; font-size:11px; color:var(--secondary-text);">8 px</span>
+          <div class="space-bar" style="width: 32px;"></div>
+          <span style="font-size:11px;">Component internal spacing</span>
+        </div>
+        <div class="space-item">
+          <span style="width:36px; font-size:11px; color:var(--secondary-text);">12 px</span>
+          <div class="space-bar" style="width: 48px;"></div>
+          <span style="font-size:11px;">Card internal padding</span>
+        </div>
+        <div class="space-item">
+          <span style="width:36px; font-size:11px; color:var(--secondary-text);">16 px</span>
+          <div class="space-bar" style="width: 64px;"></div>
+          <span style="font-size:11px;">Section & card gaps</span>
+        </div>
+        <div class="space-item">
+          <span style="width:36px; font-size:11px; color:var(--secondary-text);">24 px</span>
+          <div class="space-bar" style="width: 96px;"></div>
+          <span style="font-size:11px;">Screen margins & safe areas</span>
+        </div>
+      </div>
+
+      <!-- Layout Rules -->
+      <div class="token-card">
+        <div class="token-name" style="margin-bottom:8px;">6. Layout & Frame Rules</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li><strong>Reference frame:</strong> 390 &times; 844 px (Android-first)</li>
+          <li><strong>Screen margins:</strong> Exactly 24 px left & right</li>
+          <li><strong>Safe areas:</strong> 24 px top & bottom margins</li>
+          <li><strong>Hierarchy:</strong> One dominant primary action per screen</li>
+          <li><strong>Scrolling:</strong> Vertical scrolling only; no horizontal card overflow</li>
+          <li><strong>System UI:</strong> White status bar with dark system icons</li>
+        </ul>
+      </div>
+
+      <!-- Shape & Radius -->
+      <div class="token-card">
+        <div class="token-name" style="margin-bottom:8px;">7 & 8. Shape, Radius & Borders</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li><strong>Cards:</strong> exactly 8 px radius</li>
+          <li><strong>Text & OTP Fields:</strong> exactly 8 px radius</li>
+          <li><strong>Buttons:</strong> exactly 8 px radius</li>
+          <li><strong>Dialogs:</strong> exactly 8 px radius</li>
+          <li><strong>Bottom Sheets:</strong> exactly 12 px top radius</li>
+          <li><strong>Status Chips:</strong> exactly 6 px radius</li>
+          <li><strong>Borders:</strong> thin 1 px solid #E6EAED</li>
+          <li><strong>Elevation:</strong> subtle 1px/2px shadows; no heavy float</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9 & 10. APP-BAR & BOTTOM NAVIGATION COMPONENTS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>9 & 10. App Bar & Customer Navigation Components</span>
+      <span class="section-subtitle">Height: 56 px &bull; 3 customer tabs (Home, Scan, Account)</span>
+    </div>
+
+    <div class="grid-2">
+      <!-- App Bar Variants -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">App Bar Specifications (56 px fixed height)</div>
+        
+        <!-- Root App Bar -->
+        <div style="font-size:11px; color:var(--secondary-text); margin-bottom:4px;">A. Root App Bar</div>
+        <div class="app-bar-spec" style="border:1px solid var(--divider); border-radius:8px; margin-bottom:8px;">
+          <div class="app-bar-left">
+            <span class="app-bar-title" style="font-weight:600;">KataKiu</span>
+          </div>
+          <button class="icon-btn" aria-label="Notifications">
+            <span class="material-symbols-outlined" style="font-size:20px;">notifications</span>
+          </button>
+        </div>
+
+        <!-- Secondary App Bar -->
+        <div style="font-size:11px; color:var(--secondary-text); margin-bottom:4px;">B. Secondary Screen (Back Navigation)</div>
+        <div class="app-bar-spec" style="border:1px solid var(--divider); border-radius:8px; margin-bottom:8px;">
+          <div class="app-bar-left">
+            <button class="icon-btn" aria-label="Back">
+              <span class="material-symbols-outlined" style="font-size:20px;">arrow_back</span>
+            </button>
+            <span class="app-bar-title">Purchase Details</span>
+          </div>
+          <button class="icon-btn" aria-label="Help">
+            <span class="material-symbols-outlined" style="font-size:20px;">help_outline</span>
+          </button>
+        </div>
+
+        <!-- Offline App Bar -->
+        <div style="font-size:11px; color:var(--secondary-text); margin-bottom:4px;">C. Offline Status Bar</div>
+        <div class="app-bar-spec" style="border:1px solid var(--divider); border-radius:8px; background:var(--soft-neutral);">
+          <div class="app-bar-left">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--secondary-text);">cloud_off</span>
+            <span class="app-bar-title" style="font-size:12px; color:var(--secondary-text);">Offline &bull; Showing cached points</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">Bottom Navigation (Strict 3 Destinations)</div>
+        <p style="font-size:11px; color:var(--secondary-text); margin-bottom:12px;">Home &bull; Scan &bull; Account. No standalone Activity or Rewards tabs (accessed within Home/Account).</p>
+        
+        <div class="bottom-nav-spec" style="border:1px solid var(--divider); border-radius:8px;">
+          <a href="#" class="nav-item active">
+            <span class="material-symbols-outlined nav-icon">home</span>
+            <span>Home</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div style="width:40px; height:32px; background:rgba(255,181,71,0.18); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--midnight);">
+              <span class="material-symbols-outlined nav-icon" style="color:var(--midnight);">qr_code_scanner</span>
+            </div>
+            <span style="color:var(--midnight); font-weight:600;">Scan</span>
+          </a>
+          <a href="#" class="nav-item">
+            <span class="material-symbols-outlined nav-icon">person</span>
+            <span>Account</span>
+          </a>
+        </div>
+
+        <div style="margin-top:12px; font-size:11px; color:var(--secondary-text); line-height:1.4;">
+          <strong>Navigation Rules:</strong><br>
+          &bull; Active destination: Teal (#0DB3A0) icon & text.<br>
+          &bull; Inactive destination: #66737D icon & text.<br>
+          &bull; Scan destination highlighted with Amber focus accent without distorting bar height.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. BUTTONS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>11. Button System</span>
+      <span class="section-subtitle">8 px radius &bull; 13 px / 600 weight &bull; 48 dp interactive touch zone</span>
+    </div>
+
+    <div class="token-card">
+      <div class="btn-demo-group">
+        <div>
+          <button class="btn btn-primary">Primary Enabled</button>
+        </div>
+        <div>
+          <button class="btn btn-primary" style="background-color:#0B9888;">Primary Pressed</button>
+        </div>
+        <div>
+          <button class="btn btn-primary" style="opacity: 0.85;">
+            <span class="material-symbols-outlined" style="font-size:16px; animation: spin 1s linear infinite;">progress_activity</span>
+            Checking...
+          </button>
+        </div>
+        <div>
+          <button class="btn btn-primary" disabled>Primary Disabled</button>
+        </div>
+        <div>
+          <button class="btn btn-secondary">Secondary (1px border)</button>
+        </div>
+        <div>
+          <button class="btn btn-tertiary">Tertiary Link</button>
+        </div>
+        <div>
+          <button class="btn btn-destructive">Destructive Action</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 & 13. TEXT FIELDS & OTP -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>12 & 13. Form Controls & OTP Verification</span>
+      <span class="section-subtitle">8 px radius &bull; 1 px border &bull; Teal focus &bull; Coral error</span>
+    </div>
+
+    <div class="grid-2">
+      <!-- Text Fields -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">Standard Text Fields</div>
+        
+        <div class="field-group">
+          <label class="field-label">Mobile Number</label>
+          <input type="text" class="field-input" value="+254 712 345 678" readonly>
+          <div class="field-helper">Kenyan verified Safaricom or Airtel number</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Receipt Code (Focused State)</label>
+          <input type="text" class="field-input" value="KTK-9921" style="border-color: var(--teal);">
+          <div class="field-helper">Found on eligible merchant slip</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Merchant Voucher (Error State)</label>
+          <input type="text" class="field-input error" value="EXPIRED-CODE-001">
+          <div class="field-helper error">We could not verify this purchase code. Try again.</div>
+        </div>
+      </div>
+
+      <!-- OTP Fields -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">6-Digit OTP Verification Field</div>
+        <p style="font-size:11px; color:var(--secondary-text); margin-bottom:12px;">Equal width, 8 px radius, compact height.</p>
+
+        <div class="field-group">
+          <label class="field-label">Active Input (Teal Focus)</label>
+          <div class="otp-container">
+            <input class="otp-box" value="4" readonly>
+            <input class="otp-box" value="8" readonly>
+            <input class="otp-box focus" value="" placeholder="|" readonly>
+            <input class="otp-box" readonly>
+            <input class="otp-box" readonly>
+            <input class="otp-box" readonly>
+          </div>
+          <div class="field-helper" style="margin-top:8px;">SMS sent to +254 712 345 678 &bull; <strong>Resend code (45s)</strong></div>
+        </div>
+
+        <div class="field-group" style="margin-top:16px;">
+          <label class="field-label">Invalid OTP State (Coral)</label>
+          <div class="otp-container">
+            <input class="otp-box error" value="9" readonly>
+            <input class="otp-box error" value="1" readonly>
+            <input class="otp-box error" value="0" readonly>
+            <input class="otp-box error" value="3" readonly>
+            <input class="otp-box error" value="2" readonly>
+            <input class="otp-box error" value="7" readonly>
+          </div>
+          <div class="field-helper error" style="margin-top:8px;">Invalid verification code. Please check and re-enter.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 & 15. CARDS & LIST ROWS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>14 & 15. Cards & List Rows</span>
+      <span class="section-subtitle">Single-purpose &bull; 8 px radius &bull; 12/16 px padding &bull; No horizontal overflow</span>
+    </div>
+
+    <div class="grid-2">
+      <!-- Cards -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">A. Points Balance Summary Card (Midnight Surface)</div>
+        <div style="background-color:var(--midnight); color:var(--white); border-radius:8px; padding:16px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div style="font-size:11px; color:var(--aqua); font-weight:500;">VERIFIED BALANCE</div>
+              <div style="font-size:22px; font-weight:700; color:var(--white); margin-top:2px;">1,840 PTS</div>
+            </div>
+            <span class="chip" style="background:rgba(255,181,71,0.2); color:var(--amber); font-size:11px;">240 pending</span>
+          </div>
+          <div style="border-top:1px solid rgba(230,234,237,0.15); margin-top:12px; padding-top:10px; font-size:11px; color:#A0B1BE; display:flex; justify-content:space-between;">
+            <span>Member: Kevin Mwangi</span>
+            <span>ID: KT-88319</span>
+          </div>
+        </div>
+
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">B. Standard White Card (12 px internal padding)</div>
+        <div style="background:var(--white); border:1px solid var(--divider); border-radius:8px; padding:12px;">
+          <div style="font-size:12px; font-weight:600; color:var(--midnight);">Next Eligible Reward</div>
+          <div style="font-size:11px; color:var(--secondary-text); margin-top:2px;">KES 500 Fuel or Safe Ride voucher at 2,000 PTS.</div>
+          <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
+            <div style="flex:1; height:6px; background:var(--soft-neutral); border-radius:3px; overflow:hidden;">
+              <div style="width:92%; height:100%; background:var(--teal);"></div>
+            </div>
+            <span style="font-size:11px; font-weight:600; color:var(--midnight);">160 PTS to go</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- List Rows -->
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">List Row Specifications</div>
+
+        <!-- Row 1: Confirmed -->
+        <div class="list-row">
+          <div class="row-left">
+            <div class="row-icon-box">
+              <span class="material-symbols-outlined" style="font-size:18px;">local_mall</span>
+            </div>
+            <div>
+              <div class="row-title">Naivas Westlands</div>
+              <div class="row-sub">Verified purchase &bull; Yesterday</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div class="row-value">+120 PTS</div>
+            <span class="chip chip-confirmed" style="margin-top:2px;">Confirmed</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Pending -->
+        <div class="list-row">
+          <div class="row-left">
+            <div class="row-icon-box">
+              <span class="material-symbols-outlined" style="font-size:18px;">storefront</span>
+            </div>
+            <div>
+              <div class="row-title">Carrefour Hub</div>
+              <div class="row-sub">Slip under review &bull; 2 hrs ago</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div class="row-value" style="color:var(--secondary-text);">+240 PTS</div>
+            <span class="chip chip-pending" style="margin-top:2px;">Pending</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Reversal -->
+        <div class="list-row">
+          <div class="row-left">
+            <div class="row-icon-box">
+              <span class="material-symbols-outlined" style="font-size:18px; color:var(--coral);">replay</span>
+            </div>
+            <div>
+              <div class="row-title">Market Square Partner</div>
+              <div class="row-sub">Purchase reversed</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div class="row-value" style="color:var(--coral);">-50 PTS</div>
+            <span class="chip chip-reversed" style="margin-top:2px;">Reversed</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. STATUS CHIPS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>16. Status Chips</span>
+      <span class="section-subtitle">Strict 6 px radius &bull; Never rely on color alone (always pair icon + label)</span>
+    </div>
+
+    <div class="token-card" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+      <span class="chip chip-confirmed">
+        <span class="material-symbols-outlined chip-icon">check_circle</span>
+        Confirmed
+      </span>
+
+      <span class="chip chip-pending">
+        <span class="material-symbols-outlined chip-icon">hourglass_top</span>
+        Pending
+      </span>
+
+      <span class="chip chip-review">
+        <span class="material-symbols-outlined chip-icon">info</span>
+        Review
+      </span>
+
+      <span class="chip chip-reversed">
+        <span class="material-symbols-outlined chip-icon">cancel</span>
+        Reversed
+      </span>
+
+      <span class="chip chip-reversed">
+        <span class="material-symbols-outlined chip-icon">error</span>
+        Error
+      </span>
+
+      <span class="chip chip-offline">
+        <span class="material-symbols-outlined chip-icon">cloud_off</span>
+        Offline
+      </span>
+    </div>
+  </section>
+
+  <!-- 17. DIALOGS & BOTTOM SHEETS -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>17. Dialogs & Bottom Sheets</span>
+      <span class="section-subtitle">Dialogs: 8 px radius &bull; Bottom Sheets: 12 px top radius with handle</span>
+    </div>
+
+    <div class="grid-2">
+      <!-- Bottom Sheet -->
+      <div class="bottom-sheet-box">
+        <div class="sheet-handle"></div>
+        <div style="font-size:14px; font-weight:600; color:var(--midnight); margin-bottom:4px;">Merchant Scan Confirmation</div>
+        <div style="font-size:12px; color:var(--secondary-text); margin-bottom:12px;">Present this to an authorised cashier at Carrefour Westlands.</div>
+        
+        <div style="background:var(--soft-neutral); padding:10px; border-radius:8px; margin-bottom:12px; font-size:11px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span style="color:var(--secondary-text);">Customer:</span>
+            <span style="font-weight:600;">Amina Wanjiku</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--secondary-text);">Reward Value:</span>
+            <span style="font-weight:600; color:var(--teal);">KES 500 Safe Ride</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%;">Authorize Claim</button>
+      </div>
+
+      <!-- Confirmation Dialog -->
+      <div class="dialog-box">
+        <div style="font-size:14px; font-weight:600; color:var(--midnight); margin-bottom:6px;">Cancel Pending Claim?</div>
+        <div style="font-size:12px; color:var(--secondary-text); margin-bottom:16px;">
+          Your 240 pending points will remain locked for 24 hours before returning to your available balance.
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button class="btn btn-secondary" style="height:36px; padding:0 12px;">Keep Claim</button>
+          <button class="btn btn-destructive" style="height:36px; padding:0 12px;">Confirm Cancel</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18. SYSTEM STATES (LOADING, SUCCESS, ERROR, OFFLINE) -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>18. Loading, Success, Error & Offline States</span>
+      <span class="section-subtitle">Concise copy explaining what happened + clear recovery step</span>
+    </div>
+
+    <div class="grid-2">
+      <!-- Loading State -->
+      <div class="state-row">
+        <span class="material-symbols-outlined" style="color:var(--teal); font-size:20px;">sync</span>
+        <div>
+          <div style="font-weight:600; font-size:12px;">Checking your purchase…</div>
+          <div style="font-size:11px; color:var(--secondary-text);">Verifying receipt cryptographic signature with merchant.</div>
+        </div>
+      </div>
+
+      <!-- Success State -->
+      <div class="state-row">
+        <span class="material-symbols-outlined" style="color:var(--teal); font-size:20px;">check_circle</span>
+        <div>
+          <div style="font-weight:600; font-size:12px;">Purchase confirmed.</div>
+          <div style="font-size:11px; color:var(--secondary-text);">120 PTS added to your verified balance.</div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div class="state-row">
+        <span class="material-symbols-outlined" style="color:var(--coral); font-size:20px;">error</span>
+        <div>
+          <div style="font-weight:600; font-size:12px;">We could not verify this purchase. Try again.</div>
+          <div style="font-size:11px; color:var(--secondary-text);">Ensure receipt QR is well-lit and fully in frame.</div>
+        </div>
+      </div>
+
+      <!-- Offline State -->
+      <div class="state-row">
+        <span class="material-symbols-outlined" style="color:var(--secondary-text); font-size:20px;">cloud_off</span>
+        <div>
+          <div style="font-weight:600; font-size:12px;">Connection unavailable. Check your network.</div>
+          <div style="font-size:11px; color:var(--secondary-text);">Saved scans will automatically upload once reconnected.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19. QR & VIRTUAL-PASS COMPONENT -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>19. QR & Virtual-Pass Component Specification</span>
+      <span class="section-subtitle">Square black/white modules &bull; Quiet zone &bull; 8 px outer container &bull; No logo inside matrix</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="qr-spec-card">
+        <div class="qr-frame">
+          <!-- Sharp Crisp QR Matrix SVG representation -->
+          <svg class="qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Finder pattern top-left -->
+            <rect x="5" y="5" width="28" height="28" fill="#071724" />
+            <rect x="9" y="9" width="20" height="20" fill="#FFFFFF" />
+            <rect x="13" y="13" width="12" height="12" fill="#071724" />
+
+            <!-- Finder pattern top-right -->
+            <rect x="67" y="5" width="28" height="28" fill="#071724" />
+            <rect x="71" y="9" width="20" height="20" fill="#FFFFFF" />
+            <rect x="75" y="13" width="12" height="12" fill="#071724" />
+
+            <!-- Finder pattern bottom-left -->
+            <rect x="5" y="67" width="28" height="28" fill="#071724" />
+            <rect x="9" y="71" width="20" height="20" fill="#FFFFFF" />
+            <rect x="13" y="75" width="12" height="12" fill="#071724" />
+
+            <!-- Timing and Alignment patterns -->
+            <rect x="37" y="5" width="4" height="4" fill="#071724"/>
+            <rect x="45" y="5" width="4" height="4" fill="#071724"/>
+            <rect x="53" y="5" width="4" height="4" fill="#071724"/>
+            <rect x="5" y="37" width="4" height="4" fill="#071724"/>
+            <rect x="5" y="45" width="4" height="4" fill="#071724"/>
+            <rect x="5" y="53" width="4" height="4" fill="#071724"/>
+
+            <!-- Data modules -->
+            <rect x="37" y="37" width="8" height="8" fill="#071724"/>
+            <rect x="49" y="37" width="4" height="4" fill="#071724"/>
+            <rect x="57" y="37" width="8" height="8" fill="#071724"/>
+            <rect x="73" y="37" width="4" height="4" fill="#071724"/>
+            <rect x="85" y="37" width="8" height="4" fill="#071724"/>
+
+            <rect x="37" y="49" width="4" height="8" fill="#071724"/>
+            <rect x="45" y="49" width="8" height="4" fill="#071724"/>
+            <rect x="61" y="49" width="4" height="12" fill="#071724"/>
+            <rect x="69" y="49" width="8" height="4" fill="#071724"/>
+            <rect x="85" y="49" width="4" height="8" fill="#071724"/>
+
+            <rect x="37" y="65" width="8" height="4" fill="#071724"/>
+            <rect x="49" y="65" width="4" height="8" fill="#071724"/>
+            <rect x="57" y="65" width="12" height="4" fill="#071724"/>
+            <rect x="73" y="65" width="8" height="8" fill="#071724"/>
+            <rect x="85" y="65" width="4" height="4" fill="#071724"/>
+
+            <rect x="37" y="77" width="4" height="12" fill="#071724"/>
+            <rect x="45" y="77" width="8" height="4" fill="#071724"/>
+            <rect x="57" y="81" width="4" height="8" fill="#071724"/>
+            <rect x="65" y="77" width="4" height="8" fill="#071724"/>
+            <rect x="81" y="81" width="8" height="8" fill="#071724"/>
+          </svg>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:var(--midnight);">KTK-PASS-4902-881</div>
+        <div style="font-size:11px; color:var(--secondary-text); margin-top:2px;">Dynamic pass expires in 04:58</div>
+        <div style="margin-top:8px;">
+          <span class="chip chip-confirmed">
+            <span class="material-symbols-outlined chip-icon">verified_user</span>
+            Active Pass
+          </span>
+        </div>
+      </div>
+
+      <div class="token-card">
+        <div style="font-weight:600; font-size:12px; margin-bottom:8px;">QR Component Engineering Rules:</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li><strong>Contrast:</strong> Pure black/white sharp square modules with standard 4-module quiet zone</li>
+          <li><strong>Container:</strong> Exactly 8 px outer container corner radius</li>
+          <li><strong>Integrity:</strong> Never place brand logos or text inside the scannable matrix</li>
+          <li><strong>Style:</strong> No gradients, circular dots, 3D perspective or barcode hybrid styles</li>
+          <li><strong>Supporting Pass Metadata:</strong> Customer name, member ID, verified points balance, countdown timer, merchant instruction</li>
+          <li><em>Visual note:</em> Design system QR is an illustrative placeholder token and not claimed as live scannable</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 & 21. ACCESSIBILITY & CONTENT GUIDELINES -->
+  <section class="section-block">
+    <div class="grid-2">
+      <!-- Accessibility -->
+      <div class="token-card">
+        <div class="section-title" style="margin-bottom:8px;">20. Accessibility & Interaction</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li><strong>Minimum Touch Targets:</strong> All interactive controls must reserve at least 48 dp hit areas</li>
+          <li><strong>Contrast Compliance:</strong> WCAG AA contrast for text against backgrounds (Midnight #071724 on White #FFFFFF ratio > 17:1)</li>
+          <li><strong>Dual Encoding:</strong> Status is never conveyed through color alone; always pair text label with icon</li>
+          <li><strong>No Hidden Gestures:</strong> Critical flows must be achievable through visible tapped actions</li>
+          <li><strong>Form Proximity:</strong> Error messages stay immediately below the responsible input field</li>
+        </ul>
+      </div>
+
+      <!-- Kenyan Content Guidelines -->
+      <div class="token-card">
+        <div class="section-title" style="margin-bottom:8px;">21. Kenyan Content & Tone</div>
+        <ul class="rule-list" style="color:var(--midnight);">
+          <li><strong>Tone:</strong> Clear, respectful, friendly, brief, and responsible</li>
+          <li><strong>Realistic Kenyan Copy:</strong> Use genuine names (Amina, Kevin) and merchants (Naivas, Carrefour, Westlands, Market Square)</li>
+          <li><strong>Currency & Values:</strong> KES 500 &bull; 1,840 PTS &bull; +254 712 345 678</li>
+          <li><strong>Standard Language:</strong> “Scan to earn”, “Purchase confirmed”, “Points pending confirmation”, “Enjoy responsibly”</li>
+          <li><strong>Responsible Conduct:</strong> Strictly no alcohol glamour, no consumption targets, no drinking leaderboards, no urgency tactics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22. DO-NOT-USE EXAMPLES -->
+  <section class="section-block">
+    <div class="section-title">
+      <span>22. System Boundary & Do-Not-Use Rules</span>
+      <span class="section-subtitle">Strict design principles to avoid AI-generated and toy-like aesthetics</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="rule-card do">
+        <div class="rule-title do-title">
+          <span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>
+          Strictly Enforced KataKiu Patterns
+        </div>
+        <ul class="rule-list" style="color:#086B60;">
+          <li>Exact 390 &times; 844 px visual reference canvas</li>
+          <li>Fixed 8 px corner radius on cards, buttons, inputs, dialogs</li>
+          <li>Fixed 12 px top radius on bottom sheets</li>
+          <li>Fixed 6 px radius on status chips</li>
+          <li>Thin 1 px borders with #E6EAED</li>
+          <li>Inter single-family typography with strict px scale</li>
+          <li>Single dominant primary Teal button per screen</li>
+          <li>Calm, trustworthy, human-designed Kenyan loyalty experience</li>
+        </ul>
+      </div>
+
+      <div class="rule-card dont">
+        <div class="rule-title dont-title">
+          <span class="material-symbols-outlined" style="font-size:16px;">cancel</span>
+          Explicitly Prohibited Anti-Patterns
+        </div>
+        <ul class="rule-list" style="color:#A62424;">
+          <li>No gradients, glassmorphism, or neon glow effects</li>
+          <li>No giant display typography or bloated button labels</li>
+          <li>No oversized rounded cards, pill buttons, or decorative blobs</li>
+          <li>No logos inside QR codes or distorted QR modules</li>
+          <li>No standalone 'Rewards' or 'Activity' tabs in bottom navigation</li>
+          <li>No alcohol consumption gamification or drinking leaderboards</li>
+          <li>No heavy drop shadows or floating multi-layered cards</li>
+          <li>No customer/merchant application screens created on this board</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

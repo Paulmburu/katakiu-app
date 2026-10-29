@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1400, initial-scale=1.0">
+  <title>KataKiu Merchant Campaigns and Staff — 1400 × 972</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --midnight: #071724;
+      --amber: #FFB547;
+      --teal: #0DB3A0;
+      --aqua: #7AE1D6;
+      --coral: #EF6A6A;
+      --white: #FFFFFF;
+      --divider: #E6EAED;
+      --secondary: #66737D;
+      --bg-board: #F5F7F8;
+      --surface: #FFFFFF;
+      --surface-subtle: #F8FAFB;
+      --teal-light: #E6F7F5;
+      --amber-light: #FFF8EB;
+      --coral-light: #FDF2F2;
+    }
+
+    body {
+      width: 1400px;
+      height: 972px;
+      background-color: var(--bg-board);
+      font-family: 'Inter', sans-serif;
+      color: var(--midnight);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Presentation Canvas Board */
+    .presentation-board {
+      width: 1400px;
+      height: 972px;
+      position: relative;
+    }
+
+    /* Artboards Positioning */
+    .artboard {
+      position: absolute;
+      top: 64px;
+      width: 390px;
+      height: 844px;
+      background-color: var(--white);
+      border-radius: 28px;
+      box-shadow: 0 12px 36px rgba(7, 23, 36, 0.08), 0 1px 3px rgba(7, 23, 36, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(230, 234, 237, 0.7);
+    }
+
+    .artboard-1 { left: 67px; }
+    .artboard-2 { left: 505px; }
+    .artboard-3 { left: 943px; }
+
+    /* Mobile Chrome & Status Bar */
+    .status-bar {
+      height: 24px;
+      padding: 6px 24px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--midnight);
+      background-color: var(--white);
+      z-index: 10;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .status-bar-icons svg {
+      width: 13px;
+      height: 13px;
+      fill: var(--midnight);
+    }
+
+    /* App Bar (56px) */
+    .app-bar {
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--white);
+      border-bottom: 1px solid var(--divider);
+      flex-shrink: 0;
+    }
+
+    .app-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--midnight);
+      border-radius: 8px;
+      margin-left: -6px;
+    }
+
+    .app-bar-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--midnight);
+    }
+
+    .app-bar-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background-color: var(--surface-subtle);
+      color: var(--secondary);
+      border: 1px solid var(--divider);
+    }
+
+    /* Content Area with 24px padding and scrolling */
+    .content-area {
+      flex: 1;
+      padding: 16px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Safe Bottom Area (24px) */
+    .bottom-safe {
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      background-color: var(--white);
+    }
+
+    .home-indicator {
+      width: 128px;
+      height: 4px;
+      background-color: var(--midnight);
+      opacity: 0.2;
+      border-radius: 2px;
+    }
+
+    /* Typography & Hierarchy Tokens */
+    .helper-text {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--secondary);
+      line-height: 1.4;
+    }
+
+    .body-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--midnight);
+      line-height: 1.45;
+    }
+
+    .section-heading {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--midnight);
+      letter-spacing: -0.2px;
+    }
+
+    .outlet-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Buttons (48px height, 8px radius) */
+    .btn-primary {
+      height: 48px;
+      background-color: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      width: 100%;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-outlined {
+      height: 48px;
+      background-color: var(--white);
+      color: var(--midnight);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .btn-coral-outlined {
+      height: 48px;
+      background-color: var(--white);
+      color: var(--coral);
+      border: 1px solid var(--coral);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* Status Chips (6px radius, 11px Inter 500) */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .status-active {
+      background-color: var(--teal-light);
+      color: #087568;
+      border: 1px solid rgba(13, 179, 160, 0.25);
+    }
+
+    .status-scheduled {
+      background-color: var(--amber-light);
+      color: #9E6100;
+      border: 1px solid rgba(255, 181, 71, 0.3);
+    }
+
+    .status-ended {
+      background-color: var(--surface-subtle);
+      color: var(--secondary);
+      border: 1px solid var(--divider);
+    }
+
+    .status-pending {
+      background-color: var(--amber-light);
+      color: #9E6100;
+      border: 1px solid rgba(255, 181, 71, 0.3);
+    }
+
+    /* Component Cards & List Items (8px radius, subtle border) */
+    .card {
+      background-color: var(--white);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .list-item {
+      background-color: var(--white);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+
+    .list-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .item-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--midnight);
+    }
+
+    .chevron-icon {
+      color: var(--secondary);
+      flex-shrink: 0;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      padding-top: 4px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .meta-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      color: var(--secondary);
+      font-weight: 400;
+    }
+
+    .meta-val {
+      font-size: 12px;
+      color: var(--midnight);
+      font-weight: 500;
+    }
+
+    .meta-val-highlight {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    /* Details Table */
+    .data-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(230, 234, 237, 0.6);
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .data-key {
+      font-size: 11px;
+      color: var(--secondary);
+      font-weight: 400;
+    }
+
+    .data-value {
+      font-size: 12px;
+      color: var(--midnight);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    /* Rule Checklist Rows */
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 12px;
+      background-color: var(--surface-subtle);
+      border-radius: 8px;
+      border: 1px solid rgba(230, 234, 237, 0.8);
+    }
+
+    .rule-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .rule-text {
+      font-size: 12px;
+      color: var(--midnight);
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    /* Notice and Warning Panels */
+    .notice-panel {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background-color: var(--amber-light);
+      border: 1px solid rgba(255, 181, 71, 0.4);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .notice-icon {
+      width: 16px;
+      height: 16px;
+      color: #9E6100;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .notice-text {
+      font-size: 11px;
+      color: #6C4403;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    /* Staff Specific Components */
+    .staff-card {
+      background-color: var(--white);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .staff-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .staff-identity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-compact {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: var(--teal-light);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .avatar-pending {
+      background-color: var(--surface-subtle);
+      color: var(--secondary);
+    }
+
+    .staff-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--midnight);
+    }
+
+    .staff-role-badge {
+      font-size: 11px;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .permissions-box {
+      background-color: var(--surface-subtle);
+      border-radius: 6px;
+      padding: 6px 10px;
+      border: 1px solid rgba(230, 234, 237, 0.7);
+    }
+
+    .permission-text {
+      font-size: 11px;
+      color: var(--secondary);
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="presentation-board">
+
+    <!-- ==========================================
+         SCREEN 01: CAMPAIGNS LIST (x: 67, y: 64)
+         ========================================== -->
+    <div class="artboard artboard-1">
+      <!-- Mobile Android Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.64-.64C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <button class="back-btn" aria-label="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <span class="app-bar-title">Campaigns</span>
+        </div>
+        <span class="outlet-label">Market Square</span>
+      </div>
+
+      <!-- Content -->
+      <div class="content-area">
+        <div>
+          <p class="helper-text">View the reward rules currently available at your outlet.</p>
+        </div>
+
+        <button class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Create campaign
+        </button>
+
+        <!-- Compact Campaign List -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+          <!-- Campaign 1: Launch partner rewards -->
+          <div class="list-item">
+            <div class="list-item-header">
+              <div class="item-title-row">
+                <span class="item-title">Launch partner rewards</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-active">Active</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="meta-grid">
+              <div class="meta-entry">
+                <span class="meta-label">Eligible products</span>
+                <span class="meta-val">3 products</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Customer reward</span>
+                <span class="meta-val meta-val-highlight">Up to 240 pts</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Merchant reward</span>
+                <span class="meta-val">Up to 20 pts</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Validity</span>
+                <span class="meta-val">01 Sep – 30 Sep 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campaign 2: Weekend verified purchase -->
+          <div class="list-item">
+            <div class="list-item-header">
+              <div class="item-title-row">
+                <span class="item-title">Weekend verified purchase</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-scheduled">Scheduled</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="meta-grid">
+              <div class="meta-entry">
+                <span class="meta-label">Eligible products</span>
+                <span class="meta-val">2 products</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Customer reward</span>
+                <span class="meta-val meta-val-highlight">120 pts</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Merchant reward</span>
+                <span class="meta-val">10 pts</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Validity</span>
+                <span class="meta-val">20 Sep – 22 Sep 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campaign 3: August outlet bonus -->
+          <div class="list-item">
+            <div class="list-item-header">
+              <div class="item-title-row">
+                <span class="item-title">August outlet bonus</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-ended">Ended</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="meta-grid">
+              <div class="meta-entry">
+                <span class="meta-label">Eligible products</span>
+                <span class="meta-val">4 products</span>
+              </div>
+              <div class="meta-entry">
+                <span class="meta-label">Final activity</span>
+                <span class="meta-val">Completed</span>
+              </div>
+              <div class="meta-entry" style="grid-column: span 2;">
+                <span class="meta-label">Validity</span>
+                <span class="meta-val">01 Aug – 31 Aug 2026</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notice-panel" style="margin-top: auto; background-color: var(--surface-subtle); border-color: var(--divider);">
+          <svg class="notice-icon" style="color: var(--secondary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span class="notice-text" style="color: var(--secondary);">Campaign point allocation is funded centrally. Only verified outlet purchases trigger points.</span>
+        </div>
+      </div>
+
+      <!-- Safe Area -->
+      <div class="bottom-safe">
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         SCREEN 02: CAMPAIGN DETAILS (x: 505, y: 64)
+         ========================================== -->
+    <div class="artboard artboard-2">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.64-.64C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <button class="back-btn" aria-label="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <span class="app-bar-title">Campaign details</span>
+        </div>
+        <span class="status-chip status-active">Active</span>
+      </div>
+
+      <!-- Content -->
+      <div class="content-area">
+        <!-- Campaign Header Card -->
+        <div class="card" style="background-color: var(--surface-subtle);">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <h1 class="section-heading" style="font-size: 15px;">Launch partner rewards</h1>
+            <p class="body-text" style="color: var(--secondary); font-size: 11px;">Award points for verified purchases of participating products at this outlet.</p>
+          </div>
+          
+          <div class="data-table" style="margin-top: 4px;">
+            <div class="data-row">
+              <span class="data-key">Validity</span>
+              <span class="data-value">01 Sep – 30 Sep 2026</span>
+            </div>
+            <div class="data-row">
+              <span class="data-key">Outlet</span>
+              <span class="data-value">Market Square Westlands</span>
+            </div>
+            <div class="data-row">
+              <span class="data-key">Eligible products</span>
+              <span class="data-value">3 products</span>
+            </div>
+            <div class="data-row">
+              <span class="data-key">Customer reward</span>
+              <span class="data-value" style="color: var(--teal); font-weight: 600;">Up to 240 pts</span>
+            </div>
+            <div class="data-row">
+              <span class="data-key">Merchant fee reward</span>
+              <span class="data-value">Up to 20 pts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Reward Rules -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <h2 class="section-heading" style="font-size: 13px;">Reward rules</h2>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div class="rule-item">
+              <svg class="rule-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="rule-text">Customer claim must be verified</span>
+            </div>
+            <div class="rule-item">
+              <svg class="rule-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="rule-text">Merchant confirmation is required</span>
+            </div>
+            <div class="rule-item">
+              <svg class="rule-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="rule-text">One reward per eligible product</span>
+            </div>
+            <div class="rule-item">
+              <svg class="rule-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span class="rule-text">Returns reverse the related loyalty value</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Outlet Controls -->
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+          <h2 class="section-heading" style="font-size: 13px;">Outlet controls</h2>
+          
+          <button class="btn-outlined">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            View eligible products
+          </button>
+          
+          <button class="btn-coral-outlined">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            Pause campaign
+          </button>
+
+          <p class="helper-text" style="text-align: center; margin-top: 2px;">
+            Pausing prevents new claims but does not change already confirmed purchases.
+          </p>
+        </div>
+      </div>
+
+      <!-- Safe Area -->
+      <div class="bottom-safe">
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         SCREEN 03: STAFF ACCESS (x: 943, y: 64)
+         ========================================== -->
+    <div class="artboard artboard-3">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.64-.64C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <button class="back-btn" aria-label="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <span class="app-bar-title">Staff access</span>
+        </div>
+        <span class="app-bar-badge">Westlands</span>
+      </div>
+
+      <!-- Content -->
+      <div class="content-area">
+        <div>
+          <p class="helper-text">Manage who can confirm purchases and review returns.</p>
+        </div>
+
+        <button class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          Invite staff member
+        </button>
+
+        <!-- Staff List -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+          <!-- Staff 1: James Otieno (Supervisor) -->
+          <div class="staff-card">
+            <div class="staff-head">
+              <div class="staff-identity">
+                <div class="avatar-compact">JO</div>
+                <div>
+                  <div class="staff-name">James Otieno</div>
+                  <span class="staff-role-badge">Role: Supervisor</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-active">Active</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="permissions-box">
+              <span class="permission-text"><strong>Permissions:</strong> Confirm claims • Approve reversals • View reports</span>
+            </div>
+          </div>
+
+          <!-- Staff 2: Wanjiku Njeri (Cashier) -->
+          <div class="staff-card">
+            <div class="staff-head">
+              <div class="staff-identity">
+                <div class="avatar-compact">WN</div>
+                <div>
+                  <div class="staff-name">Wanjiku Njeri</div>
+                  <span class="staff-role-badge">Role: Cashier</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-active">Active</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="permissions-box">
+              <span class="permission-text"><strong>Permissions:</strong> Confirm claims</span>
+            </div>
+          </div>
+
+          <!-- Staff 3: Peter Mwangi (Invite pending) -->
+          <div class="staff-card">
+            <div class="staff-head">
+              <div class="staff-identity">
+                <div class="avatar-compact avatar-pending">PM</div>
+                <div>
+                  <div class="staff-name">Peter Mwangi</div>
+                  <span class="staff-role-badge">Role: Cashier</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="status-chip status-pending">Invite pending</span>
+                <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+            <div class="permissions-box">
+              <span class="permission-text"><strong>Permissions:</strong> Not active yet</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Permission Note -->
+        <div class="notice-panel">
+          <svg class="notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span class="notice-text">
+            Only supervisors can approve returns, reversals and staff changes.
+          </span>
+        </div>
+
+        <!-- Role Permissions Action -->
+        <div style="margin-top: auto;">
+          <button class="btn-outlined">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Review role permissions
+          </button>
+        </div>
+      </div>
+
+      <!-- Safe Area -->
+      <div class="bottom-safe">
+        <div class="home-indicator"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

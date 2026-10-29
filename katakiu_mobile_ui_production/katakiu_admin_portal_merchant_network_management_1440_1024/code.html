@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>KataKiu Admin Portal — Merchant Network Management (1440 × 1024)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Reset & Design Tokens */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-midnight: #071724;
+      --color-amber: #FFB547;
+      --color-teal: #0DB3A0;
+      --color-teal-dark: #0A8F80;
+      --color-aqua: #7AE1D6;
+      --color-coral: #EF6A6A;
+      --color-white: #FFFFFF;
+      --color-divider: #E6EAED;
+      --color-text-secondary: #66737D;
+      --color-bg-workspace: #F7F9FA;
+      --color-sidebar-hover: rgba(255, 255, 255, 0.06);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      width: 1440px;
+      height: 1024px;
+      overflow: hidden;
+      background-color: var(--color-bg-workspace);
+      color: var(--color-midnight);
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+    }
+
+    /* Fixed 232px Left Admin Sidebar */
+    .sidebar {
+      width: 232px;
+      height: 1024px;
+      background-color: var(--color-midnight);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      user-select: none;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      color: var(--color-white);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .logo-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 14px;
+    }
+
+    .nav-section {
+      padding: 12px 12px 0 12px;
+    }
+
+    .nav-section-title {
+      color: #8C9BA5;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 8px 12px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #BAC7D1;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      height: 42px;
+    }
+
+    .nav-item:hover {
+      background-color: var(--color-sidebar-hover);
+      color: var(--color-white);
+    }
+
+    .nav-item.active {
+      background-color: var(--color-teal);
+      color: var(--color-midnight);
+      font-weight: 600;
+    }
+
+    .nav-item.active svg {
+      stroke: var(--color-midnight);
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: #8C9BA5;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 20px 24px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-teal);
+      box-shadow: 0 0 0 2px rgba(13, 179, 160, 0.2);
+    }
+
+    .status-env-text {
+      color: #8C9BA5;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 14px;
+    }
+
+    /* Main Area */
+    .main-wrapper {
+      flex: 1;
+      height: 1024px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top App Bar (64px) */
+    .top-bar {
+      height: 64px;
+      background-color: var(--color-white);
+      border-bottom: 1px solid var(--color-divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .page-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-midnight);
+      letter-spacing: -0.2px;
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .env-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background-color: #E6F8F6;
+      color: #087F72;
+      border: 1px solid #B8ECE6;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .env-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-teal);
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--color-bg-workspace);
+      color: var(--color-midnight);
+    }
+
+    .avatar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #071724;
+      color: var(--color-white);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Page Content (32px padding) */
+    .content-area {
+      flex: 1;
+      padding: 24px 32px 32px 32px;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Header Area */
+    .content-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .header-text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .eyebrow-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      color: var(--color-teal-dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .scope-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .scope-pill svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--color-text-secondary);
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-midnight);
+      letter-spacing: -0.3px;
+    }
+
+    .supporting-text {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 16px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      height: 40px;
+      min-width: 48px;
+      padding: 0 16px;
+      border-radius: 8px;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-divider);
+      color: var(--color-midnight);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background-color: #F0F4F7;
+      border-color: #D1D8DC;
+    }
+
+    .btn-primary {
+      height: 40px;
+      min-width: 48px;
+      padding: 0 16px;
+      border-radius: 8px;
+      background-color: var(--color-teal);
+      border: 1px solid var(--color-teal);
+      color: var(--color-midnight);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.15s;
+    }
+
+    .btn-primary:hover {
+      background-color: #0CA291;
+    }
+
+    .btn-coral-outline {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 8px;
+      background-color: var(--color-white);
+      border: 1px solid #F8B4B4;
+      color: var(--color-coral);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.15s;
+    }
+
+    .btn-coral-outline:hover {
+      background-color: #FDF2F2;
+      border-color: var(--color-coral);
+    }
+
+    /* Summary Bar */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .summary-card {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-divider);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .summary-icon-container {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .summary-icon-teal {
+      background-color: #E6F8F6;
+      color: var(--color-teal-dark);
+    }
+
+    .summary-icon-amber {
+      background-color: #FFF6E8;
+      color: #D98C1E;
+    }
+
+    .summary-icon-coral {
+      background-color: #FDF2F2;
+      color: var(--color-coral);
+    }
+
+    .summary-data {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-midnight);
+      line-height: 26px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    /* Controls / Filter Bar */
+    .filter-bar {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-divider);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-container {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-text-secondary);
+      fill: none;
+      stroke-width: 2;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-bg-workspace);
+      padding: 0 12px 0 36px;
+      font-size: 12px;
+      font-family: var(--font-family);
+      color: var(--color-midnight);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--color-teal);
+      background-color: var(--color-white);
+    }
+
+    .filter-select {
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-white);
+      padding: 0 28px 0 12px;
+      font-size: 12px;
+      font-family: var(--font-family);
+      color: var(--color-midnight);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2366737D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .filter-select:focus {
+      border-color: var(--color-teal);
+    }
+
+    .btn-export {
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 6px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-white);
+      color: var(--color-midnight);
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-export:hover {
+      background-color: var(--color-bg-workspace);
+    }
+
+    /* Main Grid: 2/3 and 1/3 */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Card Panels */
+    .card-panel {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-divider);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-header-bar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-midnight);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-count {
+      background-color: var(--color-bg-workspace);
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid var(--color-divider);
+    }
+
+    /* Table Container */
+    .table-container {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    table.data-table th {
+      background-color: #FAFBFB;
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--color-divider);
+      white-space: nowrap;
+    }
+
+    table.data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-divider);
+      font-size: 12px;
+      color: var(--color-midnight);
+      vertical-align: middle;
+    }
+
+    table.data-table tr.selected {
+      background-color: #F2FAF9;
+    }
+
+    table.data-table tr:hover:not(.selected) {
+      background-color: #FBFDFE;
+    }
+
+    .outlet-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .outlet-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-midnight);
+    }
+
+    .outlet-id {
+      font-size: 11px;
+      font-family: monospace;
+      color: var(--color-text-secondary);
+    }
+
+    /* Status Chips */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .status-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-teal {
+      background-color: #E6F8F6;
+      color: #0A8F80;
+      border: 1px solid #B8ECE6;
+    }
+    .status-teal .status-chip-dot { background-color: var(--color-teal); }
+
+    .status-amber {
+      background-color: #FFF6E8;
+      color: #C07914;
+      border: 1px solid #FFE2B8;
+    }
+    .status-amber .status-chip-dot { background-color: var(--color-amber); }
+
+    .status-coral {
+      background-color: #FDF2F2;
+      color: #D34545;
+      border: 1px solid #FCD4D4;
+    }
+    .status-coral .status-chip-dot { background-color: var(--color-coral); }
+
+    .btn-table-action {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 6px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-white);
+      color: var(--color-midnight);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-table-action.primary {
+      background-color: var(--color-teal);
+      border-color: var(--color-teal);
+      color: var(--color-midnight);
+    }
+
+    .btn-table-action:hover {
+      background-color: #F2F5F7;
+    }
+
+    .btn-table-action.primary:hover {
+      background-color: #0CA291;
+    }
+
+    .table-footer {
+      padding: 10px 16px;
+      border-top: 1px solid var(--color-divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #FAFBFB;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-page {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--color-divider);
+      background-color: var(--color-white);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-midnight);
+      cursor: pointer;
+    }
+
+    .btn-page:hover {
+      background-color: var(--color-bg-workspace);
+    }
+
+    .btn-page[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Right Details Column */
+    .details-scroll-content {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .outlet-detail-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .detail-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .detail-outlet-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-midnight);
+      letter-spacing: -0.2px;
+    }
+
+    .detail-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+
+    .detail-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background-color: var(--color-bg-workspace);
+      border: 1px solid var(--color-divider);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .kpi-mini-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kpi-mini-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      line-height: 14px;
+    }
+
+    .kpi-mini-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-midnight);
+      line-height: 18px;
+    }
+
+    /* Details Section */
+    .details-sub-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sub-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sub-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-midnight);
+    }
+
+    .sub-section-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-teal-dark);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Staff List */
+    .staff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .staff-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background-color: var(--color-bg-workspace);
+      border: 1px solid var(--color-divider);
+      border-radius: 6px;
+    }
+
+    .staff-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .staff-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #E2E7EA;
+      color: var(--color-midnight);
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .staff-name-role {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .staff-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-midnight);
+      line-height: 14px;
+    }
+
+    .staff-role {
+      font-size: 10px;
+      color: var(--color-text-secondary);
+      line-height: 12px;
+    }
+
+    /* Outlet Controls */
+    .controls-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background-color: var(--color-bg-workspace);
+      border: 1px solid var(--color-divider);
+    }
+
+    .control-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-midnight);
+    }
+
+    .control-value-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    .control-value-tag.highlight {
+      color: var(--color-teal-dark);
+    }
+
+    /* Actions & Warnings in Right Panel */
+    .panel-actions-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .panel-actions-group .btn-secondary {
+      flex: 1;
+      height: 36px;
+      font-size: 12px;
+    }
+
+    .panel-actions-group .btn-coral-outline {
+      flex: 1;
+      height: 36px;
+      font-size: 12px;
+    }
+
+    .warning-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      background-color: #FDF4F4;
+      border: 1px solid #FCD4D4;
+      border-radius: 6px;
+      color: #9E2626;
+      font-size: 11px;
+      line-height: 15px;
+    }
+
+    .warning-note svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--color-coral);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT ADMIN SIDEBAR (Fixed 232px) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-mark">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnEsfMUL2oNeh7cwYBc4ueZkxjqrCgFxqDGp7m3ijAiDLZwbCg1n-ioDkQcO16tRtssX0HKWCD4TQv-hPWYx_C8L8IEW2n31SYhVfOMsDcLO7pBD0nvlEJTzN9Xp7HnW86tF6ouCMNEZ_2y79LodfrRQVNQmrazkZEc5cPVMPeWrhSpTzTKj40OI7_eHN0Rlv1J376xbHJJjGMUkfFYc087mG6yMHdhZ8qjloMYhth-Ag3iJBWeU3KbF1l0UpLf7sPDg" alt="KataKiu Logo" />
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">KataKiu</span>
+        <span class="logo-subtitle">Admin portal</span>
+      </div>
+    </div>
+
+    <!-- Navigation Section: Primary -->
+    <div class="nav-section">
+      <div class="nav-section-title">Primary</div>
+      <ul class="nav-list">
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Code operations
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Campaigns
+          </a>
+        </li>
+        <li>
+          <a class="nav-item active">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"></path><circle cx="9" cy="10" r="1"></circle><circle cx="9" cy="14" r="1"></circle><circle cx="9" cy="18" r="1"></circle></svg>
+            Merchants
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Claims and risk
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            Finance
+          </a>
+        </li>
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            Reports
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Navigation Section: System -->
+    <div class="nav-section">
+      <div class="nav-section-title">System</div>
+      <ul class="nav-list">
+        <li>
+          <a class="nav-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Settings
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <div class="status-dot"></div>
+      <span class="status-env-text">Kenya production environment</span>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <!-- TOP APP BAR (64px) -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title">Merchants</h1>
+      </div>
+      <div class="top-bar-right">
+        <div class="env-chip">
+          <span class="env-chip-dot"></span>
+          Production
+        </div>
+        <button class="icon-btn" aria-label="Help & Documentation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+        <div class="avatar-btn" title="Administrator AW">AW</div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA (32px padding) -->
+    <main class="content-area">
+      <!-- Header Area -->
+      <div class="content-header">
+        <div class="header-text-group">
+          <div class="eyebrow-wrapper">
+            <span class="eyebrow">Merchant Network</span>
+            <span style="color: var(--color-divider);">•</span>
+            <span class="scope-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              KataKiu Kenya
+            </span>
+          </div>
+          <h2 class="section-title">Outlets and merchant access</h2>
+          <p class="supporting-text">Manage participating outlets, staff permissions and verified-purchase eligibility.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            View onboarding queue
+          </button>
+          <button class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add merchant outlet
+          </button>
+        </div>
+      </div>
+
+      <!-- Merchant Summary Bar (3 Compact Cards) -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-icon-container summary-icon-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"></path></svg>
+          </div>
+          <div class="summary-data">
+            <span class="summary-number">42</span>
+            <span class="summary-label">Active outlets</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon-container summary-icon-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="summary-data">
+            <span class="summary-number">3</span>
+            <span class="summary-label">Awaiting review</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon-container summary-icon-coral">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+          </div>
+          <div class="summary-data">
+            <span class="summary-number">1</span>
+            <span class="summary-label">Suspended outlets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter and Search Bar -->
+      <div class="filter-bar">
+        <div class="search-container">
+          <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" class="search-input" placeholder="Search outlet, merchant or outlet ID" value="Market Square">
+        </div>
+        <select class="filter-select">
+          <option>All statuses</option>
+          <option>Active</option>
+          <option>Review required</option>
+          <option>Suspended</option>
+        </select>
+        <select class="filter-select">
+          <option>All regions</option>
+          <option>Nairobi</option>
+          <option>Kisumu</option>
+          <option>Mombasa</option>
+        </select>
+        <select class="filter-select">
+          <option>All campaigns</option>
+          <option>Launch partner rewards</option>
+          <option>Weekend verified purchase</option>
+        </select>
+        <button class="btn-export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export list
+        </button>
+      </div>
+
+      <!-- Main Two-Column Layout (2/3 & 1/3) -->
+      <div class="main-grid">
+        <!-- LEFT COLUMN: Participating Outlets Table (~2/3 width) -->
+        <div class="card-panel">
+          <div class="card-header-bar">
+            <span class="card-header-title">
+              Participating outlets
+              <span class="badge-count">46 total</span>
+            </span>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Outlet</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Staff</th>
+                  <th>Campaigns</th>
+                  <th>Activity</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Selected / Active -->
+                <tr class="selected">
+                  <td>
+                    <div class="outlet-cell">
+                      <span class="outlet-name">Market Square Westlands</span>
+                      <span class="outlet-id">MS-WST-004</span>
+                    </div>
+                  </td>
+                  <td style="color: var(--color-text-secondary);">Westlands, Nairobi</td>
+                  <td>
+                    <span class="status-chip status-teal">
+                      <span class="status-chip-dot"></span>
+                      Active
+                    </span>
+                  </td>
+                  <td>4 active</td>
+                  <td>2 active</td>
+                  <td>
+                    <span style="font-weight: 600; color: var(--color-midnight);">84</span> <span style="font-size: 11px; color: var(--color-text-secondary);">confirmed today</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-table-action primary">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 2: Active -->
+                <tr>
+                  <td>
+                    <div class="outlet-cell">
+                      <span class="outlet-name">Naivas Junction</span>
+                      <span class="outlet-id">NV-JCT-011</span>
+                    </div>
+                  </td>
+                  <td style="color: var(--color-text-secondary);">Kilimani, Nairobi</td>
+                  <td>
+                    <span class="status-chip status-teal">
+                      <span class="status-chip-dot"></span>
+                      Active
+                    </span>
+                  </td>
+                  <td>6 active</td>
+                  <td>1 active</td>
+                  <td>
+                    <span style="font-weight: 600; color: var(--color-midnight);">62</span> <span style="font-size: 11px; color: var(--color-text-secondary);">confirmed today</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-table-action">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 3: Review required -->
+                <tr>
+                  <td>
+                    <div class="outlet-cell">
+                      <span class="outlet-name">Kisumu Central Outlet</span>
+                      <span class="outlet-id">KSM-CTR-007</span>
+                    </div>
+                  </td>
+                  <td style="color: var(--color-text-secondary);">Kisumu</td>
+                  <td>
+                    <span class="status-chip status-amber">
+                      <span class="status-chip-dot"></span>
+                      Review required
+                    </span>
+                  </td>
+                  <td>2 active</td>
+                  <td style="color: var(--color-text-secondary);">Not assigned</td>
+                  <td style="color: var(--color-text-secondary);">No recent claims</td>
+                  <td style="text-align: right;">
+                    <button class="btn-table-action" style="border-color: #FFE2B8; color: #C07914; background-color: #FFFBF5;">Review</button>
+                  </td>
+                </tr>
+
+                <!-- Row 4: Suspended -->
+                <tr>
+                  <td>
+                    <div class="outlet-cell">
+                      <span class="outlet-name">Mombasa Road Outlet</span>
+                      <span class="outlet-id">MBA-RD-003</span>
+                    </div>
+                  </td>
+                  <td style="color: var(--color-text-secondary);">Nairobi</td>
+                  <td>
+                    <span class="status-chip status-coral">
+                      <span class="status-chip-dot"></span>
+                      Suspended
+                    </span>
+                  </td>
+                  <td style="color: var(--color-text-secondary);">0 active</td>
+                  <td style="color: var(--color-text-secondary);">Paused</td>
+                  <td style="color: var(--color-coral); font-weight: 500;">Access blocked</td>
+                  <td style="text-align: right;">
+                    <button class="btn-table-action">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span>Showing 1–4 of 46 outlets</span>
+            <div class="pagination-controls">
+              <button class="btn-page" disabled>Previous</button>
+              <button class="btn-page">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Selected Outlet Details Panel (~1/3 width) -->
+        <div class="card-panel">
+          <div class="card-header-bar">
+            <span class="card-header-title">
+              Selected outlet
+            </span>
+            <span class="status-chip status-teal">
+              <span class="status-chip-dot"></span>
+              Active
+            </span>
+          </div>
+
+          <div class="details-scroll-content">
+            <!-- Header section of selected outlet -->
+            <div class="outlet-detail-header">
+              <div class="detail-title-row">
+                <h3 class="detail-outlet-name">Market Square Westlands</h3>
+              </div>
+              <div class="detail-meta-row">
+                <span style="font-family: monospace; font-weight: 600; color: var(--color-midnight);">MS-WST-004</span>
+                <span>•</span>
+                <span>Westlands, Nairobi</span>
+                <span>•</span>
+                <span style="color: var(--color-teal-dark); font-weight: 600;">Partner approved</span>
+              </div>
+            </div>
+
+            <!-- Mini KPI Grid -->
+            <div class="detail-kpi-grid">
+              <div class="kpi-mini-card">
+                <span class="kpi-mini-label">Verification</span>
+                <span class="kpi-mini-value" style="color: var(--color-teal-dark);">Approved</span>
+              </div>
+              <div class="kpi-mini-card">
+                <span class="kpi-mini-label">Campaigns</span>
+                <span class="kpi-mini-value">2 active</span>
+              </div>
+              <div class="kpi-mini-card">
+                <span class="kpi-mini-label">Confirmed today</span>
+                <span class="kpi-mini-value">84 claims</span>
+              </div>
+            </div>
+
+            <!-- Staff Access Sub-section -->
+            <div class="details-sub-section">
+              <div class="sub-section-header">
+                <span class="sub-section-title">Staff access (3)</span>
+                <span class="sub-section-link">Manage staff</span>
+              </div>
+              <div class="staff-list">
+                <!-- Staff 1: James Otieno -->
+                <div class="staff-row">
+                  <div class="staff-info">
+                    <div class="staff-avatar">JO</div>
+                    <div class="staff-name-role">
+                      <span class="staff-name">James Otieno</span>
+                      <span class="staff-role">Supervisor</span>
+                    </div>
+                  </div>
+                  <span class="status-chip status-teal" style="font-size: 10px; padding: 2px 6px;">Active</span>
+                </div>
+
+                <!-- Staff 2: Wanjiku Njeri -->
+                <div class="staff-row">
+                  <div class="staff-info">
+                    <div class="staff-avatar">WN</div>
+                    <div class="staff-name-role">
+                      <span class="staff-name">Wanjiku Njeri</span>
+                      <span class="staff-role">Cashier</span>
+                    </div>
+                  </div>
+                  <span class="status-chip status-teal" style="font-size: 10px; padding: 2px 6px;">Active</span>
+                </div>
+
+                <!-- Staff 3: Peter Mwangi -->
+                <div class="staff-row">
+                  <div class="staff-info">
+                    <div class="staff-avatar" style="background-color: #FFF6E8; color: #C07914;">PM</div>
+                    <div class="staff-name-role">
+                      <span class="staff-name">Peter Mwangi</span>
+                      <span class="staff-role">Cashier</span>
+                    </div>
+                  </div>
+                  <span class="status-chip status-amber" style="font-size: 10px; padding: 2px 6px;">Invite pending</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outlet Controls Sub-section -->
+            <div class="details-sub-section">
+              <div class="sub-section-header">
+                <span class="sub-section-title">Outlet controls</span>
+              </div>
+              <div class="controls-list">
+                <div class="control-row">
+                  <span class="control-label">Claim confirmation</span>
+                  <span class="control-value-tag highlight">Enabled</span>
+                </div>
+                <div class="control-row">
+                  <span class="control-label">Return approval</span>
+                  <span class="control-value-tag">Supervisor only</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="panel-actions-group">
+              <button class="btn-secondary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit outlet
+              </button>
+              <button class="btn-coral-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                Suspend outlet
+              </button>
+            </div>
+
+            <!-- Security/Warning Callout -->
+            <div class="warning-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Suspending an outlet blocks new merchant confirmations but preserves existing claim and audit records.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

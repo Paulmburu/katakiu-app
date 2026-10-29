@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KataKiu Customer Mobile Test Board (1400 × 972)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            midnight: '#071724',
+            amber: '#FFB547',
+            teal: '#0DB3A0',
+            aqua: '#7AE1D6',
+            coral: '#EF6A6A',
+            divider: '#E6EAED',
+            subtext: '#66737D',
+            neutralbg: '#F5F7F8',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #F5F7F8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .artboard {
+      width: 390px;
+      height: 844px;
+      position: absolute;
+      background-color: #FFFFFF;
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(7, 23, 36, 0.05), 0 0 0 1px #E6EAED;
+      border-radius: 0px;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-[#F5F7F8]">
+
+  <!-- Staging Presentation Board: exactly 1400px x 972px -->
+  <div id="presentation-board" style="width: 1400px; height: 972px; position: relative; background-color: #F5F7F8; overflow: hidden;">
+
+    <!-- ===================================================================== -->
+    <!-- SCREEN 1: KTK_Home_Available (x: 67px, y: 64px, w: 390px, h: 844px)   -->
+    <!-- ===================================================================== -->
+    <div class="artboard flex flex-col justify-between" style="left: 67px; top: 64px;">
+      
+      <!-- Top Section -->
+      <div>
+        <!-- System Status Bar (24px) -->
+        <div class="w-full h-6 px-6 pt-1 flex items-center justify-between text-midnight text-[11px] font-medium select-none bg-white">
+          <span>09:41</span>
+          <div class="flex items-center space-x-1.5">
+            <!-- Cellular -->
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 17h2v4H2v-4zm4-5h2v9H6v-9zm4-4h2v13h-2V8zm4-4h2v17h-2V4zm4-3h2v20h-2V1z"/>
+            </svg>
+            <!-- Wifi -->
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 3.5c3.2 0 6.13 1.25 8.35 3.32L12 19.12 3.65 10.82A11.75 11.75 0 0 1 12 7.5z"/>
+            </svg>
+            <!-- Battery -->
+            <svg class="w-4 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 5v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2zm2 4h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1V9z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Shared App Bar (56px) -->
+        <div class="w-full h-14 px-6 flex items-center justify-between border-b border-[#E6EAED] bg-white">
+          <div class="flex items-center space-x-2.5">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVEn5KvMn_bsGCUOBcDG0MX8Y6WRfjdi3s6qXsQy4PgY7WTLhjUWIS5HiYSNDVukLDE5OCcpRuUODumnWgUGI_fC_OaMGrDIGWrvONzgGKzYGsGsw221UC6d5Afn-4hM3RWi0FKumCN2HRgt5A-XgoFKDH8HH9trzrN2Vls3RfF3a16D79h9_ox76l_v5z4G7ySTM8YCNgRNpxIrpZSqawN_djjMCKDOBkKzpl-cJPCi5tzaqlEeTAeRMHc_-Ohp2jBg" alt="KataKiu Logo" class="w-6 h-6 object-contain rounded-[6px]">
+            <span class="text-[14px] font-medium text-midnight tracking-tight">KataKiu</span>
+          </div>
+          <button class="w-8 h-8 flex items-center justify-center text-midnight hover:opacity-80 transition-opacity">
+            <svg class="w-5 h-5 text-midnight" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Screen Content Container (24px left/right margins) -->
+        <div class="px-6 pt-5">
+          <!-- Customer Identity & Greeting -->
+          <div>
+            <span class="text-[10px] font-semibold text-subtext tracking-wider uppercase">CUSTOMER MEMBER</span>
+            <h1 class="text-[16px] font-semibold text-midnight mt-0.5 leading-snug">Habari, Amina</h1>
+            <p class="text-[12px] font-normal text-subtext mt-0.5">Your rewards are ready when you are.</p>
+          </div>
+
+          <!-- Points Summary Card (Midnight Surface, 8px radius, fixed 116px height) -->
+          <div class="mt-4 bg-midnight rounded-[8px] p-4 text-white flex flex-col justify-between" style="height: 116px;">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-semibold tracking-wider text-aqua uppercase">AVAILABLE POINTS</span>
+              <span class="bg-amber/15 text-amber text-[11px] font-medium px-2 py-0.5 rounded-[6px] border border-amber/30 flex items-center gap-1">
+                <svg class="w-3 h-3 text-amber" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/>
+                </svg>
+                240 pending
+              </span>
+            </div>
+            <div>
+              <div class="text-[22px] font-bold text-white tracking-tight leading-none">1,840 PTS</div>
+              <div class="text-[11px] font-normal text-[#98A2B3] mt-1">Available balance</div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Area -->
+          <div class="mt-4 space-y-2">
+            <!-- Primary Action (Teal, 8px radius, 13px label) -->
+            <button class="w-full h-11 bg-teal hover:bg-[#0CA391] text-white text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2M9 12h6" />
+              </svg>
+              Scan to earn
+            </button>
+            <!-- Secondary Action (1px border, 8px radius, 13px label) -->
+            <button class="w-full h-10 bg-white border border-[#E6EAED] text-midnight text-[13px] font-semibold rounded-[8px] flex items-center justify-center hover:bg-[#F5F7F8] transition-colors">
+              Show my pass
+            </button>
+          </div>
+
+          <!-- Recent Activity Section -->
+          <div class="mt-5">
+            <h2 class="text-[16px] font-semibold text-midnight mb-2.5">Recent activity</h2>
+            <div class="space-y-2">
+              <!-- Row 1 -->
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center justify-between">
+                <div>
+                  <div class="text-[12px] font-medium text-midnight">Purchase confirmed</div>
+                  <div class="text-[11px] font-normal text-subtext mt-0.5">Market Square • Today, 14:20</div>
+                </div>
+                <div class="text-[12px] font-semibold text-teal">+240 PTS</div>
+              </div>
+              <!-- Row 2 -->
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center justify-between">
+                <div>
+                  <div class="text-[12px] font-medium text-midnight">Points pending</div>
+                  <div class="text-[11px] font-normal text-subtext mt-0.5">Westlands outlet • Today, 13:48</div>
+                </div>
+                <div class="text-[12px] font-semibold text-amber">+120 PTS</div>
+              </div>
+              <!-- Row 3 -->
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center justify-between">
+                <div>
+                  <div class="text-[12px] font-medium text-midnight">Reward redeemed</div>
+                  <div class="text-[11px] font-normal text-subtext mt-0.5">Safe Ride • Yesterday</div>
+                </div>
+                <div class="text-[12px] font-semibold text-coral">-900 PTS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Container: Navigation + Safe Area -->
+      <div>
+        <!-- Shared Bottom Navigation (56px) -->
+        <div class="w-full h-14 bg-white border-t border-[#E6EAED] grid grid-cols-3 items-center">
+          <!-- Home (Active) -->
+          <div class="flex flex-col items-center justify-center cursor-pointer text-teal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Home</span>
+          </div>
+          <!-- Scan (Inactive - NO amber dot / badge / notification indicator) -->
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2" />
+              <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Scan</span>
+          </div>
+          <!-- Account (Inactive) -->
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Account</span>
+          </div>
+        </div>
+
+        <!-- Android Bottom Gesture Indicator Area (24px) -->
+        <div class="w-full h-6 bg-white flex items-center justify-center pb-1">
+          <div class="w-16 h-1 bg-[#CED5DB] rounded-full"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================================== -->
+    <!-- SCREEN 2: KTK_Home_Zero (x: 505px, y: 64px, w: 390px, h: 844px)        -->
+    <!-- ===================================================================== -->
+    <div class="artboard flex flex-col justify-between" style="left: 505px; top: 64px;">
+      
+      <!-- Top Section -->
+      <div>
+        <!-- System Status Bar (24px) -->
+        <div class="w-full h-6 px-6 pt-1 flex items-center justify-between text-midnight text-[11px] font-medium select-none bg-white">
+          <span>09:41</span>
+          <div class="flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 17h2v4H2v-4zm4-5h2v9H6v-9zm4-4h2v13h-2V8zm4-4h2v17h-2V4zm4-3h2v20h-2V1z"/>
+            </svg>
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 3.5c3.2 0 6.13 1.25 8.35 3.32L12 19.12 3.65 10.82A11.75 11.75 0 0 1 12 7.5z"/>
+            </svg>
+            <svg class="w-4 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 5v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2zm2 4h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1V9z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Shared App Bar (56px) -->
+        <div class="w-full h-14 px-6 flex items-center justify-between border-b border-[#E6EAED] bg-white">
+          <div class="flex items-center space-x-2.5">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg7efkznNEj9vfGG6ezGXFEngjeYwEj1PaCitIIe9aUlnyHrAvYx5STd8Uh_tF7Nlhe-svZrkY3kmLAkfLGCr5kwAMI3Z0Hx05cFnLDz3mH6u2RjLljMQGywpezgitEDlmbUuQft3BgxRf3knYyx6t8JmeiomTk_jvY-9PjaBVptOl7s94sK82lqaGBMuTi6S61FNgkT46LHzfJ_8C_Dovbgd2lB62NTPeXC-qIAEO-_e8yjlXVHoxByQHn5YMXtYwLQ" alt="KataKiu Logo" class="w-6 h-6 object-contain rounded-[6px]">
+            <span class="text-[14px] font-medium text-midnight tracking-tight">KataKiu</span>
+          </div>
+          <button class="w-8 h-8 flex items-center justify-center text-midnight hover:opacity-80 transition-opacity">
+            <svg class="w-5 h-5 text-midnight" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Screen Content Container (24px left/right margins) -->
+        <div class="px-6 pt-5">
+          <!-- Customer Identity & Greeting -->
+          <div>
+            <span class="text-[10px] font-semibold text-subtext tracking-wider uppercase">CUSTOMER MEMBER</span>
+            <h1 class="text-[16px] font-semibold text-midnight mt-0.5 leading-snug">Habari, Amina</h1>
+            <p class="text-[12px] font-normal text-subtext mt-0.5">Start earning from your next eligible purchase.</p>
+          </div>
+
+          <!-- Points Summary Card (Midnight Surface, 8px radius, fixed 116px height, no pending chip) -->
+          <div class="mt-4 bg-midnight rounded-[8px] p-4 text-white flex flex-col justify-between" style="height: 116px;">
+            <div>
+              <span class="text-[10px] font-semibold tracking-wider text-aqua uppercase">AVAILABLE POINTS</span>
+            </div>
+            <div>
+              <div class="text-[22px] font-bold text-white tracking-tight leading-none">0 PTS</div>
+              <div class="text-[11px] font-normal text-[#98A2B3] mt-1">Available balance</div>
+            </div>
+          </div>
+
+          <!-- Empty-State Educational Card (8px radius, subtle border) -->
+          <div class="mt-4 p-3.5 bg-white border border-[#E6EAED] rounded-[8px] flex items-start gap-3">
+            <div class="w-8 h-8 rounded-[8px] bg-neutralbg flex items-center justify-center shrink-0 mt-0.5 text-midnight">
+              <svg class="w-4 h-4 text-midnight" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[12px] font-semibold text-midnight">Scan your first purchase</div>
+              <div class="text-[11px] font-normal text-subtext mt-1 leading-normal">Scan an eligible purchase from an authorised outlet to start earning points.</div>
+            </div>
+          </div>
+
+          <!-- Primary Action (Teal, 8px radius, 13px label, same height/width) -->
+          <div class="mt-4">
+            <button class="w-full h-11 bg-teal hover:bg-[#0CA391] text-white text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2M9 12h6" />
+              </svg>
+              Scan purchase
+            </button>
+          </div>
+
+          <!-- Supporting Section: How Earning Works -->
+          <div class="mt-5">
+            <h2 class="text-[16px] font-semibold text-midnight mb-2.5">How earning works</h2>
+            <div class="space-y-2">
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-neutralbg text-midnight text-[11px] font-semibold flex items-center justify-center shrink-0 border border-[#E6EAED]">1</div>
+                <div class="text-[12px] font-medium text-midnight">Buy an eligible product</div>
+              </div>
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-neutralbg text-midnight text-[11px] font-semibold flex items-center justify-center shrink-0 border border-[#E6EAED]">2</div>
+                <div class="text-[12px] font-medium text-midnight">Reveal and scan the code</div>
+              </div>
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-neutralbg text-midnight text-[11px] font-semibold flex items-center justify-center shrink-0 border border-[#E6EAED]">3</div>
+                <div class="text-[12px] font-medium text-midnight">Confirm the purchase with the merchant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Container: Navigation + Safe Area -->
+      <div>
+        <!-- Shared Bottom Navigation (56px) -->
+        <div class="w-full h-14 bg-white border-t border-[#E6EAED] grid grid-cols-3 items-center">
+          <div class="flex flex-col items-center justify-center cursor-pointer text-teal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Home</span>
+          </div>
+          <!-- Scan (Inactive - NO amber dot) -->
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2" />
+              <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Scan</span>
+          </div>
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Account</span>
+          </div>
+        </div>
+
+        <!-- Android Bottom Gesture Indicator Area (24px) -->
+        <div class="w-full h-6 bg-white flex items-center justify-center pb-1">
+          <div class="w-16 h-1 bg-[#CED5DB] rounded-full"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================================== -->
+    <!-- SCREEN 3: KTK_Home_Pending (x: 943px, y: 64px, w: 390px, h: 844px)     -->
+    <!-- ===================================================================== -->
+    <div class="artboard flex flex-col justify-between" style="left: 943px; top: 64px;">
+      
+      <!-- Top Section -->
+      <div>
+        <!-- System Status Bar (24px) -->
+        <div class="w-full h-6 px-6 pt-1 flex items-center justify-between text-midnight text-[11px] font-medium select-none bg-white">
+          <span>09:41</span>
+          <div class="flex items-center space-x-1.5">
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 17h2v4H2v-4zm4-5h2v9H6v-9zm4-4h2v13h-2V8zm4-4h2v17h-2V4zm4-3h2v20h-2V1z"/>
+            </svg>
+            <svg class="w-3.5 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 3.5c3.2 0 6.13 1.25 8.35 3.32L12 19.12 3.65 10.82A11.75 11.75 0 0 1 12 7.5z"/>
+            </svg>
+            <svg class="w-4 h-3.5 text-midnight" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 5v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2zm2 4h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1V9z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Shared App Bar (56px) -->
+        <div class="w-full h-14 px-6 flex items-center justify-between border-b border-[#E6EAED] bg-white">
+          <div class="flex items-center space-x-2.5">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgf9OnHRW06NH4-ooUT_dP8TbZDPclqztN6s2QIelciHHttht25czS7nVnFg-7LNnzr1YLOZs7w_M7JO-SzcdSCaZ89mW1nAU6YfJ_QqtbSA3rck2rIlmxnZ3jtwkPclAKPQs7pxEQBnXjVrHxIf9JXgRT6tdLixTxpXTNVSDnmqLG2E54EVGX7fSsJDxenBrCL9cKxhTBrTnSh1Iwo8gBuXqXTFocNbWBgHgE-cr6cIV6GZpfcW4BQ1K7XFf01aBSg" alt="KataKiu Logo" class="w-6 h-6 object-contain rounded-[6px]">
+            <span class="text-[14px] font-medium text-midnight tracking-tight">KataKiu</span>
+          </div>
+          <button class="w-8 h-8 flex items-center justify-center text-midnight hover:opacity-80 transition-opacity">
+            <svg class="w-5 h-5 text-midnight" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Screen Content Container (24px left/right margins) -->
+        <div class="px-6 pt-5">
+          <!-- Customer Identity & Greeting -->
+          <div>
+            <span class="text-[10px] font-semibold text-subtext tracking-wider uppercase">CUSTOMER MEMBER</span>
+            <h1 class="text-[16px] font-semibold text-midnight mt-0.5 leading-snug">Habari, Amina</h1>
+            <p class="text-[12px] font-normal text-subtext mt-0.5">Your latest purchase is being confirmed.</p>
+          </div>
+
+          <!-- Points Summary Card (Midnight Surface, 8px radius, fixed 116px height, with pending chip) -->
+          <div class="mt-4 bg-midnight rounded-[8px] p-4 text-white flex flex-col justify-between" style="height: 116px;">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-semibold tracking-wider text-aqua uppercase">AVAILABLE POINTS</span>
+              <span class="bg-amber/15 text-amber text-[11px] font-medium px-2 py-0.5 rounded-[6px] border border-amber/30 flex items-center gap-1">
+                <svg class="w-3 h-3 text-amber" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/>
+                </svg>
+                240 pending
+              </span>
+            </div>
+            <div>
+              <div class="text-[22px] font-bold text-white tracking-tight leading-none">1,840 PTS</div>
+              <div class="text-[11px] font-normal text-[#98A2B3] mt-1">Available balance</div>
+            </div>
+          </div>
+
+          <!-- Pending Information Surface (Light Aqua bg, 8px radius, Amber accent only inside pending content) -->
+          <div class="mt-4 p-3 bg-[#F0FAF9] border border-[#7AE1D6] rounded-[8px]">
+            <div class="flex items-start gap-2.5">
+              <svg class="w-4 h-4 text-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/>
+              </svg>
+              <div>
+                <div class="text-[12px] font-semibold text-midnight">Pending verification</div>
+                <div class="text-[11px] font-normal text-subtext mt-0.5 leading-snug">Points become available after the merchant confirms the purchase.</div>
+                <div class="flex items-center gap-1 mt-1.5 text-[11px] font-medium text-amber">
+                  <svg class="w-3 h-3 text-amber" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/>
+                  </svg>
+                  <span>Estimated review: a few minutes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary Action (Teal, 8px radius, 13px label, same height/width) -->
+          <div class="mt-4">
+            <button class="w-full h-11 bg-teal hover:bg-[#0CA391] text-white text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2M9 12h6" />
+              </svg>
+              Scan to earn
+            </button>
+          </div>
+
+          <!-- Recent Activity Section (2 rows) -->
+          <div class="mt-5">
+            <h2 class="text-[16px] font-semibold text-midnight mb-2.5">Recent activity</h2>
+            <div class="space-y-2">
+              <!-- Row 1: Pending -->
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center justify-between">
+                <div>
+                  <div class="text-[12px] font-medium text-midnight">Purchase confirmation pending</div>
+                  <div class="text-[11px] font-normal text-subtext mt-0.5">Market Square • Today, 14:20</div>
+                </div>
+                <div class="text-[12px] font-semibold text-amber">+240 PTS</div>
+              </div>
+              <!-- Row 2: Confirmed -->
+              <div class="p-3 bg-white border border-[#E6EAED] rounded-[8px] flex items-center justify-between">
+                <div>
+                  <div class="text-[12px] font-medium text-midnight">Purchase confirmed</div>
+                  <div class="text-[11px] font-normal text-subtext mt-0.5">Westlands outlet • Today, 13:48</div>
+                </div>
+                <div class="text-[12px] font-semibold text-teal">+120 PTS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Container: Navigation + Safe Area -->
+      <div>
+        <!-- Shared Bottom Navigation (56px) -->
+        <div class="w-full h-14 bg-white border-t border-[#E6EAED] grid grid-cols-3 items-center">
+          <div class="flex flex-col items-center justify-center cursor-pointer text-teal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Home</span>
+          </div>
+          <!-- Scan (Inactive - NO amber dot / badge / indicator) -->
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7V5a2 2 0 012-2h2m10 0h2a2 2 0 012 2v2m0 10v2a2 2 0 01-2 2h-2m-10 0H5a2 2 0 01-2-2v-2" />
+              <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Scan</span>
+          </div>
+          <div class="flex flex-col items-center justify-center cursor-pointer text-subtext">
+            <svg class="w-5 h-5 text-subtext" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span class="text-[12px] font-medium mt-0.5">Account</span>
+          </div>
+        </div>
+
+        <!-- Android Bottom Gesture Indicator Area (24px) -->
+        <div class="w-full h-6 bg-white flex items-center justify-center pb-1">
+          <div class="w-16 h-1 bg-[#CED5DB] rounded-full"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KataKiu Admin Portal — Reports and Exports (1440 × 1024)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#071724',
+            amber: '#FFB547',
+            teal: '#0DB3A0',
+            aqua: '#7AE1D6',
+            coral: '#EF6A6A',
+            divider: '#E6EAED',
+            secondaryText: '#66737D',
+            workspaceBg: '#F7F9FA',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #E2E8F0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    #admin-artboard {
+      width: 1440px;
+      height: 1024px;
+      min-width: 1440px;
+      min-height: 1024px;
+      max-width: 1440px;
+      max-height: 1024px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background-color: #F7F9FA;
+    }
+  </style>
+</head>
+<body>
+
+<div id="admin-artboard" class="shadow-2xl">
+  <!-- LEFT SIDEBAR: 232px Fixed Width -->
+  <aside class="w-[232px] min-w-[232px] bg-midnight flex flex-col justify-between select-none z-20 border-r border-[#0d2235]">
+    <div class="flex flex-col">
+      <!-- Brand Header -->
+      <div class="h-16 px-5 flex items-center gap-3 border-b border-[#0f273c]">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH0uiQ4qg9bg8Ei7h7CFbX6XWS9hPyumShx6M0a6CqJzeT9mDKnZ0su_FZNh2x23IACxrGiemG0OjlMEpAS9oiIk2k5QDkVIQAlyglhygQy4feJc0IoKLBDXxjJ0dB5lyvu4I48LUELI5Blpjs3iGOdZNgGptnPNpSS9Tlf3OgsBhB9JMysXlkJwVTfPhFCDrJbNtNdOUYSiTkFQ11-EHMK0FhYiiHNoU6k2LlFIiUF57-8-wmKy9slUJno5USLLwTAA" alt="KataKiu Logo" class="w-7 h-7 rounded-md object-contain" />
+        <div class="flex flex-col">
+          <span class="text-white text-[15px] font-bold leading-tight tracking-tight">KataKiu</span>
+          <span class="text-secondaryText text-[11px] leading-tight font-normal">Admin portal</span>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="px-3 py-4 flex flex-col gap-6">
+        <!-- PRIMARY -->
+        <div class="flex flex-col gap-1">
+          <span class="px-3 text-[10px] uppercase tracking-wider font-semibold text-[#486175] mb-1">PRIMARY</span>
+          
+          <!-- Overview -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Overview
+          </a>
+
+          <!-- Code operations -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+            </svg>
+            Code operations
+          </a>
+
+          <!-- Campaigns -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+            Campaigns
+          </a>
+
+          <!-- Merchants -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            Merchants
+          </a>
+
+          <!-- Claims and risk -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            Claims and risk
+          </a>
+
+          <!-- Finance -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+            Finance
+          </a>
+
+          <!-- Reports: ACTIVE -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 bg-teal text-midnight font-semibold text-[13px] shadow-sm">
+            <svg class="w-4 h-4 shrink-0 text-midnight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            Reports
+          </a>
+        </div>
+
+        <!-- SYSTEM -->
+        <div class="flex flex-col gap-1">
+          <span class="px-3 text-[10px] uppercase tracking-wider font-semibold text-[#486175] mb-1">SYSTEM</span>
+          <!-- Settings -->
+          <a href="#" class="h-10 px-3 rounded-lg flex items-center gap-3 text-secondaryText hover:text-white hover:bg-[#0e2436] transition-colors text-[13px] font-medium">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Settings
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Environment Label -->
+    <div class="px-5 py-4 border-t border-[#0f273c] flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-teal shrink-0"></span>
+      <span class="text-[11px] text-[#8699A6] font-normal leading-tight">Kenya production environment</span>
+    </div>
+  </aside>
+
+  <!-- MAIN WORKSPACE COLUMN: 1208px Width -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-workspaceBg">
+    <!-- TOP APP BAR: 64px Height -->
+    <header class="h-16 bg-white border-b border-divider px-8 flex items-center justify-between shrink-0 z-10">
+      <div class="flex items-center gap-3">
+        <h1 class="text-midnight text-[16px] font-semibold tracking-tight">Reports</h1>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Production Chip -->
+        <div class="h-7 px-2.5 rounded-full bg-[#E6F8F6] border border-[#B3EBE5] flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal"></span>
+          <span class="text-teal text-[11px] font-medium leading-none">Production</span>
+        </div>
+
+        <!-- Help Icon -->
+        <button class="w-8 h-8 rounded-full border border-divider flex items-center justify-center text-secondaryText hover:text-midnight hover:bg-slate-50 transition-colors" title="Help">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </button>
+
+        <!-- Admin Avatar AW -->
+        <div class="w-8 h-8 rounded-full bg-midnight text-white flex items-center justify-center text-[12px] font-semibold tracking-wide select-none">
+          AW
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT WORKSPACE: 32px padding, compact layout to fit within exactly 1024px artboard -->
+    <div class="flex-1 px-8 py-5 flex flex-col gap-4 overflow-hidden">
+      <!-- HEADER: Title & Actions -->
+      <div class="flex items-start justify-between shrink-0">
+        <div>
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-teal">PROGRAMME REPORTING</span>
+            <span class="text-divider">•</span>
+            <span class="text-[11px] text-secondaryText font-normal">KataKiu Kenya</span>
+          </div>
+          <h2 class="text-[18px] font-bold text-midnight leading-tight">Reports and exports</h2>
+          <p class="text-[11px] text-secondaryText mt-0.5 font-normal">
+            Review verified-purchase activity and create controlled operational exports.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button class="h-9 px-3.5 rounded-lg border border-divider bg-white text-midnight text-[13px] font-semibold hover:bg-slate-50 transition-colors shadow-xs flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-secondaryText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+            </svg>
+            Saved reports
+          </button>
+          <button class="h-9 px-4 rounded-lg bg-teal text-white text-[13px] font-semibold hover:bg-[#0aa291] transition-colors shadow-xs flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Create export
+          </button>
+        </div>
+      </div>
+
+      <!-- REPORT TABS -->
+      <div class="flex items-center border-b border-divider shrink-0 gap-6">
+        <button class="pb-2 text-[12px] font-semibold text-teal border-b-2 border-teal flex items-center gap-1.5">
+          Programme performance
+        </button>
+        <button class="pb-2 text-[12px] font-medium text-secondaryText hover:text-midnight border-b-2 border-transparent transition-colors">
+          Code traceability
+        </button>
+        <button class="pb-2 text-[12px] font-medium text-secondaryText hover:text-midnight border-b-2 border-transparent transition-colors">
+          Merchant operations
+        </button>
+        <button class="pb-2 text-[12px] font-medium text-secondaryText hover:text-midnight border-b-2 border-transparent transition-colors">
+          Finance and settlements
+        </button>
+      </div>
+
+      <!-- FILTER BAR: Compact horizontal control row -->
+      <div class="h-11 px-3 bg-white border border-divider rounded-lg flex items-center justify-between shrink-0 gap-3 shadow-xs">
+        <div class="flex items-center gap-2.5 flex-1 overflow-hidden">
+          <!-- Date Range -->
+          <div class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-divider bg-slate-50/50 text-[11px] text-midnight">
+            <svg class="w-3.5 h-3.5 text-secondaryText shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="font-medium">01 Sep – 14 Sep 2026</span>
+          </div>
+
+          <!-- Campaign Select -->
+          <div class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-divider bg-white text-[11px] text-midnight">
+            <span class="text-secondaryText">Campaign:</span>
+            <span class="font-medium">All campaigns</span>
+            <svg class="w-3 h-3 text-secondaryText ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+
+          <!-- Product Select -->
+          <div class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-divider bg-white text-[11px] text-midnight">
+            <span class="text-secondaryText">Product:</span>
+            <span class="font-medium">All products</span>
+            <svg class="w-3 h-3 text-secondaryText ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+
+          <!-- Merchant Outlet Select -->
+          <div class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-divider bg-white text-[11px] text-midnight">
+            <span class="text-secondaryText">Outlet:</span>
+            <span class="font-medium">All outlets</span>
+            <svg class="w-3 h-3 text-secondaryText ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+
+          <!-- Status Select -->
+          <div class="flex items-center gap-1.5 h-8 px-2.5 rounded-md border border-divider bg-white text-[11px] text-midnight">
+            <span class="text-secondaryText">Status:</span>
+            <span class="font-medium">All statuses</span>
+            <svg class="w-3 h-3 text-secondaryText ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+
+        <button class="h-8 px-3 rounded-md border border-divider bg-white text-midnight hover:bg-slate-50 text-[11px] font-semibold transition-colors shrink-0 shadow-xs flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-secondaryText" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+          </svg>
+          Apply filters
+        </button>
+      </div>
+
+      <!-- PERFORMANCE SUMMARY: 4 horizontal cards -->
+      <div class="grid grid-cols-4 gap-3 shrink-0">
+        <!-- Active product codes -->
+        <div class="bg-white border border-divider rounded-lg p-3 shadow-xs flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#E6F8F6] text-teal flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-[11px] text-secondaryText font-normal block leading-tight">Active product codes</span>
+            <span class="text-[20px] font-bold text-midnight leading-tight mt-0.5 block">184,520</span>
+            <span class="text-[10px] text-secondaryText font-normal block leading-tight mt-0.5">Available for eligible claims</span>
+          </div>
+        </div>
+
+        <!-- Confirmed claims -->
+        <div class="bg-white border border-divider rounded-lg p-3 shadow-xs flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#E6F8F6] text-teal flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-[11px] text-secondaryText font-normal block leading-tight">Confirmed claims</span>
+            <span class="text-[20px] font-bold text-midnight leading-tight mt-0.5 block">8,722</span>
+            <span class="text-[10px] text-secondaryText font-normal block leading-tight mt-0.5">Merchant-confirmed purchases</span>
+          </div>
+        </div>
+
+        <!-- Customer points issued -->
+        <div class="bg-white border border-divider rounded-lg p-3 shadow-xs flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#F0FDF4] text-[#16A34A] flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-[11px] text-secondaryText font-normal block leading-tight">Customer points issued</span>
+            <span class="text-[20px] font-bold text-midnight leading-tight mt-0.5 block">1,842,000 <span class="text-[12px] font-semibold text-secondaryText">pts</span></span>
+            <span class="text-[10px] text-secondaryText font-normal block leading-tight mt-0.5">Separate customer loyalty ledger</span>
+          </div>
+        </div>
+
+        <!-- Merchant points earned -->
+        <div class="bg-white border border-divider rounded-lg p-3 shadow-xs flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-[11px] text-secondaryText font-normal block leading-tight">Merchant points earned</span>
+            <span class="text-[20px] font-bold text-midnight leading-tight mt-0.5 block">154,600 <span class="text-[12px] font-semibold text-secondaryText">pts</span></span>
+            <span class="text-[10px] text-secondaryText font-normal block leading-tight mt-0.5">Separate merchant reward ledger</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN TWO-COLUMN LAYOUT -->
+      <div class="grid grid-cols-3 gap-4 flex-1 min-h-0 overflow-hidden">
+        <!-- LEFT COLUMN: ~2/3 Width (cols 2) -->
+        <div class="col-span-2 flex flex-col gap-3 min-h-0 overflow-hidden">
+          <!-- CARD 1: Verified purchase funnel (Stepped, text-first, NO CHARTS) -->
+          <div class="bg-white border border-divider rounded-lg p-3.5 shadow-xs shrink-0">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-[13px] font-semibold text-midnight">Verified purchase funnel</h3>
+              <span class="text-[10px] text-secondaryText font-normal">Controlled multi-step verification</span>
+            </div>
+
+            <!-- Stepped List (5 compact steps with connecting lines & counts) -->
+            <div class="space-y-1.5">
+              <!-- Step 1 -->
+              <div class="flex items-center justify-between p-2 rounded-md bg-slate-50/70 border border-divider/60">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-white border border-divider text-secondaryText text-[10px] font-bold flex items-center justify-center shrink-0">1</div>
+                  <div>
+                    <span class="text-[12px] font-semibold text-midnight leading-none block">Active product codes</span>
+                    <span class="text-[10px] text-secondaryText leading-none mt-0.5 block">Eligible codes in the market</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[13px] font-bold text-midnight">184,520</span>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex items-center justify-between p-2 rounded-md bg-slate-50/70 border border-divider/60">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-white border border-divider text-secondaryText text-[10px] font-bold flex items-center justify-center shrink-0">2</div>
+                  <div>
+                    <span class="text-[12px] font-semibold text-midnight leading-none block">Customer product-code claims</span>
+                    <span class="text-[10px] text-secondaryText leading-none mt-0.5 block">Unique codes claimed by eligible customers</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[13px] font-bold text-midnight">8,940</span>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex items-center justify-between p-2 rounded-md bg-[#FFFDF5] border border-[#FDE68A]/60">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-[#FEF3C7] text-[#D97706] text-[10px] font-bold flex items-center justify-center shrink-0">3</div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[12px] font-semibold text-midnight leading-none">Awaiting merchant confirmation</span>
+                      <span class="px-1.5 py-0.5 rounded bg-[#FEF3C7] text-[#92400E] text-[10px] font-medium leading-none">Pending review</span>
+                    </div>
+                    <span class="text-[10px] text-secondaryText leading-none mt-0.5 block">Customer scanned; merchant validation active</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[13px] font-bold text-amber">18</span>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="flex items-center justify-between p-2 rounded-md bg-[#F0FDF9] border border-[#A7F3D0]/60">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-[#D1FAE5] text-teal text-[10px] font-bold flex items-center justify-center shrink-0">4</div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[12px] font-semibold text-midnight leading-none">Confirmed purchases</span>
+                      <span class="px-1.5 py-0.5 rounded bg-[#D1FAE5] text-[#065F46] text-[10px] font-medium leading-none">Points recorded</span>
+                    </div>
+                    <span class="text-[10px] text-secondaryText leading-none mt-0.5 block">Dual verified by customer code & merchant staff</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[13px] font-bold text-teal">8,722</span>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="flex items-center justify-between p-2 rounded-md bg-[#FEF2F2] border border-[#FECACA]/60">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-[#FEE2E2] text-coral text-[10px] font-bold flex items-center justify-center shrink-0">5</div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[12px] font-semibold text-midnight leading-none">Reversed purchases</span>
+                      <span class="px-1.5 py-0.5 rounded bg-[#FEE2E2] text-[#991B1B] text-[10px] font-medium leading-none">Loyalty adjustment recorded</span>
+                    </div>
+                    <span class="text-[10px] text-secondaryText leading-none mt-0.5 block">Approved returns reversing customer & merchant points</span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[13px] font-bold text-coral">120</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: Campaign performance Table -->
+          <div class="bg-white border border-divider rounded-lg p-3.5 shadow-xs flex-1 flex flex-col min-h-0 overflow-hidden">
+            <div class="flex items-center justify-between mb-2 shrink-0">
+              <div>
+                <h3 class="text-[13px] font-semibold text-midnight">Campaign performance</h3>
+                <span class="text-[10px] text-secondaryText">Attributed to verified merchant-confirmed claims</span>
+              </div>
+              <button class="text-[11px] font-semibold text-teal hover:underline">
+                View campaign details →
+              </button>
+            </div>
+
+            <!-- Compact Data Table -->
+            <div class="overflow-hidden border border-divider/80 rounded-md">
+              <table class="w-full text-left text-[11px]">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-divider text-secondaryText font-medium">
+                    <th class="py-2 px-3">Campaign</th>
+                    <th class="py-2 px-2.5 text-right">Confirmed claims</th>
+                    <th class="py-2 px-2.5 text-right">Customer points</th>
+                    <th class="py-2 px-2.5 text-right">Merchant points</th>
+                    <th class="py-2 px-2 text-right">Reversals</th>
+                    <th class="py-2 px-3 text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-divider/70">
+                  <!-- Row 1: Launch partner rewards -->
+                  <tr class="hover:bg-slate-50/50 transition-colors">
+                    <td class="py-2 px-3 font-semibold text-midnight">
+                      Launch partner rewards
+                      <span class="block text-[10px] font-normal text-secondaryText">CMP-2026-001</span>
+                    </td>
+                    <td class="py-2 px-2.5 text-right font-medium text-midnight">6,420</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">1,184,000 pts</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">98,400 pts</td>
+                    <td class="py-2 px-2 text-right font-medium text-coral">-84</td>
+                    <td class="py-2 px-3 text-center">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#E6F8F6] text-teal border border-[#B3EBE5]">Active</span>
+                    </td>
+                  </tr>
+
+                  <!-- Row 2: Weekend verified purchase -->
+                  <tr class="hover:bg-slate-50/50 transition-colors">
+                    <td class="py-2 px-3 font-semibold text-midnight">
+                      Weekend verified purchase
+                      <span class="block text-[10px] font-normal text-secondaryText">CMP-2026-002</span>
+                    </td>
+                    <td class="py-2 px-2.5 text-right font-medium text-midnight">1,102</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">132,240 pts</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">11,020 pts</td>
+                    <td class="py-2 px-2 text-right font-medium text-coral">-12</td>
+                    <td class="py-2 px-3 text-center">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#E6F8F6] text-teal border border-[#B3EBE5]">Completed</span>
+                    </td>
+                  </tr>
+
+                  <!-- Row 3: August outlet bonus -->
+                  <tr class="hover:bg-slate-50/50 transition-colors">
+                    <td class="py-2 px-3 font-semibold text-midnight">
+                      August outlet bonus
+                      <span class="block text-[10px] font-normal text-secondaryText">CMP-2026-000</span>
+                    </td>
+                    <td class="py-2 px-2.5 text-right font-medium text-midnight">1,200</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">210,000 pts</td>
+                    <td class="py-2 px-2.5 text-right font-semibold text-midnight">18,000 pts</td>
+                    <td class="py-2 px-2 text-right font-medium text-coral">-24</td>
+                    <td class="py-2 px-3 text-center">
+                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-secondaryText border border-slate-200">Ended</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-2 flex items-center justify-between text-[10px] text-secondaryText">
+              <span>Customer and merchant points are recorded into strictly separate ledgers.</span>
+              <span>Showing 3 active reporting periods</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: ~1/3 Width (cols 1) -->
+        <div class="col-span-1 flex flex-col gap-3 min-h-0 overflow-hidden">
+          <!-- CARD 1: Create export panel -->
+          <div class="bg-white border border-divider rounded-lg p-3.5 shadow-xs flex flex-col gap-2.5">
+            <div class="flex items-center justify-between border-b border-divider pb-2">
+              <h3 class="text-[13px] font-semibold text-midnight">Create export</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-secondaryText">Audit logged</span>
+            </div>
+
+            <!-- Field 1: Report Type -->
+            <div>
+              <label class="block text-[10px] font-medium text-secondaryText mb-1">Report type</label>
+              <div class="h-8 px-2.5 rounded-md border border-divider bg-slate-50/60 flex items-center justify-between text-[11px] text-midnight font-medium">
+                <span>Programme performance</span>
+                <svg class="w-3.5 h-3.5 text-secondaryText" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+
+            <!-- Field 2: Date Range -->
+            <div>
+              <label class="block text-[10px] font-medium text-secondaryText mb-1">Date range</label>
+              <div class="h-8 px-2.5 rounded-md border border-divider bg-white flex items-center gap-2 text-[11px] text-midnight">
+                <svg class="w-3.5 h-3.5 text-secondaryText" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="font-medium">01 Sep – 14 Sep 2026</span>
+              </div>
+            </div>
+
+            <!-- Field 3: Data Scope -->
+            <div>
+              <label class="block text-[10px] font-medium text-secondaryText mb-1">Data scope</label>
+              <div class="h-8 px-2.5 rounded-md border border-divider bg-slate-50/60 flex items-center text-[11px] text-midnight font-medium">
+                <span>All campaigns • All outlets</span>
+              </div>
+            </div>
+
+            <!-- Field 4: Format selection -->
+            <div>
+              <label class="block text-[10px] font-medium text-secondaryText mb-1">Format selection</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button class="h-8 rounded-md border-2 border-teal bg-[#E6F8F6] text-teal text-[11px] font-bold flex items-center justify-center gap-1.5 shadow-2xs">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  CSV (Spreadsheet)
+                </button>
+                <button class="h-8 rounded-md border border-divider bg-white text-secondaryText text-[11px] font-medium flex items-center justify-center gap-1.5 hover:bg-slate-50 transition-colors">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                  PDF (Executive)
+                </button>
+              </div>
+            </div>
+
+            <!-- Privacy Setting: Locked & Enabled -->
+            <div class="p-2 rounded-md bg-slate-50 border border-divider flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-teal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span class="text-[11px] text-midnight font-medium">Exclude customer personal data</span>
+              </div>
+              <span class="text-[10px] font-semibold text-secondaryText bg-slate-200/80 px-1.5 py-0.5 rounded">Enabled & locked</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col gap-1.5 mt-1">
+              <button class="h-9 w-full rounded-lg bg-teal text-white text-[12px] font-semibold hover:bg-[#0aa291] transition-colors shadow-xs flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Generate export
+              </button>
+              <button class="h-8 w-full rounded-lg border border-divider bg-white text-midnight text-[11px] font-semibold hover:bg-slate-50 transition-colors shadow-2xs">
+                Save report view
+              </button>
+            </div>
+
+            <!-- Aqua Information Panel -->
+            <div class="p-2 rounded-md bg-[#EDFAF8] border border-[#B3EBE5] flex items-start gap-2 text-[10px] text-[#0A524A] leading-tight mt-0.5">
+              <svg class="w-3.5 h-3.5 text-teal shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Exports include aggregated operational data. Individual customer phone numbers and raw product-code values are excluded.</span>
+            </div>
+          </div>
+
+          <!-- CARD 2: Recent exports section -->
+          <div class="bg-white border border-divider rounded-lg p-3 shadow-xs flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-[12px] font-semibold text-midnight">Recent exports</h3>
+                <span class="text-[10px] text-secondaryText">Restricted archive</span>
+              </div>
+
+              <div class="space-y-2">
+                <!-- Item 1 -->
+                <div class="p-2 rounded-md border border-divider bg-slate-50/50 flex items-start justify-between">
+                  <div class="flex items-start gap-2">
+                    <span class="p-1 rounded bg-slate-200/80 text-secondaryText text-[9px] font-bold mt-0.5">CSV</span>
+                    <div>
+                      <span class="text-[11px] font-semibold text-midnight block leading-tight">Finance settlement report</span>
+                      <span class="text-[10px] text-secondaryText block leading-tight mt-0.5">CSV • Generated today, 09:30</span>
+                      <span class="text-[9px] text-teal font-medium block leading-tight mt-0.5">Available for authorised users</span>
+                    </div>
+                  </div>
+                  <button class="text-secondaryText hover:text-midnight p-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                  </button>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="p-2 rounded-md border border-divider bg-slate-50/50 flex items-start justify-between">
+                  <div class="flex items-start gap-2">
+                    <span class="p-1 rounded bg-slate-200/80 text-secondaryText text-[9px] font-bold mt-0.5">PDF</span>
+                    <div>
+                      <span class="text-[11px] font-semibold text-midnight block leading-tight">Launch partner rewards summary</span>
+                      <span class="text-[10px] text-secondaryText block leading-tight mt-0.5">PDF • Generated yesterday</span>
+                      <span class="text-[9px] text-teal font-medium block leading-tight mt-0.5">Available for authorised users</span>
+                    </div>
+                  </div>
+                  <button class="text-secondaryText hover:text-midnight p-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <span class="text-[9px] text-secondaryText block mt-1">Exports are preserved in the immutable audit log for 90 days.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

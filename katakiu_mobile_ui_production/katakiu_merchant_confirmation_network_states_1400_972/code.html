@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400, height=972, initial-scale=1.0">
+<title>KataKiu Merchant Confirmation Network States — 1400 × 972</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 1400px;
+    height: 972px;
+    background-color: #F5F7F8;
+    overflow: hidden;
+    position: relative;
+  }
+  .board-container {
+    width: 1400px;
+    height: 972px;
+    position: relative;
+    background-color: #F5F7F8;
+  }
+  .artboard {
+    position: absolute;
+    top: 64px;
+    width: 390px;
+    height: 844px;
+    background-color: #FFFFFF;
+    border-radius: 28px;
+    box-shadow: 0 12px 32px -4px rgba(7, 23, 36, 0.08), 0 4px 12px -2px rgba(7, 23, 36, 0.04);
+    border: 1px solid #E6EAED;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .screen-1 { left: 67px; }
+  .screen-2 { left: 505px; }
+  .screen-3 { left: 943px; }
+
+  /* Status Bar */
+  .status-bar {
+    height: 44px;
+    padding: 12px 24px 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #071724;
+    background: transparent;
+    z-index: 10;
+  }
+  /* App Bar */
+  .app-bar {
+    height: 56px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    gap: 12px;
+  }
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #071724;
+    flex: 1;
+  }
+  /* Safe Area / Content */
+  .screen-content {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .screen-content::-webkit-scrollbar {
+    display: none;
+  }
+  .gesture-bar {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding-bottom: 8px;
+  }
+  .gesture-pill {
+    width: 108px;
+    height: 4px;
+    background-color: #071724;
+    border-radius: 9999px;
+    opacity: 0.2;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin 1.4s linear infinite;
+  }
+</style>
+</head>
+<body>
+
+<div class="board-container">
+
+  <!-- ==================== SCREEN 01: CONNECTION UNAVAILABLE ==================== -->
+  <div class="artboard screen-1">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/>
+        </svg>
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+        </svg>
+        <div class="w-5 h-2.5 border border-[#071724] rounded-sm p-0.5 flex items-center">
+          <div class="w-full h-full bg-[#071724] rounded-2xs"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="w-7 h-7 -ml-1.5 flex items-center justify-center text-[#071724]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <span class="app-bar-title">Connection unavailable</span>
+      <span class="text-[11px] font-medium text-[#66737D] bg-[#F5F7F8] border border-[#E6EAED] px-2 py-0.5 rounded-[6px]">Terminal 04</span>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Error Icon & State -->
+      <div class="flex flex-col items-center text-center mt-2 mb-6">
+        <div class="w-12 h-12 rounded-full bg-[#FDF0F0] border border-[#FCDADA] flex items-center justify-center mb-3">
+          <svg class="w-6 h-6 text-[#EF6A6A]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+            <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+          </svg>
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FDF0F0] border border-[#F8B4B4] rounded-[6px] mb-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#EF6A6A]"></span>
+          <span class="text-[11px] font-medium text-[#EF6A6A]">Could not connect</span>
+        </div>
+        <h1 class="text-[16px] font-semibold text-[#071724] mb-1">The purchase was not confirmed</h1>
+        <p class="text-[12px] text-[#66737D] max-w-[280px]">Check the outlet connection and try again.</p>
+      </div>
+
+      <!-- Claim Details Card -->
+      <div class="bg-[#FFFFFF] border border-[#E6EAED] rounded-[8px] p-3.5 mb-4">
+        <div class="text-[11px] font-medium text-[#66737D] uppercase tracking-wide mb-2.5">Claim Details</div>
+        <div class="space-y-2 text-[12px]">
+          <div class="flex justify-between items-center py-0.5 border-b border-[#F5F7F8]">
+            <span class="text-[#66737D]">Claim ID</span>
+            <span class="font-medium text-[#071724] font-mono">KK-CLM-90814</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 border-b border-[#F5F7F8]">
+            <span class="text-[#66737D]">Customer</span>
+            <span class="font-medium text-[#071724]">Amina Mwangi</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-[#66737D]">Outlet</span>
+            <span class="font-medium text-[#071724]">Market Square Westlands</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coral Warning Panel -->
+      <div class="bg-[#FDF0F0] border border-[#F8B4B4] rounded-[8px] p-3.5 mb-5 flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-[#EF6A6A] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div class="text-[12px] text-[#071724]">
+          <span class="font-medium text-[#EF6A6A]">No points awarded.</span>
+          <span class="text-[#66737D]"> No customer or merchant points were awarded.</span>
+        </div>
+      </div>
+
+      <!-- Helper text -->
+      <div class="mt-auto mb-4">
+        <p class="text-[11px] text-[#66737D] text-center leading-relaxed">
+          Do not ask the customer to generate another QR until the claim status is checked.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2.5">
+        <button class="w-full h-12 bg-[#0DB3A0] hover:bg-[#0aa391] text-[#FFFFFF] text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+          </svg>
+          Retry connection
+        </button>
+        <button class="w-full h-12 bg-[#FFFFFF] border border-[#E6EAED] hover:bg-[#F5F7F8] text-[#071724] text-[13px] font-medium rounded-[8px] flex items-center justify-center transition-colors">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <!-- Gesture Bar -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ==================== SCREEN 02: RETRY IN PROGRESS ==================== -->
+  <div class="artboard screen-2">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/>
+        </svg>
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+        </svg>
+        <div class="w-5 h-2.5 border border-[#071724] rounded-sm p-0.5 flex items-center">
+          <div class="w-full h-full bg-[#071724] rounded-2xs"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="w-7 h-7 -ml-1.5 flex items-center justify-center text-[#071724]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <span class="app-bar-title">Checking connection</span>
+      <span class="text-[11px] font-medium text-[#0DB3A0] bg-[#E8F7F5] border border-[#7AE1D6] px-2 py-0.5 rounded-[6px] flex items-center gap-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#0DB3A0] animate-pulse"></span>
+        Active check
+      </span>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Loading Indicator & Header -->
+      <div class="flex flex-col items-center text-center mt-3 mb-6">
+        <div class="w-12 h-12 rounded-full bg-[#E8F7F5] border border-[#7AE1D6] flex items-center justify-center mb-3">
+          <svg class="w-6 h-6 text-[#0DB3A0] animate-spin-slow" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+        </div>
+        <h1 class="text-[16px] font-semibold text-[#071724] mb-1">Reconnecting securely</h1>
+        <p class="text-[12px] text-[#66737D] max-w-[280px]">
+          KataKiu is checking the claim before submitting the confirmation.
+        </p>
+      </div>
+
+      <!-- Claim Summary Banner -->
+      <div class="bg-[#F5F7F8] border border-[#E6EAED] rounded-[8px] px-3.5 py-2.5 mb-4 flex items-center justify-between">
+        <span class="text-[11px] text-[#66737D]">Target Claim</span>
+        <span class="text-[12px] font-mono font-medium text-[#071724]">KK-CLM-90814</span>
+      </div>
+
+      <!-- Live Step Progress Rows -->
+      <div class="bg-[#FFFFFF] border border-[#E6EAED] rounded-[8px] divide-y divide-[#E6EAED] mb-5">
+        <!-- Row 1: Outlet connection -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-5 h-5 rounded-full bg-[#E8F7F5] flex items-center justify-center">
+              <svg class="w-3 h-3 text-[#0DB3A0] animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+            </div>
+            <span class="text-[12px] font-medium text-[#071724]">Outlet connection</span>
+          </div>
+          <span class="text-[11px] font-medium text-[#0DB3A0] bg-[#E8F7F5] px-2 py-0.5 rounded-[6px]">Checking</span>
+        </div>
+
+        <!-- Row 2: Claim status -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-5 h-5 rounded-full bg-[#F5F7F8] border border-[#E6EAED] flex items-center justify-center">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#66737D]"></span>
+            </div>
+            <span class="text-[12px] text-[#66737D]">Claim status</span>
+          </div>
+          <span class="text-[11px] text-[#66737D]">Waiting</span>
+        </div>
+
+        <!-- Row 3: Points award -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-5 h-5 rounded-full bg-[#F5F7F8] border border-[#E6EAED] flex items-center justify-center">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#66737D]"></span>
+            </div>
+            <span class="text-[12px] text-[#66737D]">Points award</span>
+          </div>
+          <span class="text-[11px] text-[#66737D]">Not started</span>
+        </div>
+      </div>
+
+      <!-- Helper Notice -->
+      <div class="mt-auto mb-4 bg-[#F5F7F8] border border-[#E6EAED] rounded-[8px] p-3 flex items-start gap-2">
+        <svg class="w-4 h-4 text-[#66737D] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <p class="text-[11px] text-[#66737D] leading-relaxed">
+          Keep this screen open. Do not submit the same claim twice.
+        </p>
+      </div>
+
+      <!-- Disabled Loading Action -->
+      <div class="space-y-2">
+        <button disabled class="w-full h-12 bg-[#0DB3A0]/60 text-[#FFFFFF] text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 cursor-not-allowed">
+          <svg class="w-4 h-4 text-white animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+          Retrying…
+        </button>
+      </div>
+    </div>
+
+    <!-- Gesture Bar -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ==================== SCREEN 03: CONFIRMATION STATUS UNKNOWN ==================== -->
+  <div class="artboard screen-3">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/>
+        </svg>
+        <svg class="w-3.5 h-3.5 text-[#071724]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+        </svg>
+        <div class="w-5 h-2.5 border border-[#071724] rounded-sm p-0.5 flex items-center">
+          <div class="w-full h-full bg-[#071724] rounded-2xs"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="w-7 h-7 -ml-1.5 flex items-center justify-center text-[#071724]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <span class="app-bar-title">Check confirmation status</span>
+      <span class="text-[11px] font-medium text-[#FFB547] bg-[#FFF7EB] border border-[#FFE0A3] px-2 py-0.5 rounded-[6px]">Safe check</span>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Amber Status Icon & Heading -->
+      <div class="flex flex-col items-center text-center mt-2 mb-6">
+        <div class="w-12 h-12 rounded-full bg-[#FFF7EB] border border-[#FFE0A3] flex items-center justify-center mb-3">
+          <svg class="w-6 h-6 text-[#FFB547]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FFF7EB] border border-[#FFE0A3] rounded-[6px] mb-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#FFB547]"></span>
+          <span class="text-[11px] font-medium text-[#B87500]">Status checking</span>
+        </div>
+        <h1 class="text-[16px] font-semibold text-[#071724] mb-1">We need to verify the result</h1>
+        <p class="text-[12px] text-[#66737D] max-w-[290px]">
+          The connection ended before KataKiu could confirm whether the purchase was recorded.
+        </p>
+      </div>
+
+      <!-- Claim Details Card -->
+      <div class="bg-[#FFFFFF] border border-[#E6EAED] rounded-[8px] p-3.5 mb-4">
+        <div class="text-[11px] font-medium text-[#66737D] uppercase tracking-wide mb-2.5">Claim Information</div>
+        <div class="space-y-2 text-[12px]">
+          <div class="flex justify-between items-center py-0.5 border-b border-[#F5F7F8]">
+            <span class="text-[#66737D]">Claim ID</span>
+            <span class="font-medium text-[#071724] font-mono">KK-CLM-90814</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5 border-b border-[#F5F7F8]">
+            <span class="text-[#66737D]">Customer</span>
+            <span class="font-medium text-[#071724]">Amina Mwangi</span>
+          </div>
+          <div class="flex justify-between items-center py-0.5">
+            <span class="text-[#66737D]">Outlet</span>
+            <span class="font-medium text-[#071724]">Market Square Westlands</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amber Information Panel -->
+      <div class="bg-[#FFF7EB] border border-[#FFE0A3] rounded-[8px] p-3.5 mb-4 flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-[#FFB547] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <div class="text-[12px] text-[#071724]">
+          <span class="font-medium text-[#B87500]">Do not confirm this claim again yet.</span>
+          <span class="text-[#66737D]"> A duplicate check will protect both accounts.</span>
+        </div>
+      </div>
+
+      <!-- Metadata note -->
+      <div class="mt-auto mb-4">
+        <p class="text-[11px] text-[#66737D] text-center leading-relaxed">
+          Customer and merchant points remain unchanged until the server confirms the result.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2.5">
+        <button class="w-full h-12 bg-[#0DB3A0] hover:bg-[#0aa391] text-[#FFFFFF] text-[13px] font-semibold rounded-[8px] flex items-center justify-center gap-2 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Check status
+        </button>
+        <button class="w-full h-12 bg-[#FFFFFF] border border-[#E6EAED] hover:bg-[#F5F7F8] text-[#071724] text-[13px] font-medium rounded-[8px] flex items-center justify-center transition-colors">
+          Return to home
+        </button>
+      </div>
+    </div>
+
+    <!-- Gesture Bar -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

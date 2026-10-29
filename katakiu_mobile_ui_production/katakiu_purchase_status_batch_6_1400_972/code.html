@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400, height=972, initial-scale=1.0">
+<title>KataKiu Purchase Status Batch 6 (1400 × 972)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    width: 1400px;
+    height: 972px;
+    background-color: #F5F7F8;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Presentation Board Container */
+  .board {
+    width: 1400px;
+    height: 972px;
+    position: relative;
+    background-color: #F5F7F8;
+  }
+
+  /* Mobile Artboards */
+  .artboard {
+    width: 390px;
+    height: 844px;
+    position: absolute;
+    top: 64px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(7, 23, 36, 0.04);
+  }
+
+  .screen-1 { left: 67px; }
+  .screen-2 { left: 505px; }
+  .screen-3 { left: 943px; }
+
+  /* Android Status Bar (24px safe area) */
+  .status-bar {
+    height: 24px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    z-index: 10;
+  }
+  .status-time {
+    font-size: 11px;
+    font-weight: 600;
+    color: #071724;
+    letter-spacing: -0.1px;
+  }
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #071724;
+  }
+
+  /* 56px App Bar */
+  .app-bar {
+    height: 56px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    flex-shrink: 0;
+  }
+  .back-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    color: #071724;
+    cursor: pointer;
+  }
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #071724;
+  }
+
+  /* Content Container (padding 24px) */
+  .content-body {
+    flex: 1;
+    padding: 24px 24px 0 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status Chips */
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+  .status-chip.confirmed {
+    background-color: #E8F7F5;
+    color: #0DB3A0;
+  }
+  .status-chip.used {
+    background-color: #FDF0F0;
+    color: #EF6A6A;
+  }
+  .status-chip.expired {
+    background-color: #FDF0F0;
+    color: #EF6A6A;
+  }
+
+  /* Typography */
+  .section-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .supporting-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 1.45;
+    margin-bottom: 20px;
+  }
+
+  /* Summary Cards */
+  .card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #E6EAED;
+  }
+  .card-row:first-child {
+    padding-top: 0;
+  }
+  .card-row:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+  .card-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: #071724;
+    text-align: right;
+  }
+
+  /* Points Banner inside Screen 1 */
+  .points-box {
+    background-color: #F5F7F8;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .points-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: #66737D;
+    text-transform: uppercase;
+  }
+  .points-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0DB3A0;
+    line-height: 1.2;
+  }
+  .points-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+
+  /* Explanation / Warning Alert Surfaces */
+  .alert-surface {
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .alert-surface.coral-light {
+    background-color: #FDF0F0;
+    border: 1px solid #FCE1E1;
+  }
+  .alert-surface.amber-light {
+    background-color: #FFF9F0;
+    border: 1px solid #FFE8CC;
+  }
+  .alert-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #071724;
+    margin-bottom: 4px;
+  }
+  .alert-desc {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 1.45;
+  }
+  .alert-ref {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #EF6A6A;
+  }
+
+  /* Button and Footer Area (Safe bottom 24px) */
+  .screen-footer {
+    margin-top: auto;
+    padding: 0 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-primary {
+    width: 100%;
+    height: 44px;
+    background-color: #0DB3A0;
+    border-radius: 8px;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .btn-secondary-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0DB3A0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  /* Android Gesture Bar */
+  .gesture-bar {
+    width: 72px;
+    height: 4px;
+    background-color: #E6EAED;
+    border-radius: 2px;
+    margin: 8px auto 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="board">
+
+  <!-- ================= SCREEN 1: PURCHASE CONFIRMED ================= -->
+  <div class="artboard screen-1">
+    <!-- Android Status Bar (24px) -->
+    <div class="status-bar">
+      <span class="status-time">09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3C7.5 3 3.75 4.9 1 8l11 13 11-13C20.25 4.9 16.5 3 12 3z"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 56px App Bar -->
+    <div class="app-bar">
+      <div class="back-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </div>
+      <div class="app-bar-title">Purchase status</div>
+    </div>
+
+    <!-- Content Body -->
+    <div class="content-body">
+      <!-- Status Chip -->
+      <div class="status-chip confirmed">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Confirmed
+      </div>
+
+      <h1 class="section-heading">Purchase confirmed</h1>
+      <p class="supporting-text">Your purchase has been confirmed by the authorised merchant.</p>
+
+      <!-- Points Summary -->
+      <div class="points-box">
+        <span class="points-label">Points added</span>
+        <span class="points-value">+240 PTS</span>
+        <span class="points-sub">Your customer points are now available.</span>
+      </div>
+
+      <!-- Purchase Summary Card -->
+      <div class="card">
+        <div class="card-row">
+          <span class="card-label">Product</span>
+          <span class="card-value">Eligible partner product</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Merchant</span>
+          <span class="card-value">Market Square</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Location</span>
+          <span class="card-value">Westlands</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Date & time</span>
+          <span class="card-value">Today, 14:20</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Reference</span>
+          <span class="card-value">KTK-240-8841</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions & Safe Bottom -->
+    <div class="screen-footer">
+      <button class="btn-primary">Done</button>
+      <a class="btn-secondary-link">View points activity</a>
+      <div class="gesture-bar"></div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 2: PRODUCT CODE ALREADY USED ================= -->
+  <div class="artboard screen-2">
+    <!-- Android Status Bar (24px) -->
+    <div class="status-bar">
+      <span class="status-time">09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3C7.5 3 3.75 4.9 1 8l11 13 11-13C20.25 4.9 16.5 3 12 3z"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 56px App Bar -->
+    <div class="app-bar">
+      <div class="back-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </div>
+      <div class="app-bar-title">Purchase status</div>
+    </div>
+
+    <!-- Content Body -->
+    <div class="content-body">
+      <!-- Status Chip -->
+      <div class="status-chip used">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        Already used
+      </div>
+
+      <h1 class="section-heading">This code has already been used</h1>
+      <p class="supporting-text">This product code was previously claimed and cannot be used again.</p>
+
+      <!-- Alert Explanation Card -->
+      <div class="alert-surface coral-light">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+        <div>
+          <div class="alert-title">No points were added</div>
+          <div class="alert-desc">Each participating product code can only be used once.</div>
+          <div class="alert-ref">Code status: Redeemed</div>
+        </div>
+      </div>
+
+      <!-- Detail Card -->
+      <div class="card">
+        <div class="card-row">
+          <span class="card-label">Product code</span>
+          <span class="card-value">AB7K-92M4</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Outlet check</span>
+          <span class="card-value">Authorised partner outlet</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Claim attempt</span>
+          <span class="card-value">Today, 14:21</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions & Safe Bottom -->
+    <div class="screen-footer">
+      <button class="btn-primary">Back to scan</button>
+      <a class="btn-secondary-link">Get help</a>
+      <div class="gesture-bar"></div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 3: PRODUCT CODE EXPIRED ================= -->
+  <div class="artboard screen-3">
+    <!-- Android Status Bar (24px) -->
+    <div class="status-bar">
+      <span class="status-time">09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3C7.5 3 3.75 4.9 1 8l11 13 11-13C20.25 4.9 16.5 3 12 3z"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 56px App Bar -->
+    <div class="app-bar">
+      <div class="back-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </div>
+      <div class="app-bar-title">Purchase status</div>
+    </div>
+
+    <!-- Content Body -->
+    <div class="content-body">
+      <!-- Status Chip -->
+      <div class="status-chip expired">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        Expired
+      </div>
+
+      <h1 class="section-heading">This code has expired</h1>
+      <p class="supporting-text">This product code is no longer active and cannot be claimed.</p>
+
+      <!-- Alert Explanation Card -->
+      <div class="alert-surface coral-light">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div>
+          <div class="alert-title">No points were added</div>
+          <div class="alert-desc">Try another eligible product or contact support if you believe this is incorrect.</div>
+          <div class="alert-ref">Code status: Expired</div>
+        </div>
+      </div>
+
+      <!-- Detail Card -->
+      <div class="card">
+        <div class="card-row">
+          <span class="card-label">Product code</span>
+          <span class="card-value">KL9X-41M8</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Campaign eligibility</span>
+          <span class="card-value">Batch concluded</span>
+        </div>
+        <div class="card-row">
+          <span class="card-label">Expiry date</span>
+          <span class="card-value">31 August 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions & Safe Bottom -->
+    <div class="screen-footer">
+      <button class="btn-primary">Back to scan</button>
+      <a class="btn-secondary-link">Get help</a>
+      <div class="gesture-bar"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

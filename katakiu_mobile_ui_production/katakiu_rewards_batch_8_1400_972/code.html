@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KataKiu Rewards Batch 8 (1400 × 972)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: #F5F7F8;
+      font-family: 'Inter', sans-serif;
+      color: #071724;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 1400 x 972 Presentation Board */
+    .presentation-board {
+      width: 1400px;
+      height: 972px;
+      background-color: #F5F7F8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Common Mobile Artboard: exactly 390 x 844 px */
+    .mobile-artboard {
+      width: 390px;
+      height: 844px;
+      background-color: #FFFFFF;
+      position: absolute;
+      top: 64px;
+      border-radius: 0px;
+      box-shadow: 0 4px 20px rgba(7, 23, 36, 0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Positions */
+    #artboard-1 { left: 67px; }
+    #artboard-2 { left: 505px; }
+    #artboard-3 { left: 943px; }
+
+    /* Top Safe Area & Status Bar (24px) */
+    .status-bar {
+      height: 24px;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 500;
+      color: #071724;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 56px Professional App Bar */
+    .app-bar {
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #E6EAED;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .app-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-bar-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #071724;
+      letter-spacing: -0.1px;
+    }
+    .app-bar-action-icon {
+      color: #071724;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Screen Content Scrollable Container */
+    .screen-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Typography & Hierarchy */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #071724;
+      line-height: 1.3;
+      letter-spacing: -0.2px;
+      margin-bottom: 4px;
+    }
+    .supporting-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: #66737D;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    /* Points Summary Surfaces */
+    .points-summary-card {
+      background-color: #071724;
+      border-radius: 8px;
+      padding: 16px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .points-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #7AE1D6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .points-val-large {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .pending-badge {
+      background-color: rgba(255, 181, 71, 0.16);
+      border: 1px solid rgba(255, 181, 71, 0.35);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #FFB547;
+      white-space: nowrap;
+    }
+
+    /* Status Chips */
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .chip-teal {
+      background-color: #E8F7F5;
+      color: #0DB3A0;
+      border: 1px solid rgba(13, 179, 160, 0.2);
+    }
+    .chip-amber {
+      background-color: #FFF7EB;
+      color: #D98200;
+      border: 1px solid rgba(255, 181, 71, 0.3);
+    }
+
+    /* Reward Items / Rows */
+    .reward-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .reward-row {
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.15s ease;
+    }
+    .reward-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background-color: #F0FAF9;
+      color: #0DB3A0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .reward-details {
+      flex: 1;
+      min-width: 0;
+    }
+    .reward-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #071724;
+      line-height: 1.3;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .reward-desc {
+      font-size: 11px;
+      font-weight: 400;
+      color: #66737D;
+      line-height: 1.3;
+    }
+    .reward-cost-tag {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .cost-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0DB3A0;
+    }
+
+    /* Key-Value Breakdown Card */
+    .info-card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #F0F4F7;
+      font-size: 12px;
+    }
+    .kv-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .kv-row:first-child {
+      padding-top: 0;
+    }
+    .kv-key {
+      color: #66737D;
+      font-weight: 400;
+    }
+    .kv-val {
+      color: #071724;
+      font-weight: 500;
+    }
+    .kv-val-teal {
+      color: #0DB3A0;
+      font-weight: 600;
+    }
+    .kv-val-coral {
+      color: #EF6A6A;
+      font-weight: 600;
+    }
+
+    /* Supporting Aqua / Light Notice Surface */
+    .notice-surface {
+      background-color: #F0FAF9;
+      border: 1px solid rgba(13, 179, 160, 0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .notice-icon {
+      color: #0DB3A0;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .notice-text {
+      font-size: 11px;
+      font-weight: 400;
+      color: #071724;
+      line-height: 1.45;
+    }
+
+    /* Security / Policy Guidance Card */
+    .policy-card {
+      background-color: #F5F7F8;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+    }
+    .policy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      color: #66737D;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .policy-item:last-child {
+      margin-bottom: 0;
+    }
+    .policy-bullet {
+      color: #0DB3A0;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    /* CTA Buttons */
+    .btn-primary {
+      width: 100%;
+      height: 48px;
+      background-color: #0DB3A0;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-secondary-link {
+      background: none;
+      border: none;
+      color: #0DB3A0;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      padding: 12px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+    }
+    .btn-outlined {
+      width: 100%;
+      height: 48px;
+      background-color: transparent;
+      color: #071724;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Bottom Navigation Bar (Screen 1 only) */
+    .bottom-nav {
+      height: 56px;
+      background-color: #FFFFFF;
+      border-top: 1px solid #E6EAED;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-shrink: 0;
+      padding: 0 16px;
+      z-index: 10;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #66737D;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+    }
+    .nav-item.active {
+      color: #0DB3A0;
+    }
+    .nav-icon {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Android Bottom Safe Indicator (24px) */
+    .bottom-safe-area {
+      height: 24px;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .gesture-bar {
+      width: 72px;
+      height: 4px;
+      background-color: #E6EAED;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="presentation-board">
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 1: REWARDS LIST (x = 67px, y = 64px) -->
+    <!-- ========================================================================= -->
+    <div class="mobile-artboard" id="artboard-1">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <!-- Cellular -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 14c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+          <!-- Wifi -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.8 1.34 9.27 3.55L12 18.25 2.73 11.05C5.2 8.84 8.45 7.5 12 7.5z"/></svg>
+          <!-- Battery -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar (56px) -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <div class="app-bar-title">Rewards</div>
+        </div>
+        <div class="app-bar-action-icon" title="Points History">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Screen Content -->
+      <div class="screen-content">
+        <div class="section-title">Rewards for you</div>
+        <div class="supporting-text">Use your available points on practical rewards.</div>
+
+        <!-- Compact Points Summary Card -->
+        <div class="points-summary-card">
+          <div>
+            <div class="points-label">AVAILABLE POINTS</div>
+            <div class="points-val-large">1,840 PTS</div>
+          </div>
+          <div class="pending-badge">240 pending</div>
+        </div>
+
+        <!-- Reward Rows (Exactly 3) -->
+        <div class="reward-list">
+          <!-- Reward 1 -->
+          <div class="reward-row">
+            <div class="reward-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="7" cy="17" r="2"></circle>
+                <circle cx="17" cy="17" r="2"></circle>
+                <path d="M5 11l2-6h10l2 6"></path>
+              </svg>
+            </div>
+            <div class="reward-details">
+              <div class="reward-name">Safe Ride voucher</div>
+              <div class="reward-desc">KES 500 travel voucher</div>
+            </div>
+            <div class="reward-cost-tag">
+              <div class="cost-val">900 PTS</div>
+              <div class="status-chip chip-teal">Available</div>
+            </div>
+          </div>
+
+          <!-- Reward 2 -->
+          <div class="reward-row">
+            <div class="reward-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+            <div class="reward-details">
+              <div class="reward-name">Shopping voucher</div>
+              <div class="reward-desc">KES 300 partner voucher</div>
+            </div>
+            <div class="reward-cost-tag">
+              <div class="cost-val">600 PTS</div>
+              <div class="status-chip chip-teal">Available</div>
+            </div>
+          </div>
+
+          <!-- Reward 3 -->
+          <div class="reward-row">
+            <div class="reward-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div class="reward-details">
+              <div class="reward-name">Partner merchandise</div>
+              <div class="reward-desc">Limited partner item</div>
+            </div>
+            <div class="reward-cost-tag">
+              <div class="cost-val">1,500 PTS</div>
+              <div class="status-chip chip-teal">Available</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px;" class="notice-surface">
+          <div class="notice-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <div class="notice-text">Points reflect verified eligible retail purchases. Rewards must be redeemed at participating partner outlets.</div>
+        </div>
+      </div>
+
+      <!-- Customer Bottom Navigation (Account active) -->
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <span>Home</span>
+        </div>
+        <!-- Scan has NO amber dot, NO badge, NO marker -->
+        <div class="nav-item">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <span>Scan</span>
+        </div>
+        <div class="nav-item active">
+          <div class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span>Account</span>
+        </div>
+      </div>
+
+      <!-- Safe Gesture Area -->
+      <div class="bottom-safe-area">
+        <div class="gesture-bar"></div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 2: REWARD DETAILS (x = 505px, y = 64px) -->
+    <!-- ========================================================================= -->
+    <div class="mobile-artboard" id="artboard-2">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 14c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.8 1.34 9.27 3.55L12 18.25 2.73 11.05C5.2 8.84 8.45 7.5 12 7.5z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar (56px) with Back Arrow -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <div class="app-bar-action-icon" title="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </div>
+          <div class="app-bar-title">Reward details</div>
+        </div>
+      </div>
+
+      <!-- Screen Content (No bottom nav) -->
+      <div class="screen-content">
+        <!-- Header Profile of Reward -->
+        <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px;">
+          <div class="reward-icon-box" style="width: 52px; height: 52px; background-color: #F0FAF9;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+              <circle cx="7" cy="17" r="2"></circle>
+              <circle cx="17" cy="17" r="2"></circle>
+              <path d="M5 11l2-6h10l2 6"></path>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <div class="section-title" style="margin-bottom: 0;">Safe Ride voucher</div>
+              <div class="status-chip chip-teal">Available</div>
+            </div>
+            <div style="font-size: 12px; color: #66737D; font-weight: 400;">KES 500 travel voucher</div>
+          </div>
+        </div>
+
+        <!-- Points Calculation Card -->
+        <div class="info-card">
+          <div style="font-size: 11px; font-weight: 600; color: #071724; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px;">
+            Points calculation
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Available points</span>
+            <span class="kv-val">1,840 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Reward cost</span>
+            <span class="kv-val-teal">-900 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Remaining points</span>
+            <span class="kv-val" style="font-weight: 700; color: #071724;">940 PTS</span>
+          </div>
+          <div class="kv-row" style="background-color: #FAFBFB; margin: 4px -8px -8px -8px; padding: 8px; border-radius: 6px; border-bottom: none;">
+            <span class="kv-key" style="font-size: 11px;">Pending balance</span>
+            <span class="pending-badge" style="padding: 2px 6px; font-size: 10px;">240 pending</span>
+          </div>
+        </div>
+
+        <!-- Information & Guidelines Surface -->
+        <div class="policy-card">
+          <div class="policy-item">
+            <span class="policy-bullet">•</span>
+            <span>Use at authorised participating partners.</span>
+          </div>
+          <div class="policy-item">
+            <span class="policy-bullet">•</span>
+            <span>Reward availability may vary by campaign.</span>
+          </div>
+          <div class="policy-item">
+            <span class="policy-bullet">•</span>
+            <span>Points are reserved only after you confirm redemption.</span>
+          </div>
+        </div>
+
+        <!-- Push Actions to Bottom -->
+        <div style="margin-top: auto;">
+          <button class="btn-primary">
+            <span>Redeem for 900 PTS</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button class="btn-secondary-link">Back to rewards</button>
+        </div>
+      </div>
+
+      <!-- Safe Gesture Area -->
+      <div class="bottom-safe-area">
+        <div class="gesture-bar"></div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- SCREEN 3: REDEEM CONFIRMATION (x = 943px, y = 64px) -->
+    <!-- ========================================================================= -->
+    <div class="mobile-artboard" id="artboard-3">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="status-bar-icons">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 14c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.55 0 6.8 1.34 9.27 3.55L12 18.25 2.73 11.05C5.2 8.84 8.45 7.5 12 7.5z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+        </div>
+      </div>
+
+      <!-- App Bar (56px) with Back Arrow -->
+      <div class="app-bar">
+        <div class="app-bar-left">
+          <div class="app-bar-action-icon" title="Back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </div>
+          <div class="app-bar-title">Confirm redemption</div>
+        </div>
+      </div>
+
+      <!-- Screen Content (No bottom nav) -->
+      <div class="screen-content">
+        <div class="section-title">Redeem Safe Ride voucher?</div>
+        <div class="supporting-text">Confirm reserving points for this partner voucher.</div>
+
+        <!-- Selected Reward Overview Box -->
+        <div class="reward-row" style="margin-bottom: 16px;">
+          <div class="reward-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+              <circle cx="7" cy="17" r="2"></circle>
+              <circle cx="17" cy="17" r="2"></circle>
+              <path d="M5 11l2-6h10l2 6"></path>
+            </svg>
+          </div>
+          <div class="reward-details">
+            <div class="reward-name">Safe Ride voucher</div>
+            <div class="reward-desc">Reward value: KES 500</div>
+          </div>
+          <div class="reward-cost-tag">
+            <div class="cost-val" style="font-size: 14px;">900 PTS</div>
+          </div>
+        </div>
+
+        <!-- Compact Confirmation Balance Summary -->
+        <div class="info-card" style="margin-bottom: 14px;">
+          <div class="kv-row">
+            <span class="kv-key">Available points</span>
+            <span class="kv-val">1,840 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Reward cost</span>
+            <span class="kv-val-coral">-900 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Remaining available points</span>
+            <span class="kv-val-teal" style="font-size: 13px;">940 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Pending points</span>
+            <span class="kv-val" style="color: #66737D;">240 pending</span>
+          </div>
+        </div>
+
+        <!-- Process Explainer Notice -->
+        <div class="notice-surface" style="margin-bottom: 12px;">
+          <div class="notice-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="notice-text">
+            Your points will be reserved while the reward is confirmed. A one-time reward voucher will be created next.
+          </div>
+        </div>
+
+        <!-- Security & Usage Note -->
+        <div style="font-size: 11px; color: #66737D; line-height: 1.4; padding: 0 4px; margin-bottom: 16px;">
+          Use the voucher only at an authorised participating partner. Points cannot be reclaimed once verified by merchant.
+        </div>
+
+        <!-- Push Actions to Bottom -->
+        <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
+          <button class="btn-primary">Confirm redemption</button>
+          <button class="btn-outlined">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Safe Gesture Area -->
+      <div class="bottom-safe-area">
+        <div class="gesture-bar"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

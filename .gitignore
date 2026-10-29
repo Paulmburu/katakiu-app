@@ -1,0 +1,19 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+.idea/
+# local flavour config (LAN IPs, never secrets in git)
+config/*.local.json
+# signing and credentials — never commit
+*.jks
+*.keystore
+key.properties
+android/key.properties
+*.p12
+*.mobileprovision
+# OS
+.DS_Store

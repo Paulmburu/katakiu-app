@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KataKiu Customer Mobile Test Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      background-color: #2D3748;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Neutral presentation staging board exactly 1,362px x 940px */
+    .board-container {
+      width: 1362px;
+      height: 940px;
+      background-color: #F5F7F8;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Exact mobile artboard container: 390px x 844px */
+    .artboard {
+      width: 390px;
+      height: 844px;
+      background-color: #FFFFFF;
+      position: absolute;
+      top: 48px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #E6EAED;
+    }
+
+    /* Screen exact coordinates */
+    #ktk-screen-available { left: 48px; }
+    #ktk-screen-zero { left: 486px; }
+    #ktk-screen-pending { left: 924px; }
+
+    /* Mobile Android Status Bar (24px safe area) */
+    .status-bar {
+      height: 24px;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #071724;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .status-bar .icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-bar svg {
+      fill: #071724;
+    }
+
+    /* Fixed App Bar (exactly 56px height) */
+    .app-bar {
+      height: 56px;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #E6EAED;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: block;
+      object-fit: cover;
+    }
+    .brand-wordmark {
+      font-size: 14px;
+      font-weight: 500;
+      color: #071724;
+      letter-spacing: -0.1px;
+    }
+    .bell-icon-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: #071724;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Screen Scrollable Body */
+    .screen-content {
+      flex: 1;
+      overflow-y: hidden;
+      padding: 16px 24px 0 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Customer Greeting Header */
+    .customer-meta {
+      font-size: 11px;
+      font-weight: 400;
+      color: #66737D;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .greeting-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #071724;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .greeting-desc {
+      font-size: 12px;
+      font-weight: 400;
+      color: #66737D;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      min-height: 16px;
+    }
+
+    /* Points Summary Card (Midnight Surface #071724, fixed height: 116px) */
+    .points-card {
+      background-color: #071724;
+      border-radius: 8px;
+      padding: 16px;
+      height: 116px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      margin-bottom: 16px;
+    }
+    .points-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .points-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: #7AE1D6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-chip-pending {
+      background-color: rgba(255, 181, 71, 0.18);
+      border: 1px solid rgba(255, 181, 71, 0.4);
+      color: #FFB547;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .points-card-mid {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .points-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.2px;
+    }
+    .points-card-bottom {
+      font-size: 11px;
+      font-weight: 400;
+      color: #7AE1D6;
+      opacity: 0.85;
+    }
+
+    /* Action Buttons Area */
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .btn-primary {
+      height: 40px;
+      background-color: #0DB3A0;
+      border-radius: 8px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-secondary {
+      height: 40px;
+      background-color: #FFFFFF;
+      border-radius: 8px;
+      border: 1px solid #E6EAED;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #071724;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Middle Informational or Empty Surface (Screen 2 & 3) */
+    .state-banner {
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .state-banner.aqua {
+      background-color: #F0FAF9;
+      border: 1px solid #7AE1D6;
+    }
+    .state-banner.neutral {
+      background-color: #F5F7F8;
+      border: 1px solid #E6EAED;
+    }
+    .banner-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .banner-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #071724;
+    }
+    .banner-desc {
+      font-size: 11px;
+      font-weight: 400;
+      color: #66737D;
+      line-height: 1.35;
+    }
+    .banner-meta {
+      font-size: 11px;
+      font-weight: 500;
+      color: #FFB547;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Section Area */
+    .section-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #071724;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    /* List Rows */
+    .list-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .list-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background-color: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .row-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .row-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #071724;
+      line-height: 1.2;
+    }
+    .row-meta {
+      font-size: 11px;
+      font-weight: 400;
+      color: #66737D;
+      line-height: 1.2;
+    }
+    .row-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .points-earned {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0DB3A0;
+    }
+    .points-pending-val {
+      font-size: 12px;
+      font-weight: 600;
+      color: #FFB547;
+    }
+    .points-redeemed {
+      font-size: 12px;
+      font-weight: 600;
+      color: #EF6A6A;
+    }
+
+    /* How it works steps (Screen 2) */
+    .step-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background-color: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .step-number {
+      width: 20px;
+      height: 20px;
+      background-color: #F5F7F8;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #071724;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: #071724;
+    }
+
+    /* Fixed Bottom Navigation (exact 3 destinations, height: 56px) */
+    .bottom-nav {
+      height: 56px;
+      background-color: #FFFFFF;
+      border-top: 1px solid #E6EAED;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      height: 100%;
+    }
+    .nav-item.active svg {
+      stroke: #0DB3A0;
+      fill: none;
+    }
+    .nav-item.active span {
+      color: #0DB3A0;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .nav-item.inactive svg {
+      stroke: #66737D;
+      fill: none;
+    }
+    .nav-item.inactive span {
+      color: #66737D;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    /* Scan item with subtle Amber accent border on icon or dot */
+    .scan-icon-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scan-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: #FFB547;
+      border-radius: 50%;
+      top: -2px;
+      right: -2px;
+    }
+
+    /* Android Bottom Gesture Area (24px safe area) */
+    .gesture-bar {
+      height: 24px;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .gesture-indicator {
+      width: 72px;
+      height: 4px;
+      background-color: #071724;
+      opacity: 0.2;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Board: Exactly 1,362px x 940px, Background #F5F7F8 -->
+  <div class="board-container">
+
+    <!-- ========================================== -->
+    <!-- SCREEN 1: KTK_Home_Available (x=48, y=48)  -->
+    <!-- ========================================== -->
+    <div class="artboard" id="ktk-screen-available">
+      
+      <!-- Top Safe Area (24px) -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="icons">
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 9.5H3V1.5H1V9.5ZM5 9.5H7V4.5H5V9.5ZM9 9.5H11V6.5H9V9.5ZM13 9.5H15V0H13V9.5Z" fill="#071724"/></svg>
+          <svg width="12" height="11" viewBox="0 0 12 11" fill="none"><path d="M6 1.5C3.5 1.5 1.4 2.6 0 4.2L6 10.5L12 4.2C10.6 2.6 8.5 1.5 6 1.5Z" fill="#071724"/></svg>
+          <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><rect x="0.5" y="0.5" width="14" height="9" rx="2" stroke="#071724"/><path d="M16 3.5V6.5" stroke="#071724" stroke-linecap="round"/><rect x="2" y="2" width="10" height="6" rx="1" fill="#071724"/></svg>
+        </div>
+      </div>
+
+      <!-- Shared App Bar (56px) -->
+      <header class="app-bar">
+        <div class="brand-cluster">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuArEMxlinPpi10eA1oW-nE11QS6JaoOGN1aOM0ZP86MXNNfNlbko24-QlgehLBTcE1CM2kmUDXKMTmwBoEKPB7o4zAh6gOPAcRTIOkslc5kHYzL33zcwob6N3SroyFLw73gt5lw30nt2HQMI9dfkzr9TfQtueaLWr3BGwUUhc6qZksamrkbC-Jr48DT2H1iMykmHbiZ0zVhtcg6kVBXN3QV6G_5rjC6JS73Uc1Q15zdMA-U9XG2F7fn-3d8r9K5SJSbWA" alt="KataKiu" class="logo-badge" />
+          <span class="brand-wordmark">KataKiu</span>
+        </div>
+        <button class="bell-icon-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Main Body Content -->
+      <div class="screen-content">
+        <!-- Customer Greeting -->
+        <div class="customer-meta">CUSTOMER MEMBER</div>
+        <div class="greeting-title">Habari, Amina</div>
+        <div class="greeting-desc">Your rewards are ready when you are.</div>
+
+        <!-- Points Summary Card (116px fixed) -->
+        <div class="points-card">
+          <div class="points-card-top">
+            <span class="points-label">AVAILABLE POINTS</span>
+            <div class="status-chip-pending">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>240 pending</span>
+            </div>
+          </div>
+          <div class="points-card-mid">
+            <span class="points-val">1,840 PTS</span>
+          </div>
+          <div class="points-card-bottom">Available balance</div>
+        </div>
+
+        <!-- Actions -->
+        <div class="action-group">
+          <button class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+              <line x1="7" y1="12" x2="17" y2="12"></line>
+            </svg>
+            <span>Scan to earn</span>
+          </button>
+          <button class="btn-secondary">
+            <span>Show my pass</span>
+          </button>
+        </div>
+
+        <!-- Recent Activity (Exactly 3 rows) -->
+        <div class="section-container">
+          <div class="section-title">Recent activity</div>
+          <div class="list-wrapper">
+            <div class="list-row">
+              <div class="row-left">
+                <span class="row-title">Purchase confirmed</span>
+                <span class="row-meta">Market Square • Today, 14:20</span>
+              </div>
+              <div class="row-right">
+                <span class="points-earned">+240 PTS</span>
+              </div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">
+                <span class="row-title">Points pending</span>
+                <span class="row-meta">Westlands outlet • Today, 13:48</span>
+              </div>
+              <div class="row-right">
+                <span class="points-pending-val">+120 PTS</span>
+              </div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">
+                <span class="row-title">Reward redeemed</span>
+                <span class="row-meta">Safe Ride • Yesterday</span>
+              </div>
+              <div class="row-right">
+                <span class="points-redeemed">-900 PTS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shared Bottom Navigation (56px) -->
+      <nav class="bottom-nav">
+        <div class="nav-item active">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Home</span>
+        </div>
+        <div class="nav-item inactive">
+          <div class="scan-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <div class="scan-dot"></div>
+          </div>
+          <span>Scan</span>
+        </div>
+        <div class="nav-item inactive">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Account</span>
+        </div>
+      </nav>
+
+      <!-- Bottom Gesture Safe Area (24px) -->
+      <div class="gesture-bar">
+        <div class="gesture-indicator"></div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: KTK_Home_Zero (x=486, y=48)      -->
+    <!-- ========================================== -->
+    <div class="artboard" id="ktk-screen-zero">
+      
+      <!-- Top Safe Area (24px) -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="icons">
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 9.5H3V1.5H1V9.5ZM5 9.5H7V4.5H5V9.5ZM9 9.5H11V6.5H9V9.5ZM13 9.5H15V0H13V9.5Z" fill="#071724"/></svg>
+          <svg width="12" height="11" viewBox="0 0 12 11" fill="none"><path d="M6 1.5C3.5 1.5 1.4 2.6 0 4.2L6 10.5L12 4.2C10.6 2.6 8.5 1.5 6 1.5Z" fill="#071724"/></svg>
+          <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><rect x="0.5" y="0.5" width="14" height="9" rx="2" stroke="#071724"/><path d="M16 3.5V6.5" stroke="#071724" stroke-linecap="round"/><rect x="2" y="2" width="10" height="6" rx="1" fill="#071724"/></svg>
+        </div>
+      </div>
+
+      <!-- Shared App Bar (56px) -->
+      <header class="app-bar">
+        <div class="brand-cluster">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtMmXIHGI3dX1xUIjnaLg1l2Yu-OUymwNPlmZIinrepzAApgyXANLdsKWEzwPIZ7cQPtu98nAuAlFDZMei1FJ5DEL82jad91DE7JMjKiMfgl6PT4dM2jkmt5ugz6NlAfpshghTW2QxN9ikkFeLZEAKHjPiWmJmo6mOd-eyRVMa0KdMfSgSQdXsYb1UKGieN7Qn4fNLpfvUbfkL0VQR8P826xigG8wBdd0wEwS7nUOd_3T9u2BTAvsr9tbC_2bgkh-1Mg" alt="KataKiu" class="logo-badge" />
+          <span class="brand-wordmark">KataKiu</span>
+        </div>
+        <button class="bell-icon-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Main Body Content -->
+      <div class="screen-content">
+        <!-- Customer Greeting -->
+        <div class="customer-meta">CUSTOMER MEMBER</div>
+        <div class="greeting-title">Habari, Amina</div>
+        <div class="greeting-desc">Start earning from your next eligible purchase.</div>
+
+        <!-- Points Summary Card (116px fixed, zero points, no pending chip) -->
+        <div class="points-card">
+          <div class="points-card-top">
+            <span class="points-label">AVAILABLE POINTS</span>
+          </div>
+          <div class="points-card-mid">
+            <span class="points-val">0 PTS</span>
+          </div>
+          <div class="points-card-bottom">Available balance</div>
+        </div>
+
+        <!-- Empty-state surface banner -->
+        <div class="state-banner neutral">
+          <div class="banner-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="8" y1="10" x2="16" y2="10"></line>
+              <line x1="8" y1="14" x2="12" y2="14"></line>
+            </svg>
+            <span class="banner-title">Scan your first purchase</span>
+          </div>
+          <div class="banner-desc">Scan an eligible purchase from an authorised outlet to start earning points.</div>
+        </div>
+
+        <!-- Action -->
+        <div class="action-group">
+          <button class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+              <line x1="7" y1="12" x2="17" y2="12"></line>
+            </svg>
+            <span>Scan purchase</span>
+          </button>
+        </div>
+
+        <!-- How Earning Works (Exactly 3 compact steps) -->
+        <div class="section-container">
+          <div class="section-title">How earning works</div>
+          <div class="list-wrapper">
+            <div class="step-row">
+              <div class="step-number">1</div>
+              <span class="step-text">Buy an eligible product</span>
+            </div>
+            <div class="step-row">
+              <div class="step-number">2</div>
+              <span class="step-text">Reveal and scan the code</span>
+            </div>
+            <div class="step-row">
+              <div class="step-number">3</div>
+              <span class="step-text">Confirm the purchase with the merchant</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shared Bottom Navigation (56px) -->
+      <nav class="bottom-nav">
+        <div class="nav-item active">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Home</span>
+        </div>
+        <div class="nav-item inactive">
+          <div class="scan-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <div class="scan-dot"></div>
+          </div>
+          <span>Scan</span>
+        </div>
+        <div class="nav-item inactive">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Account</span>
+        </div>
+      </nav>
+
+      <!-- Bottom Gesture Safe Area (24px) -->
+      <div class="gesture-bar">
+        <div class="gesture-indicator"></div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: KTK_Home_Pending (x=924, y=48)   -->
+    <!-- ========================================== -->
+    <div class="artboard" id="ktk-screen-pending">
+      
+      <!-- Top Safe Area (24px) -->
+      <div class="status-bar">
+        <span>09:41</span>
+        <div class="icons">
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 9.5H3V1.5H1V9.5ZM5 9.5H7V4.5H5V9.5ZM9 9.5H11V6.5H9V9.5ZM13 9.5H15V0H13V9.5Z" fill="#071724"/></svg>
+          <svg width="12" height="11" viewBox="0 0 12 11" fill="none"><path d="M6 1.5C3.5 1.5 1.4 2.6 0 4.2L6 10.5L12 4.2C10.6 2.6 8.5 1.5 6 1.5Z" fill="#071724"/></svg>
+          <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><rect x="0.5" y="0.5" width="14" height="9" rx="2" stroke="#071724"/><path d="M16 3.5V6.5" stroke="#071724" stroke-linecap="round"/><rect x="2" y="2" width="10" height="6" rx="1" fill="#071724"/></svg>
+        </div>
+      </div>
+
+      <!-- Shared App Bar (56px) -->
+      <header class="app-bar">
+        <div class="brand-cluster">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-0OdcozdzRhF9scuMg48pT2fUq7Y3F9d3tra_Rx5MOIPFKCJUhHjZWPAHCDR4iFT3Do2qqqyXYbAwkT4w_eCSIRBZVl8bRIIncbBzCAeCWWxcIiadZPwkh_HNVtynM_gVtPtblcHtstMy6ddMJ-5BVzcgZkMhP-74L19rLI4sv_TzWn7FJiXFlI_XdyZjOAwMkeCflvmf5B63_GfvQuB41r6MasPSeO5Rx6FpGzA8AkOgeVjoaXvO52v5BlSIcAKD6w" alt="KataKiu" class="logo-badge" />
+          <span class="brand-wordmark">KataKiu</span>
+        </div>
+        <button class="bell-icon-btn" aria-label="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#071724" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Main Body Content -->
+      <div class="screen-content">
+        <!-- Customer Greeting -->
+        <div class="customer-meta">CUSTOMER MEMBER</div>
+        <div class="greeting-title">Habari, Amina</div>
+        <div class="greeting-desc">Your latest purchase is being confirmed.</div>
+
+        <!-- Points Summary Card (116px fixed, with pending chip) -->
+        <div class="points-card">
+          <div class="points-card-top">
+            <span class="points-label">AVAILABLE POINTS</span>
+            <div class="status-chip-pending">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>240 pending</span>
+            </div>
+          </div>
+          <div class="points-card-mid">
+            <span class="points-val">1,840 PTS</span>
+          </div>
+          <div class="points-card-bottom">Available balance</div>
+        </div>
+
+        <!-- Pending information surface banner (Aqua background #F0FAF9, Amber metadata accent) -->
+        <div class="state-banner aqua">
+          <div class="banner-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span class="banner-title">Pending verification</span>
+          </div>
+          <div class="banner-desc">Points become available after the merchant confirms the purchase.</div>
+          <div class="banner-meta">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Estimated review: a few minutes</span>
+          </div>
+        </div>
+
+        <!-- Action -->
+        <div class="action-group">
+          <button class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+              <line x1="7" y1="12" x2="17" y2="12"></line>
+            </svg>
+            <span>Scan to earn</span>
+          </button>
+        </div>
+
+        <!-- Recent Activity (Exactly 2 rows) -->
+        <div class="section-container">
+          <div class="section-title">Recent activity</div>
+          <div class="list-wrapper">
+            <div class="list-row">
+              <div class="row-left">
+                <span class="row-title">Purchase confirmation pending</span>
+                <span class="row-meta">Market Square • Today, 14:20</span>
+              </div>
+              <div class="row-right">
+                <span class="points-pending-val">+240 PTS</span>
+              </div>
+            </div>
+            <div class="list-row">
+              <div class="row-left">
+                <span class="row-title">Purchase confirmed</span>
+                <span class="row-meta">Westlands outlet • Today, 13:48</span>
+              </div>
+              <div class="row-right">
+                <span class="points-earned">+120 PTS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shared Bottom Navigation (56px) -->
+      <nav class="bottom-nav">
+        <div class="nav-item active">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Home</span>
+        </div>
+        <div class="nav-item inactive">
+          <div class="scan-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <div class="scan-dot"></div>
+          </div>
+          <span>Scan</span>
+        </div>
+        <div class="nav-item inactive">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Account</span>
+        </div>
+      </nav>
+
+      <!-- Bottom Gesture Safe Area (24px) -->
+      <div class="gesture-bar">
+        <div class="gesture-indicator"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KataKiu Activity Batch 3 (1400 × 972)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F5F7F8;
+    color: #071724;
+    width: 1400px;
+    height: 972px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Board Artboards Placement */
+  .artboard {
+    position: absolute;
+    top: 64px;
+    width: 390px;
+    height: 844px;
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    border-radius: 0px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screen-1 { left: 67px; }
+  .screen-2 { left: 505px; }
+  .screen-3 { left: 943px; }
+
+  /* Android System Bar */
+  .status-bar {
+    height: 24px;
+    padding: 4px 24px 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 500;
+    color: #071724;
+    background-color: #FFFFFF;
+    z-index: 10;
+  }
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-icons svg {
+    display: block;
+  }
+
+  /* App Bar */
+  .app-bar {
+    height: 56px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6EAED;
+    z-index: 10;
+  }
+  .app-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .app-bar-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #071724;
+    line-height: 20px;
+  }
+  .icon-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #071724;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Screen Content Canvas */
+  .screen-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+  }
+
+  /* Gesture / Safe Area Bottom */
+  .gesture-bar {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    z-index: 10;
+  }
+  .gesture-pill {
+    width: 72px;
+    height: 4px;
+    background-color: #071724;
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav {
+    height: 56px;
+    border-top: 1px solid #E6EAED;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 16px;
+    z-index: 10;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    width: 64px;
+  }
+  .nav-item span {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+  }
+  .nav-item.active {
+    color: #0DB3A0;
+  }
+  .nav-item.inactive {
+    color: #66737D;
+  }
+
+  /* Shared Typography & Badge */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: 0.5px;
+  }
+  .chip-offline {
+    background-color: #F5F7F8;
+    color: #66737D;
+    border: 1px solid #E6EAED;
+  }
+  .chip-coral {
+    background-color: #FEF2F2;
+    color: #EF6A6A;
+  }
+  .chip-teal {
+    background-color: #E6F8F5;
+    color: #0DB3A0;
+  }
+  .chip-aqua {
+    background-color: #EEFAF8;
+    color: #0DB3A0;
+  }
+  .chip-amber {
+    background-color: #FFF8EB;
+    color: #B37400;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .btn-teal {
+    background-color: #0DB3A0;
+    color: #FFFFFF;
+    border: none;
+  }
+  .btn-outlined {
+    background-color: #FFFFFF;
+    color: #071724;
+    border: 1px solid #E6EAED;
+  }
+
+  /* Identity Block */
+  .identity-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .label-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .customer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #071724;
+    letter-spacing: 0.5px;
+  }
+  .member-id {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    margin-top: 2px;
+  }
+
+  /* Points Summary Mini */
+  .points-box {
+    background-color: #F5F7F8;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .points-box-val {
+    font-size: 22px;
+    font-weight: 700;
+    color: #071724;
+    line-height: 26px;
+  }
+  .points-box-lbl {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+
+  /* SCREEN 1 SPECIFICS: OFFLINE PASS */
+  .qr-placeholder-area {
+    width: 216px;
+    height: 216px;
+    margin: 0 auto 20px auto;
+    border-radius: 8px;
+    background-color: #F5F7F8;
+    border: 1px dashed #CED4DA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+  .offline-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #FFFFFF;
+    border: 1px solid #E6EAED;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: #66737D;
+  }
+  .offline-heading {
+    font-size: 14px;
+    font-weight: 600;
+    color: #071724;
+    margin-bottom: 6px;
+  }
+  .offline-desc {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 16px;
+  }
+  .offline-notice-box {
+    background-color: #F5F7F8;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .notice-text {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+    line-height: 16px;
+  }
+
+  /* SCREEN 2 SPECIFICS: ACTIVITY LIST */
+  .balance-strip {
+    background-color: #071724;
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .balance-strip .pts {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 26px;
+  }
+  .balance-strip .lbl {
+    font-size: 11px;
+    font-weight: 400;
+    color: #7AE1D6;
+    margin-bottom: 2px;
+  }
+  .pending-pill {
+    background-color: rgba(255, 181, 71, 0.16);
+    color: #FFB547;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 181, 71, 0.3);
+  }
+
+  /* Segmented Controls */
+  .seg-control {
+    display: flex;
+    background-color: #F5F7F8;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .seg-tab {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    color: #66737D;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .seg-tab.active {
+    background-color: #FFFFFF;
+    color: #071724;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  /* Activity Item Rows */
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .activity-item {
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .act-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #071724;
+    margin-bottom: 2px;
+  }
+  .act-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: #66737D;
+  }
+  .act-right {
+    text-align: right;
+  }
+  .act-pts {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .pts-earned { color: #0DB3A0; }
+  .pts-pending { color: #071724; }
+  .pts-deducted { color: #EF6A6A; }
+
+  /* SCREEN 3 SPECIFICS: TRANSACTION DETAILS */
+  .detail-card {
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    margin-bottom: 16px;
+  }
+  .detail-header {
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E6EAED;
+    margin-bottom: 16px;
+  }
+  .icon-check-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background-color: #E6F8F5;
+    color: #0DB3A0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .tx-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #071724;
+    margin-bottom: 4px;
+  }
+  .tx-amount {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0DB3A0;
+    margin-top: 4px;
+  }
+
+  .kv-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .kv-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .kv-key {
+    color: #66737D;
+    font-weight: 400;
+  }
+  .kv-val {
+    color: #071724;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .explainer-box {
+    background-color: #F5F7F8;
+    border: 1px solid #E6EAED;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= SCREEN 1: OFFLINE VIRTUAL PASS ================= -->
+  <div class="artboard screen-1">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z" opacity="0.4"/>
+          <line x1="2" y1="2" x2="22" y2="22" stroke="#EF6A6A" stroke-width="2.5" />
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7v18h10V4z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="app-bar-title">My KataKiu Pass</div>
+      </div>
+      <div class="icon-btn" style="color: #66737D;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Identity Block (Identical to Batches 2 and previous) -->
+      <div class="identity-card">
+        <div>
+          <div class="label-sub">CUSTOMER IDENTITY</div>
+          <div class="customer-name">AMINA MWANGI</div>
+          <div class="member-id">Member ID: KTK-0219-8841</div>
+        </div>
+        <span class="chip chip-offline">OFFLINE</span>
+      </div>
+
+      <!-- Compact Balance Summary -->
+      <div class="points-box">
+        <div>
+          <div class="points-box-lbl">AVAILABLE POINTS</div>
+          <div class="points-box-val">1,840 PTS</div>
+        </div>
+        <div style="font-size: 11px; color: #66737D; text-align: right;">
+          Last updated<br><span style="font-weight: 500; color: #071724;">Today, 14:20</span>
+        </div>
+      </div>
+
+      <!-- Contained Offline State Area (Same 216x216 geometry as QR container) -->
+      <div class="qr-placeholder-area">
+        <div class="offline-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+            <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+          </svg>
+        </div>
+        <div class="offline-heading">Live pass unavailable</div>
+        <div class="offline-desc">Connect to mobile data or Wi-Fi to load your secure pass.</div>
+      </div>
+
+      <!-- Security clarification -->
+      <div class="offline-notice-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div class="notice-text">
+          Screenshots cannot be used for merchant verification. Pass tokens require a live secure network connection.
+        </div>
+      </div>
+
+      <div style="flex: 1;"></div>
+
+      <!-- Actions (Teal Retry + Outlined Back) -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button class="btn btn-teal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          Retry connection
+        </button>
+        <button class="btn btn-outlined">Back to home</button>
+      </div>
+    </div>
+
+    <!-- Android Gesture Area -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ================= SCREEN 2: POINTS ACTIVITY ================= -->
+  <div class="artboard screen-2">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7v18h10V4z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="app-bar-title">Points activity</div>
+      </div>
+      <div class="icon-btn" style="color: #66737D;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="12" cy="5" r="1"></circle>
+          <circle cx="12" cy="19" r="1"></circle>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Balance Strip -->
+      <div class="balance-strip">
+        <div>
+          <div class="lbl">AVAILABLE POINTS</div>
+          <div class="pts">1,840 PTS</div>
+        </div>
+        <span class="pending-pill">240 pending</span>
+      </div>
+
+      <!-- Segmented Tabs Filter -->
+      <div class="seg-control">
+        <button class="seg-tab active">All</button>
+        <button class="seg-tab">Earned</button>
+        <button class="seg-tab">Redeemed</button>
+      </div>
+
+      <!-- Exactly 4 Activity Rows -->
+      <div class="activity-list">
+        <!-- Row 1: Confirmed -->
+        <div class="activity-item">
+          <div>
+            <div class="act-title">Purchase confirmed</div>
+            <div class="act-sub">Market Square • Today, 14:20</div>
+          </div>
+          <div class="act-right">
+            <div class="act-pts pts-earned">+240 PTS</div>
+            <span class="chip chip-teal">Confirmed</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Pending -->
+        <div class="activity-item">
+          <div>
+            <div class="act-title">Points pending</div>
+            <div class="act-sub">Westlands outlet • Today, 13:48</div>
+          </div>
+          <div class="act-right">
+            <div class="act-pts pts-pending">+120 PTS</div>
+            <span class="chip chip-amber">Pending</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Redeemed -->
+        <div class="activity-item">
+          <div>
+            <div class="act-title">Reward redeemed</div>
+            <div class="act-sub">Safe Ride • Yesterday</div>
+          </div>
+          <div class="act-right">
+            <div class="act-pts pts-deducted">-900 PTS</div>
+            <span class="chip chip-coral">Redeemed</span>
+          </div>
+        </div>
+
+        <!-- Row 4: Reversed -->
+        <div class="activity-item">
+          <div>
+            <div class="act-title">Points reversed</div>
+            <div class="act-sub">Already redeemed code • 12 Aug</div>
+          </div>
+          <div class="act-right">
+            <div class="act-pts pts-deducted">-240 PTS</div>
+            <span class="chip chip-coral">Reversed</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="flex: 1;"></div>
+      
+      <div style="font-size: 11px; color: #66737D; text-align: center; margin-top: 16px;">
+        Points reflect eligible verified retail purchases.
+      </div>
+    </div>
+
+    <!-- Bottom Navigation (Account Active, Scan Inactive without any dot) -->
+    <div class="bottom-nav">
+      <a href="#" class="nav-item inactive">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item inactive">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+          <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+          <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+          <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+        </svg>
+        <span>Scan</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Account</span>
+      </a>
+    </div>
+
+    <!-- Android Gesture Area -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+
+  <!-- ================= SCREEN 3: TRANSACTION DETAILS ================= -->
+  <div class="artboard screen-3">
+    <!-- Android Status Bar -->
+    <div class="status-bar">
+      <span>09:41</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 4h-3V2h-4v2H7v18h10V4z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <button class="icon-btn" aria-label="Back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="app-bar-title">Transaction details</div>
+      </div>
+      <div class="icon-btn" style="color: #66737D;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="screen-content">
+      <!-- Transaction Summary Card -->
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="icon-check-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <span class="chip chip-teal">CONFIRMED</span>
+          </div>
+          <div class="tx-title">Purchase confirmed</div>
+          <div class="tx-amount">+240 PTS</div>
+        </div>
+
+        <!-- Key Value Pairs -->
+        <div class="kv-group">
+          <div class="kv-row">
+            <span class="kv-key">Merchant</span>
+            <span class="kv-val">Market Square</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Location</span>
+            <span class="kv-val">Westlands</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Date</span>
+            <span class="kv-val">14 September 2026</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Time</span>
+            <span class="kv-val">14:20</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Product</span>
+            <span class="kv-val">Eligible partner product</span>
+          </div>
+          <div class="kv-row" style="padding-top: 6px; border-top: 1px dashed #E6EAED;">
+            <span class="kv-key">Balance after transaction</span>
+            <span class="kv-val" style="font-weight: 600;">1,840 PTS</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Reference ID</span>
+            <span class="kv-val" style="font-family: monospace; color: #66737D; font-size: 11px;">KTK-240-8841</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Short explanation box -->
+      <div class="explainer-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <div style="font-size: 11px; color: #66737D; line-height: 16px;">
+          Points were added after the merchant confirmed the purchase.
+        </div>
+      </div>
+
+      <div style="flex: 1;"></div>
+
+      <!-- Action Button -->
+      <button class="btn btn-outlined">Back to activity</button>
+    </div>
+
+    <!-- Bottom Navigation (Account Active, Scan Inactive without any dot) -->
+    <div class="bottom-nav">
+      <a href="#" class="nav-item inactive">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item inactive">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+          <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+          <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+          <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+        </svg>
+        <span>Scan</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Account</span>
+      </a>
+    </div>
+
+    <!-- Android Gesture Area -->
+    <div class="gesture-bar">
+      <div class="gesture-pill"></div>
+    </div>
+  </div>
+
+</body>
+</html>

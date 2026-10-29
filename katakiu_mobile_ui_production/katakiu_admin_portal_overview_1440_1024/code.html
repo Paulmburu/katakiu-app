@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1.0">
+<title>KataKiu Admin Portal — Overview (1440 × 1024)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --midnight: #071724;
+    --amber: #FFB547;
+    --amber-dark: #D98818;
+    --amber-bg: #FFF8EE;
+    --teal: #0DB3A0;
+    --teal-dark: #0A8E80;
+    --teal-light: #E6F7F5;
+    --aqua: #7AE1D6;
+    --coral: #EF6A6A;
+    --coral-dark: #D44E4E;
+    --coral-bg: #FDF2F2;
+    --white: #FFFFFF;
+    --divider: #E6EAED;
+    --secondary-text: #66737D;
+    --workspace-bg: #F7F9FA;
+    --surface-card: #FFFFFF;
+  }
+
+  body {
+    width: 1440px;
+    height: 1024px;
+    max-width: 1440px;
+    max-height: 1024px;
+    overflow: hidden;
+    background-color: var(--workspace-bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--midnight);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+  }
+
+  /* LEFT ADMIN SIDEBAR (232px) */
+  .sidebar {
+    width: 232px;
+    min-width: 232px;
+    height: 1024px;
+    background-color: var(--midnight);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 16px 16px 16px;
+    z-index: 20;
+  }
+
+  .brand-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px 20px 8px;
+    border-bottom: 1px solid rgba(230, 234, 237, 0.12);
+  }
+
+  .brand-logo-wrap {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+
+  .brand-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.2px;
+    line-height: 18px;
+  }
+
+  .brand-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    color: #98A2B3;
+    line-height: 14px;
+  }
+
+  .nav-group-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #66737D;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 16px 12px 6px 12px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    height: 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #98A2B3;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .nav-link svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    flex-shrink: 0;
+  }
+
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+  }
+
+  .nav-link.active {
+    background-color: var(--teal);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .nav-link.active svg {
+    stroke: var(--white);
+  }
+
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid rgba(230, 234, 237, 0.12);
+    padding-top: 12px;
+  }
+
+  .environment-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #98A2B3;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+  }
+
+  .env-indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--teal);
+    box-shadow: 0 0 6px var(--teal);
+  }
+
+  /* MAIN WRAPPER */
+  .main-container {
+    flex: 1;
+    height: 1024px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* TOP APP BAR (64px) */
+  .top-app-bar {
+    height: 64px;
+    min-height: 64px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    z-index: 10;
+  }
+
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .page-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--midnight);
+    letter-spacing: -0.2px;
+  }
+
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .env-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: var(--teal-light);
+    color: var(--teal-dark);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .date-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    background-color: var(--white);
+    color: var(--midnight);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .icon-button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    background-color: var(--white);
+    color: var(--secondary-text);
+    cursor: pointer;
+    min-width: 36px;
+  }
+
+  .avatar-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--midnight);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid var(--divider);
+  }
+
+  /* DASHBOARD BODY (32px padding, fixed 1024 bound) */
+  .dashboard-body {
+    flex: 1;
+    padding: 24px 32px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+  }
+
+  /* HEADER & ACTIONS */
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--midnight);
+    line-height: 24px;
+    letter-spacing: -0.3px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--secondary-text);
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scope-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #EDF2F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--midnight);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn {
+    height: 40px;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--teal);
+    color: var(--white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--teal-dark);
+  }
+
+  .btn-secondary {
+    background-color: var(--white);
+    color: var(--midnight);
+    border: 1px solid var(--divider);
+  }
+
+  .btn-secondary:hover {
+    background-color: #F8FAFB;
+    border-color: #D1D8DC;
+  }
+
+  /* KPI SECTION (4 cards) */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .kpi-card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 94px;
+  }
+
+  .kpi-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .kpi-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--secondary-text);
+  }
+
+  .kpi-icon-wrap {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kpi-val-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--midnight);
+    line-height: 26px;
+    letter-spacing: -0.4px;
+  }
+
+  .kpi-meta {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--secondary-text);
+  }
+
+  /* TWO-COLUMN OPERATIONS LAYOUT */
+  .operations-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    height: 290px;
+  }
+
+  .card-panel {
+    background-color: var(--surface-card);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    height: 48px;
+    min-height: 48px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+  }
+
+  .panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--midnight);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-action-link {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--teal);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  /* DATA TABLE */
+  .table-container {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .custom-table th {
+    text-align: left;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--secondary-text);
+    background-color: #F8FAFB;
+    border-bottom: 1px solid var(--divider);
+    letter-spacing: 0.2px;
+  }
+
+  .custom-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: middle;
+    color: var(--midnight);
+  }
+
+  .custom-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .batch-id-text {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--midnight);
+    font-family: monospace, 'Inter';
+  }
+
+  /* CHIPS & BADGES */
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    width: fit-content;
+  }
+
+  .status-chip-teal {
+    background-color: var(--teal-light);
+    color: var(--teal-dark);
+  }
+
+  .status-chip-amber {
+    background-color: var(--amber-bg);
+    color: var(--amber-dark);
+  }
+
+  .status-chip-coral {
+    background-color: var(--coral-bg);
+    color: var(--coral-dark);
+  }
+
+  .chip-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+
+  /* ATTENTION LIST */
+  .attention-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    divide-y: 1px solid var(--divider);
+  }
+
+  .attention-row {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--divider);
+    transition: background 0.1s ease;
+  }
+
+  .attention-row:last-child {
+    border-bottom: none;
+  }
+
+  .attention-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .attention-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .attention-desc {
+    font-size: 11px;
+    color: var(--secondary-text);
+  }
+
+  .attention-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-footer-action {
+    height: 38px;
+    border-top: 1px solid var(--divider);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAFCFD;
+  }
+
+  .footer-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--midnight);
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ACTIVITY SECTION (Full Width) */
+  .activity-section {
+    flex: 1;
+    background-color: var(--surface-card);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .activity-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex: 1;
+  }
+
+  .activity-item {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .activity-item:nth-child(odd) {
+    border-right: 1px solid var(--divider);
+  }
+
+  .activity-item:nth-child(3), .activity-item:nth-child(4) {
+    border-bottom: none;
+  }
+
+  .activity-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .activity-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .activity-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .activity-sub {
+    font-size: 11px;
+    color: var(--secondary-text);
+  }
+
+  .activity-time {
+    font-size: 11px;
+    color: var(--secondary-text);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+  <!-- LEFT ADMIN SIDEBAR (232px) -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand-area">
+        <div class="brand-logo-wrap">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlZTHw_6KAq2i-vjKvBKQ_SYmADTOFgpQUdA6uuIc6KR4rQT8tbpPRO0DAIV0u0HKChIdYkT4dNgiGMmk0NrSltfOqCQwyjWEOJZHaUPuEYhQ2CJFQML5SYfbHb0BVIu0KwLUH_aVsr4CfkUge_2HH2VhVial1P_v8XUo1LazofN0Fa8pMEAMDyuJiYwnkDS4a_0MUor4Ltc_lsEh2DRRSM-7SUkXHKEwarE0CNupLtV1APMJUCoUqKlMXq9OYLe9mZw" alt="KataKiu Mark">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">KataKiu</span>
+          <span class="brand-subtitle">Admin portal</span>
+        </div>
+      </div>
+
+      <div class="nav-group-label">Primary</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Code operations</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>Campaigns</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11H9z"></path></svg>
+            <span>Merchants</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Claims and risk</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            <span>Finance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Reports</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-group-label" style="margin-top: 6px;">System</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="environment-label">
+        <span class="env-indicator-dot"></span>
+        <span>Kenya production environment</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="main-container">
+
+    <!-- TOP APP BAR (64px) -->
+    <header class="top-app-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title">Overview</h1>
+      </div>
+      <div class="top-bar-right">
+        <div class="env-chip">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--teal);"></span>
+          Production
+        </div>
+        <div class="date-filter-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Today</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <button class="icon-button" aria-label="Help & Documentation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+        <div class="avatar-badge" title="Admin User">AW</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD CONTENT -->
+    <div class="dashboard-body">
+
+      <!-- HEADER & ACTIONS -->
+      <section class="header-section">
+        <div class="header-content">
+          <span class="eyebrow">PLATFORM OPERATIONS</span>
+          <h2 class="section-title">KataKiu programme overview</h2>
+          <div class="section-subtitle">
+            <span>Monitor code operations, purchase claims, merchant activity and programme controls.</span>
+            <span class="scope-tag">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              All participating outlets • Kenya
+            </span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Create campaign
+          </button>
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            Create code batch
+          </button>
+        </div>
+      </section>
+
+      <!-- KPI SECTION (4 cards) -->
+      <section class="kpi-grid">
+        <!-- KPI 1 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Active code batches</span>
+            <div class="kpi-icon-wrap" style="background: var(--teal-light); color: var(--teal-dark);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </div>
+          </div>
+          <div class="kpi-val-row">
+            <span class="kpi-value">12</span>
+            <span class="kpi-meta">2 awaiting activation</span>
+          </div>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Valid codes in market</span>
+            <div class="kpi-icon-wrap" style="background: rgba(122, 225, 214, 0.2); color: #0C8A7C;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            </div>
+          </div>
+          <div class="kpi-val-row">
+            <span class="kpi-value">184,520</span>
+            <span class="kpi-meta">Across 7 eligible products</span>
+          </div>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Confirmed claims today</span>
+            <div class="kpi-icon-wrap" style="background: var(--teal-light); color: var(--teal-dark);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+          </div>
+          <div class="kpi-val-row">
+            <span class="kpi-value">1,284</span>
+            <span class="kpi-meta">Rewards recorded</span>
+          </div>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <span class="kpi-label">Risk alerts</span>
+            <div class="kpi-icon-wrap" style="background: var(--coral-bg); color: var(--coral-dark);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+          </div>
+          <div class="kpi-val-row">
+            <span class="kpi-value" style="color: var(--coral-dark);">5</span>
+            <span class="kpi-meta" style="color: var(--coral-dark); font-weight: 500;">Require review</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TWO-COLUMN OPERATIONS LAYOUT -->
+      <section class="operations-layout">
+        
+        <!-- LEFT: CODE BATCH HEALTH (2/3 width) -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Code batch health</span>
+            </div>
+            <a href="#" class="panel-action-link">
+              <span>View code operations</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+          <div class="table-container">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Batch</th>
+                  <th>Product</th>
+                  <th style="width: 120px;">Status</th>
+                  <th style="width: 150px;">Activation</th>
+                  <th style="width: 140px;">Claim activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="batch-id-text">KTK-SEP-001</td>
+                  <td>Participating product • 500 ml</td>
+                  <td>
+                    <span class="status-chip status-chip-teal">
+                      <span class="chip-dot"></span> Active
+                    </span>
+                  </td>
+                  <td>98% packaged</td>
+                  <td style="font-weight: 500;">4,280 confirmed</td>
+                </tr>
+                <tr>
+                  <td class="batch-id-text">KTK-SEP-002</td>
+                  <td>Participating product • 330 ml</td>
+                  <td>
+                    <span class="status-chip status-chip-amber">
+                      <span class="chip-dot"></span> QA review
+                    </span>
+                  </td>
+                  <td>Sample scan required</td>
+                  <td style="color: var(--secondary-text);">Not active</td>
+                </tr>
+                <tr>
+                  <td class="batch-id-text">KTK-AUG-011</td>
+                  <td>Participating product • 500 ml</td>
+                  <td>
+                    <span class="status-chip status-chip-teal">
+                      <span class="chip-dot"></span> Active
+                    </span>
+                  </td>
+                  <td>100% packaged</td>
+                  <td style="font-weight: 500;">8,940 confirmed</td>
+                </tr>
+                <tr>
+                  <td class="batch-id-text">KTK-AUG-008</td>
+                  <td>Participating product • 330 ml</td>
+                  <td>
+                    <span class="status-chip status-chip-coral">
+                      <span class="chip-dot"></span> Recalled
+                    </span>
+                  </td>
+                  <td>Disabled</td>
+                  <td style="color: var(--coral-dark); font-weight: 500;">Investigation open</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RIGHT: ATTENTION REQUIRED (1/3 width) -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber-dark)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Attention required</span>
+            </div>
+            <span class="status-chip status-chip-amber" style="font-size: 10px; padding: 1px 6px;">4 open</span>
+          </div>
+
+          <div class="attention-list">
+            <!-- Item 1 -->
+            <div class="attention-row">
+              <div class="attention-info">
+                <span class="attention-title">Batch QA approval</span>
+                <span class="attention-desc">KTK-SEP-002 requires sample-scan</span>
+              </div>
+              <div class="attention-right">
+                <span class="status-chip status-chip-amber">Review</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-text)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="attention-row">
+              <div class="attention-info">
+                <span class="attention-title">Duplicate-claim pattern</span>
+                <span class="attention-desc">3 related claims at one outlet</span>
+              </div>
+              <div class="attention-right">
+                <span class="status-chip status-chip-coral">Investigate</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-text)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="attention-row">
+              <div class="attention-info">
+                <span class="attention-title">Merchant access request</span>
+                <span class="attention-desc">New supervisor for Westlands</span>
+              </div>
+              <div class="attention-right">
+                <span class="status-chip status-chip-amber">Approve</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-text)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="attention-row">
+              <div class="attention-info">
+                <span class="attention-title">Campaign budget notice</span>
+                <span class="attention-desc">Launch partner rewards at 82%</span>
+              </div>
+              <div class="attention-right">
+                <span class="status-chip status-chip-amber">Review</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-text)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-footer-action">
+            <a href="#" class="footer-btn">
+              <span>Open risk queue</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- FULL-WIDTH SECTION: LATEST PLATFORM ACTIVITY -->
+      <section class="activity-section">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--midnight)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            <span>Latest platform activity</span>
+          </div>
+          <span style="font-size: 11px; color: var(--secondary-text);">Real-time programme audit</span>
+        </div>
+
+        <div class="activity-list">
+          <!-- Activity 1 -->
+          <div class="activity-item">
+            <div class="activity-left">
+              <div class="activity-icon" style="background: var(--teal-light); color: var(--teal-dark);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="activity-details">
+                <span class="activity-name">Code batch activated</span>
+                <span class="activity-sub">KTK-SEP-001 • Packaging QA approved</span>
+              </div>
+            </div>
+            <span class="activity-time">Today, 14:05</span>
+          </div>
+
+          <!-- Activity 2 -->
+          <div class="activity-item">
+            <div class="activity-left">
+              <div class="activity-icon" style="background: var(--teal-light); color: var(--teal-dark);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="activity-details">
+                <span class="activity-name">Merchant claim confirmed</span>
+                <span class="activity-sub">Market Square Westlands • KK-CLM-90814</span>
+              </div>
+            </div>
+            <span class="activity-time">Today, 14:20</span>
+          </div>
+
+          <!-- Activity 3 -->
+          <div class="activity-item">
+            <div class="activity-left">
+              <div class="activity-icon" style="background: var(--amber-bg); color: var(--amber-dark);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="activity-details">
+                <span class="activity-name">Return reversal submitted</span>
+                <span class="activity-sub">MS-90814 • Awaiting supervisor approval</span>
+              </div>
+            </div>
+            <span class="activity-time">Today, 14:24</span>
+          </div>
+
+          <!-- Activity 4 -->
+          <div class="activity-item">
+            <div class="activity-left">
+              <div class="activity-icon" style="background: var(--coral-bg); color: var(--coral-dark);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+              <div class="activity-details">
+                <span class="activity-name">Code batch recalled</span>
+                <span class="activity-sub">KTK-AUG-008 • Fraud investigation</span>
+              </div>
+            </div>
+            <span class="activity-time">Today, 13:48</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

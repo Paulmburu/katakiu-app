@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>KataKiu Admin Portal — Product and Code-Batch Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F7F9FA;
+      color: #071724;
+      width: 1440px;
+      height: 1024px;
+      overflow: hidden;
+      display: flex;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Side navigation */
+    .sidebar {
+      width: 232px;
+      background-color: #071724;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 1024px;
+      position: relative;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sidebar-brand {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      background: #0DB3A0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      line-height: 16px;
+      color: #FFFFFF;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 400;
+      color: #7AE1D6;
+      line-height: 14px;
+    }
+
+    .nav-container {
+      padding: 16px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: rgba(255, 255, 255, 0.45);
+      padding: 0 12px 6px 12px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      height: 40px;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+    }
+
+    .nav-item.active {
+      background: #0DB3A0;
+      color: #FFFFFF;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(13, 179, 160, 0.25);
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #0DB3A0;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 2px rgba(13, 179, 160, 0.3);
+    }
+
+    /* Main view area */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 1024px;
+      overflow: hidden;
+    }
+
+    /* Top application bar */
+    .top-app-bar {
+      height: 64px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E6EAED;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+
+    .top-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-app-bar-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #071724;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .env-chip {
+      background: #EAF9F7;
+      color: #0DB3A0;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(13, 179, 160, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .env-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #0DB3A0;
+      border-radius: 50%;
+    }
+
+    .icon-button {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid #E6EAED;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #66737D;
+      cursor: pointer;
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #071724;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #E6EAED;
+    }
+
+    /* Content container */
+    .content-container {
+      padding: 28px 32px 32px 32px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header block */
+    .header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: #0DB3A0;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .page-heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: #071724;
+      letter-spacing: -0.3px;
+      line-height: 26px;
+    }
+
+    .header-subtext {
+      font-size: 12px;
+      color: #66737D;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scope-tag {
+      background: #F0F4F7;
+      color: #495763;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 11px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      height: 40px;
+      padding: 0 16px;
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      color: #071724;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #F7F9FA;
+      border-color: #D3D9DE;
+    }
+
+    .btn-primary {
+      height: 40px;
+      padding: 0 18px;
+      background: #0DB3A0;
+      border: 1px solid #0DB3A0;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(13, 179, 160, 0.2);
+      transition: background 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: #0b9e8d;
+    }
+
+    /* Tabs */
+    .tabs-bar {
+      display: flex;
+      border-bottom: 1px solid #E6EAED;
+      gap: 28px;
+      margin-top: -4px;
+    }
+
+    .tab-item {
+      font-size: 13px;
+      font-weight: 500;
+      color: #66737D;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-item.active {
+      color: #0DB3A0;
+      font-weight: 600;
+    }
+
+    .tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #0DB3A0;
+      border-radius: 2px 2px 0 0;
+    }
+
+    /* Batch KPI Summary Strip */
+    .summary-strip {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      padding: 12px 20px;
+    }
+
+    .summary-metric {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .summary-metric-divider {
+      width: 1px;
+      height: 24px;
+      background: #E6EAED;
+    }
+
+    .metric-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .metric-icon-teal {
+      background: #EAF9F7;
+      color: #0DB3A0;
+    }
+
+    .metric-icon-amber {
+      background: #FFF7EB;
+      color: #D98818;
+    }
+
+    .metric-icon-coral {
+      background: #FDEDED;
+      color: #EF6A6A;
+    }
+
+    .metric-content {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #071724;
+      line-height: 22px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: #66737D;
+      font-weight: 500;
+    }
+
+    /* Filters Row */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 340px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #66737D;
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px 0 36px;
+      border-radius: 8px;
+      border: 1px solid #E6EAED;
+      background: #FFFFFF;
+      font-size: 12px;
+      font-family: inherit;
+      color: #071724;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #66737D;
+    }
+
+    .search-input:focus {
+      border-color: #0DB3A0;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-control {
+      height: 38px;
+      padding: 0 32px 0 14px;
+      border-radius: 8px;
+      border: 1px solid #E6EAED;
+      background: #FFFFFF;
+      font-size: 12px;
+      font-family: inherit;
+      color: #071724;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .select-control:focus {
+      border-color: #0DB3A0;
+    }
+
+    .select-chevron {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #66737D;
+      width: 14px;
+      height: 14px;
+    }
+
+    .btn-export {
+      margin-left: auto;
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: #071724;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-export:hover {
+      background: #F7F9FA;
+    }
+
+    /* Two-column layout */
+    .operations-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Data Table Card */
+    .card-panel {
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card-header-clean {
+      padding: 16px 20px;
+      border-bottom: 1px solid #E6EAED;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #071724;
+    }
+
+    .table-container {
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: 600;
+      color: #66737D;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      background: #FAFBFB;
+      padding: 10px 16px;
+      border-bottom: 1px solid #E6EAED;
+    }
+
+    td {
+      font-size: 12px;
+      color: #071724;
+      padding: 14px 16px;
+      border-bottom: 1px solid #E6EAED;
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr.row-selected {
+      background: #F0F9F8;
+    }
+
+    tr:hover:not(.row-selected) {
+      background: #FDFDFE;
+    }
+
+    .batch-id-cell {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: -0.1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .product-cell-name {
+      font-weight: 500;
+      color: #071724;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 14px;
+    }
+
+    .chip-teal {
+      background: #EAF9F7;
+      color: #0DB3A0;
+      border: 1px solid rgba(13, 179, 160, 0.25);
+    }
+
+    .chip-amber {
+      background: #FFF7EB;
+      color: #D98818;
+      border: 1px solid rgba(255, 181, 71, 0.4);
+    }
+
+    .chip-coral {
+      background: #FDEDED;
+      color: #EF6A6A;
+      border: 1px solid rgba(239, 106, 106, 0.3);
+    }
+
+    .btn-row-action {
+      background: transparent;
+      border: 1px solid #E6EAED;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #071724;
+      cursor: pointer;
+    }
+
+    .btn-row-action.review {
+      background: #FFF7EB;
+      border-color: rgba(255, 181, 71, 0.6);
+      color: #A35E06;
+    }
+
+    .btn-row-action:hover {
+      background: #E6EAED;
+    }
+
+    .table-footer {
+      padding: 12px 20px;
+      border-top: 1px solid #E6EAED;
+      background: #FAFBFB;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #66737D;
+    }
+
+    /* Right column: Selected batch & details */
+    .right-sidebar-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .detail-card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+
+    .detail-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .detail-title-group h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #071724;
+      letter-spacing: -0.2px;
+    }
+
+    .detail-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 10px;
+      column-gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #E6EAED;
+    }
+
+    .detail-item-label {
+      font-size: 11px;
+      color: #66737D;
+      margin-bottom: 2px;
+    }
+
+    .detail-item-val {
+      font-size: 12px;
+      font-weight: 500;
+      color: #071724;
+    }
+
+    /* Lifecycle Stepper */
+    .lifecycle-section {
+      margin-bottom: 16px;
+    }
+
+    .lifecycle-heading {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #66737D;
+      margin-bottom: 10px;
+    }
+
+    .stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .step-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      padding-bottom: 14px;
+    }
+
+    .step-node:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-node:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 22px;
+      bottom: 0px;
+      width: 2px;
+      background: #E6EAED;
+    }
+
+    .step-node.completed:not(:last-child)::before {
+      background: #0DB3A0;
+    }
+
+    .step-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .step-icon.done {
+      background: #0DB3A0;
+      color: #FFFFFF;
+    }
+
+    .step-icon.current {
+      background: #FFF7EB;
+      color: #D98818;
+      border: 2px solid #FFB547;
+    }
+
+    .step-icon.upcoming {
+      background: #FFFFFF;
+      color: #66737D;
+      border: 2px solid #E6EAED;
+    }
+
+    .step-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #071724;
+      line-height: 16px;
+    }
+
+    .step-state {
+      font-size: 11px;
+      color: #66737D;
+      line-height: 14px;
+    }
+
+    .step-state.current-txt {
+      color: #A35E06;
+      font-weight: 500;
+    }
+
+    /* Amber Notice */
+    .qa-notice-box {
+      background: #FFF9F0;
+      border: 1px solid rgba(255, 181, 71, 0.4);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: #8C5300;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 16px;
+      line-height: 15px;
+    }
+
+    .qa-notice-box svg {
+      width: 16px;
+      height: 16px;
+      color: #D98818;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .detail-actions .btn-primary {
+      flex: 1;
+      height: 38px;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .detail-actions .btn-secondary {
+      height: 38px;
+      font-size: 12px;
+      padding: 0 12px;
+    }
+
+    /* Security Guidelines Card */
+    .security-card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .security-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #071724;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .security-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .security-item {
+      font-size: 11px;
+      color: #66737D;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 15px;
+    }
+
+    .security-bullet {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #0DB3A0;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Admin Sidebar (Fixed 232px, Midnight #071724) -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">K</div>
+      <div class="brand-text">
+        <span class="brand-name">KataKiu</span>
+        <span class="brand-subtitle">Admin portal</span>
+      </div>
+    </div>
+
+    <div class="nav-container">
+      <div>
+        <div class="nav-section-title">Primary</div>
+        <ul class="nav-list">
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item active">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Code operations</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>Campaigns</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85a4.98 4.98 0 0 0 2 0V21m10 0v-10.15a4.98 4.98 0 0 0 2 0V21"></path></svg>
+              <span>Merchants</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>Claims and risk</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              <span>Finance</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-title">System</div>
+        <ul class="nav-list">
+          <li>
+            <a class="nav-item">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      <span>Kenya production environment</span>
+    </div>
+  </aside>
+
+  <!-- Main View Area -->
+  <div class="main-wrapper">
+    <!-- Top Application Bar (Height 64px) -->
+    <header class="top-app-bar">
+      <div class="top-title-area">
+        <h1 class="top-app-bar-title">Code operations</h1>
+      </div>
+
+      <div class="top-actions">
+        <div class="env-chip">
+          <span class="env-dot"></span>
+          <span>Production</span>
+        </div>
+        <button class="icon-button" title="Help">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+        <div class="avatar-circle" title="Administrator">AW</div>
+      </div>
+    </header>
+
+    <!-- Page Content Container (32px padding) -->
+    <main class="content-container">
+      <!-- Header Area -->
+      <div class="header-block">
+        <div>
+          <div class="eyebrow">Product Traceability</div>
+          <h2 class="page-heading">Products and code batches</h2>
+          <div class="header-subtext">
+            <span>Manage eligible products and secure code batches before packaging activation.</span>
+            <span class="scope-tag">KataKiu Kenya</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add product</span>
+          </button>
+          <button class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Generate code batch</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="tabs-bar">
+        <a class="tab-item active">
+          <span>Code batches</span>
+        </a>
+        <a class="tab-item">
+          <span>Products</span>
+        </a>
+      </div>
+
+      <!-- Batch KPI Summary Strip -->
+      <div class="summary-strip">
+        <div class="summary-metric">
+          <div class="metric-icon-wrap metric-icon-teal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div class="metric-content">
+            <span class="metric-value">12</span>
+            <span class="metric-label">Active batches</span>
+          </div>
+        </div>
+
+        <div class="summary-metric-divider"></div>
+
+        <div class="summary-metric">
+          <div class="metric-icon-wrap metric-icon-amber">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="metric-content">
+            <span class="metric-value">2</span>
+            <span class="metric-label">Awaiting QA</span>
+          </div>
+        </div>
+
+        <div class="summary-metric-divider"></div>
+
+        <div class="summary-metric">
+          <div class="metric-icon-wrap metric-icon-coral">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+          </div>
+          <div class="metric-content">
+            <span class="metric-value">1</span>
+            <span class="metric-label">Recalled batches</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search and Filter Bar -->
+      <div class="filter-bar">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" class="search-input" placeholder="Search batch ID or product" value="KTK-SEP">
+        </div>
+
+        <div class="select-wrap">
+          <select class="select-control">
+            <option>All products</option>
+            <option>Participating product • 500 ml</option>
+            <option>Participating product • 330 ml</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+
+        <div class="select-wrap">
+          <select class="select-control">
+            <option>All statuses</option>
+            <option>Active</option>
+            <option>QA review</option>
+            <option>Recalled</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+
+        <div class="select-wrap">
+          <select class="select-control">
+            <option>Last 30 days</option>
+            <option>Last 60 days</option>
+            <option>Current quarter</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+
+        <button class="btn-export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Export list</span>
+        </button>
+      </div>
+
+      <!-- Main Operations Grid (2 Column: 2/3 and 1/3) -->
+      <div class="operations-grid">
+        <!-- Left 2/3: Code Batches Table -->
+        <div class="card-panel">
+          <div class="card-header-clean">
+            <div class="card-title">Code batches</div>
+            <span style="font-size: 11px; color: #66737D;">12 total registered batches</span>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Batch ID</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Packaging</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Selected KTK-SEP-002 -->
+                <tr class="row-selected">
+                  <td>
+                    <div class="batch-id-cell">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                      <span>KTK-SEP-002</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-cell-name">Participating product • 330 ml</div>
+                  </td>
+                  <td>25,000 codes</td>
+                  <td>Scratch-off neck label</td>
+                  <td>
+                    <span class="chip chip-amber">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                      QA review
+                    </span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-row-action review">Review</button>
+                  </td>
+                </tr>
+
+                <!-- Row 2: KTK-SEP-001 -->
+                <tr>
+                  <td>
+                    <div class="batch-id-cell">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                      <span>KTK-SEP-001</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-cell-name">Participating product • 500 ml</div>
+                  </td>
+                  <td>50,000 codes</td>
+                  <td>Tamper-evident cap seal</td>
+                  <td>
+                    <span class="chip chip-teal">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      Active
+                    </span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-row-action">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 3: KTK-AUG-011 -->
+                <tr>
+                  <td>
+                    <div class="batch-id-cell">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#66737D" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                      <span>KTK-AUG-011</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-cell-name">Participating product • 500 ml</div>
+                  </td>
+                  <td>40,000 codes</td>
+                  <td>Scratch-off neck label</td>
+                  <td>
+                    <span class="chip chip-teal">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      Active
+                    </span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-row-action">View</button>
+                  </td>
+                </tr>
+
+                <!-- Row 4: KTK-AUG-008 -->
+                <tr>
+                  <td>
+                    <div class="batch-id-cell">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF6A6A" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                      <span>KTK-AUG-008</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="product-cell-name">Participating product • 330 ml</div>
+                  </td>
+                  <td>15,000 codes</td>
+                  <td>Tamper-evident cap seal</td>
+                  <td>
+                    <span class="chip chip-coral">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                      Recalled
+                    </span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="btn-row-action">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span>Showing 1–4 of 12 batches</span>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-row-action" style="padding: 2px 8px;" disabled>Previous</button>
+              <button class="btn-row-action" style="padding: 2px 8px;">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 1/3: Selected Batch & Secure Handling Panels -->
+        <div class="right-sidebar-panels">
+          <!-- Selected Batch Card -->
+          <div class="detail-card">
+            <div class="detail-head">
+              <div class="detail-title-group">
+                <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #66737D; letter-spacing: 0.5px;">Selected batch</span>
+                <h3>KTK-SEP-002</h3>
+              </div>
+              <span class="chip chip-amber">QA review</span>
+            </div>
+
+            <div class="detail-meta-row">
+              <div>
+                <div class="detail-item-label">Product</div>
+                <div class="detail-item-val">Participating product • 330 ml</div>
+              </div>
+              <div>
+                <div class="detail-item-label">Serialized codes</div>
+                <div class="detail-item-val">25,000</div>
+              </div>
+              <div>
+                <div class="detail-item-label">Packaging placement</div>
+                <div class="detail-item-val">Scratch-off neck label</div>
+              </div>
+              <div>
+                <div class="detail-item-label">Print partner</div>
+                <div class="detail-item-val">Approved packaging partner</div>
+              </div>
+              <div>
+                <div class="detail-item-label">Created</div>
+                <div class="detail-item-val">12 September 2026</div>
+              </div>
+              <div>
+                <div class="detail-item-label">Current status</div>
+                <div class="detail-item-val" style="color: #A35E06; font-weight: 600;">QA review</div>
+              </div>
+            </div>
+
+            <!-- Compact Lifecycle Tracker -->
+            <div class="lifecycle-section">
+              <div class="lifecycle-heading">Batch Lifecycle</div>
+              <div class="stepper">
+                <!-- Step 1: Generated (Completed) -->
+                <div class="step-node completed">
+                  <div class="step-icon done">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-info">
+                    <span class="step-name">1. Generated</span>
+                    <span class="step-state">Completed</span>
+                  </div>
+                </div>
+
+                <!-- Step 2: Released to printer (Completed) -->
+                <div class="step-node completed">
+                  <div class="step-icon done">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="step-info">
+                    <span class="step-name">2. Released to printer</span>
+                    <span class="step-state">Completed</span>
+                  </div>
+                </div>
+
+                <!-- Step 3: Packaging QA (Current) -->
+                <div class="step-node">
+                  <div class="step-icon current">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="6"></circle></svg>
+                  </div>
+                  <div class="step-info">
+                    <span class="step-name">3. Packaging QA</span>
+                    <span class="step-state current-txt">Current step</span>
+                  </div>
+                </div>
+
+                <!-- Step 4: Activated (Not started) -->
+                <div class="step-node">
+                  <div class="step-icon upcoming">
+                    <span style="font-size: 10px;">4</span>
+                  </div>
+                  <div class="step-info">
+                    <span class="step-name">4. Activated</span>
+                    <span class="step-state">Not started</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Amber Information Panel -->
+            <div class="qa-notice-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Sample scans must pass packaging QA before this batch can be activated.</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="detail-actions">
+              <button class="btn-primary">
+                <span>Review QA</span>
+              </button>
+              <button class="btn-secondary">
+                <span>View batch history</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Secure Handling Card -->
+          <div class="security-card">
+            <div class="security-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0DB3A0" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>Secure handling</span>
+            </div>
+            <ul class="security-list">
+              <li class="security-item">
+                <span class="security-bullet"></span>
+                <span>Raw code values are never shown in this screen.</span>
+              </li>
+              <li class="security-item">
+                <span class="security-bullet"></span>
+                <span>Print exports require a separate authorised approval.</span>
+              </li>
+              <li class="security-item">
+                <span class="security-bullet"></span>
+                <span>A recalled batch cannot be reactivated.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

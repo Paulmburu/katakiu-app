@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1400, height=972">
+  <title>KataKiu Merchant Confirmation Flow Batch 1 — 1400 × 972</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#071724',
+            amber: '#FFB547',
+            teal: '#0DB3A0',
+            aqua: '#7AE1D6',
+            coral: '#EF6A6A',
+            divider: '#E6EAED',
+            secondary: '#66737D',
+            surface: '#F5F7F8'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1400px;
+      height: 972px;
+      background-color: #F5F7F8;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: #071724;
+      -webkit-font-smoothing: antialiased;
+    }
+    .artboard {
+      position: absolute;
+      top: 64px;
+      width: 390px;
+      height: 844px;
+      background-color: #FFFFFF;
+      border: 1px solid #E6EAED;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(7, 23, 36, 0.04);
+    }
+    .safe-content {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCREEN 1: Merchant Login (x=67, y=64) -->
+  <section class="artboard" style="left: 67px;" aria-label="Screen 1 - Merchant Login">
+    <!-- Android Top Safe Bar (24px) -->
+    <div class="h-6 w-full px-6 flex justify-between items-center text-[11px] font-medium text-secondary select-none bg-white">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.957 9.957 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.8 4.45-2.14 6.14l-.62-.62A8.966 8.966 0 0 0 21 12c0-4.97-4.03-9-9-9z"/><circle cx="12" cy="12" r="3"/><path d="M12 6a6 6 0 0 0-6 6c0 1.4.48 2.69 1.28 3.72l.71-.71A4.978 4.978 0 0 1 7 12a5 5 0 0 1 5-5 5 5 0 0 1 5 5c0 1.13-.38 2.17-1.02 3.01l.71.71A5.98 5.98 0 0 0 18 12a6 6 0 0 0-6-6z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- Header / Brand Area -->
+    <div class="safe-content pt-8 pb-4 flex flex-col items-center text-center">
+      <!-- KataKiu Logo -->
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg48o8wCyBMHpRxIcMEI93IUxnMTyrtDebXhacSZ-cBKmaNb4mW3pl6I4pc4wQwCJMJ0i7ZhvC_4DwUakO-AZ1-s8nb6HgEeo7PIDtqiLFUNsc7TKrf-W6XfKseLuYEZqwKT2J3nsJXIrC3bZVl8albNZYAqr8ZhJI2CNogkoZ6nm-Ke9m0ZenGLFvX0nPqZpC7Q3nRb1DLt5sLmSFeluckb32m__s-ML5Cf_U5hCEFafLXof8bwl58Ok9NVxcbv6vuw" alt="KataKiu Logo" class="w-12 h-12 rounded-lg mb-4 object-cover border border-divider">
+      
+      <h1 class="text-[16px] font-semibold text-midnight tracking-tight">Sign in to merchant portal</h1>
+      <p class="text-[12px] text-secondary mt-1.5 leading-relaxed">
+        Use your registered outlet mobile number to continue.
+      </p>
+    </div>
+
+    <!-- Form Area -->
+    <div class="safe-content flex-1 flex flex-col pt-4">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-medium text-midnight mb-1.5">Mobile number</label>
+          <div class="flex items-center border border-divider rounded-lg h-12 px-3 bg-white focus-within:border-teal transition-colors">
+            <div class="flex items-center gap-1.5 pr-2.5 border-r border-divider text-[12px] font-medium text-midnight">
+              <span class="w-4 h-3 bg-[#E6EAED] rounded-[2px] flex items-center justify-center text-[9px]">🇰🇪</span>
+              <span>+254</span>
+            </div>
+            <input type="text" value="722 987 654" class="w-full pl-3 text-[12px] font-medium text-midnight bg-transparent focus:outline-none tracking-wide" readonly>
+          </div>
+          <p class="text-[11px] text-secondary mt-1.5 flex items-center gap-1">
+            <svg class="w-3 h-3 text-secondary flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>We’ll send a one-time verification code by SMS.</span>
+          </p>
+        </div>
+
+        <!-- Security Note -->
+        <div class="p-3 bg-surface border border-divider rounded-lg flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <p class="text-[11px] text-secondary leading-normal">
+            Never share your verification code with another person.
+          </p>
+        </div>
+
+        <!-- Primary Action -->
+        <button class="w-full h-12 bg-teal hover:bg-[#0aa190] active:bg-[#088f80] text-white text-[13px] font-semibold rounded-lg flex items-center justify-center transition-colors">
+          Send login code
+        </button>
+
+        <!-- Secondary Help Action -->
+        <div class="text-center pt-1">
+          <button class="text-[13px] font-semibold text-teal hover:underline py-1">
+            Need help signing in?
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Badge -->
+      <div class="mt-auto pb-6 text-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface border border-divider rounded-full">
+          <div class="w-1.5 h-1.5 rounded-full bg-teal"></div>
+          <span class="text-[11px] font-medium text-secondary">Market Square Westlands • Authorised outlet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Android Bottom Gesture Area (24px) -->
+    <div class="h-6 w-full flex justify-center items-center">
+      <div class="w-24 h-1 bg-divider rounded-full"></div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: Confirm Customer QR (x=505, y=64) -->
+  <section class="artboard" style="left: 505px;" aria-label="Screen 2 - Confirm Customer QR">
+    <!-- Android Top Safe Bar (24px) -->
+    <div class="h-6 w-full px-6 flex justify-between items-center text-[11px] font-medium text-secondary select-none bg-white">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.957 9.957 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.8 4.45-2.14 6.14l-.62-.62A8.966 8.966 0 0 0 21 12c0-4.97-4.03-9-9-9z"/><circle cx="12" cy="12" r="3"/><path d="M12 6a6 6 0 0 0-6 6c0 1.4.48 2.69 1.28 3.72l.71-.71A4.978 4.978 0 0 1 7 12a5 5 0 0 1 5-5 5 5 0 0 1 5 5c0 1.13-.38 2.17-1.02 3.01l.71.71A5.98 5.98 0 0 0 18 12a6 6 0 0 0-6-6z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar (56px) -->
+    <header class="h-14 border-b border-divider px-6 flex items-center justify-between bg-white">
+      <div class="flex items-center gap-3">
+        <button class="w-8 h-8 flex items-center justify-center text-midnight -ml-2 rounded-full hover:bg-surface transition-colors" aria-label="Back">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <h2 class="text-[14px] font-medium text-midnight">Confirm customer</h2>
+      </div>
+      <span class="px-2 py-0.5 bg-surface text-secondary border border-divider text-[11px] font-medium rounded-[6px]">
+        Terminal 04
+      </span>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="safe-content flex-1 flex flex-col pt-4">
+      <p class="text-[12px] text-secondary leading-relaxed">
+        Ask the customer to open their temporary KataKiu QR.
+      </p>
+
+      <!-- Restrained Scan Target Area -->
+      <div class="my-4 p-5 bg-surface border border-divider rounded-lg flex flex-col items-center text-center">
+        <!-- Target Reticle Icon -->
+        <div class="w-16 h-16 rounded-lg bg-white border border-divider flex items-center justify-center mb-3 relative">
+          <svg class="w-8 h-8 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+            <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+            <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+            <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-teal rounded-full animate-pulse"></div>
+        </div>
+        <span class="text-[13px] font-semibold text-midnight">Scan customer QR</span>
+        <span class="text-[11px] text-secondary mt-1 max-w-[220px]">
+          The QR is valid for one purchase only.
+        </span>
+      </div>
+
+      <!-- Actions -->
+      <div class="space-y-3">
+        <button class="w-full h-12 bg-teal hover:bg-[#0aa190] text-white text-[13px] font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>Open camera</span>
+        </button>
+
+        <button class="w-full h-12 bg-white border border-divider hover:bg-surface text-midnight text-[13px] font-semibold rounded-lg flex items-center justify-center transition-colors">
+          Enter claim code manually
+        </button>
+      </div>
+
+      <!-- Operational Security Notice -->
+      <div class="mt-4 p-3.5 bg-[#FFF7EB] border border-amber/30 rounded-lg flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-amber flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="text-[11px] text-midnight leading-relaxed">
+          <strong class="font-semibold">Security note:</strong> Confirm the customer and product before awarding points.
+        </p>
+      </div>
+
+      <!-- Help Link -->
+      <div class="mt-auto pb-6 text-center">
+        <button class="text-[12px] font-medium text-teal hover:underline inline-flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>How confirmation works</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Android Bottom Gesture Area (24px) -->
+    <div class="h-6 w-full flex justify-center items-center">
+      <div class="w-24 h-1 bg-divider rounded-full"></div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: Valid Claim Review (x=943, y=64) -->
+  <section class="artboard" style="left: 943px;" aria-label="Screen 3 - Valid Claim Review">
+    <!-- Android Top Safe Bar (24px) -->
+    <div class="h-6 w-full px-6 flex justify-between items-center text-[11px] font-medium text-secondary select-none bg-white">
+      <span>09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25A9.957 9.957 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10c0 2.32-.8 4.45-2.14 6.14l-.62-.62A8.966 8.966 0 0 0 21 12c0-4.97-4.03-9-9-9z"/><circle cx="12" cy="12" r="3"/><path d="M12 6a6 6 0 0 0-6 6c0 1.4.48 2.69 1.28 3.72l.71-.71A4.978 4.978 0 0 1 7 12a5 5 0 0 1 5-5 5 5 0 0 1 5 5c0 1.13-.38 2.17-1.02 3.01l.71.71A5.98 5.98 0 0 0 18 12a6 6 0 0 0-6-6z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4z"/></svg>
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17 4h-3V2h-4v2H7v18h10V4z"/></svg>
+      </div>
+    </div>
+
+    <!-- App Bar (56px) -->
+    <header class="h-14 border-b border-divider px-6 flex items-center justify-between bg-white">
+      <div class="flex items-center gap-3">
+        <button class="w-8 h-8 flex items-center justify-center text-midnight -ml-2 rounded-full hover:bg-surface transition-colors" aria-label="Back">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <h2 class="text-[14px] font-medium text-midnight">Review claim</h2>
+      </div>
+      <!-- Status Chip -->
+      <span class="px-2.5 py-0.5 bg-[#E6F8F5] text-teal border border-teal/30 text-[11px] font-semibold rounded-[6px] flex items-center gap-1">
+        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Valid claim</span>
+      </span>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="safe-content flex-1 flex flex-col pt-3.5 overflow-y-auto">
+      <!-- Customer Card -->
+      <div class="p-3 bg-surface border border-divider rounded-lg mb-2.5">
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="text-[11px] font-medium text-secondary uppercase tracking-wider block">Customer</span>
+            <span class="text-[13px] font-semibold text-midnight mt-0.5 block">Amina Mwangi</span>
+            <span class="text-[11px] text-secondary font-mono mt-0.5 block">+254 712 *** 678</span>
+          </div>
+          <span class="px-2 py-0.5 bg-white border border-divider text-secondary text-[10px] font-medium rounded">
+            Age Verified 18+
+          </span>
+        </div>
+      </div>
+
+      <!-- Claim Metadata Card -->
+      <div class="border border-divider rounded-lg divide-y divide-divider bg-white mb-2.5">
+        <div class="p-2.5 flex justify-between items-center text-[11px]">
+          <span class="text-secondary">Claim ID</span>
+          <span class="font-mono font-medium text-midnight">KK-CLM-90814</span>
+        </div>
+        <div class="p-2.5 flex justify-between items-center text-[11px]">
+          <span class="text-secondary">Outlet</span>
+          <span class="font-medium text-midnight">Market Square Westlands</span>
+        </div>
+        <div class="p-2.5 flex justify-between items-center text-[11px]">
+          <span class="text-secondary">Time</span>
+          <span class="font-medium text-midnight">Today, 14:20</span>
+        </div>
+        <div class="p-2.5 flex justify-between items-center text-[11px]">
+          <span class="text-secondary">Participating product</span>
+          <span class="font-semibold text-midnight">1 × 500 ml</span>
+        </div>
+      </div>
+
+      <!-- Value Separation Grid (Customer vs Merchant Rewards) -->
+      <div class="grid grid-cols-2 gap-2 mb-3">
+        <!-- Customer Allocation -->
+        <div class="p-3 bg-[#F0FAF9] border border-teal/20 rounded-lg">
+          <span class="text-[11px] text-secondary block font-medium">Customer receives</span>
+          <span class="text-[18px] font-bold text-teal block mt-0.5 tracking-tight">+240 pts</span>
+          <span class="text-[10px] text-secondary mt-0.5 block">Verified loyalty award</span>
+        </div>
+        <!-- Merchant Allocation -->
+        <div class="p-3 bg-surface border border-divider rounded-lg">
+          <span class="text-[11px] text-secondary block font-medium">Merchant receives</span>
+          <span class="text-[18px] font-bold text-midnight block mt-0.5 tracking-tight">+20 pts</span>
+          <span class="text-[10px] text-secondary mt-0.5 block">Outlet handling fee</span>
+        </div>
+      </div>
+
+      <!-- Verification / Warning Helper -->
+      <div class="p-2.5 bg-[#FFF7EB] border border-amber/30 rounded-lg flex items-start gap-2 mb-3">
+        <svg class="w-3.5 h-3.5 text-amber flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p class="text-[11px] text-midnight leading-tight">
+          Confirm only after checking the product and receipt at the counter.
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="space-y-2 mt-auto pb-4">
+        <button class="w-full h-11 bg-teal hover:bg-[#0aa190] text-white text-[13px] font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Confirm purchase</span>
+        </button>
+        <button class="w-full h-10 bg-white border border-divider hover:bg-surface text-midnight text-[13px] font-semibold rounded-lg flex items-center justify-center transition-colors">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <!-- Android Bottom Gesture Area (24px) -->
+    <div class="h-6 w-full flex justify-center items-center">
+      <div class="w-24 h-1 bg-divider rounded-full"></div>
+    </div>
+  </section>
+
+</body>
+</html>
